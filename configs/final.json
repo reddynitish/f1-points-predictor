@@ -1,0 +1,35 @@
+{
+  "frozen_at": "2026-10-06T13:38:47.516133+00:00",
+  "selected_from_commit": "cb9fbb74fe8a45d16abeb75a2e382dfe8dcb12a8",
+  "model": {
+    "name": "M1",
+    "family": "logistic",
+    "params": {
+      "C": 0.1
+    }
+  },
+  "feature_columns": [
+    "qualifying_rank",
+    "qualifying_rank_missing",
+    "field_size",
+    "qualifying_percentile",
+    "driver_points_rate_last5",
+    "driver_finish_mean_last5",
+    "driver_dnf_rate_last5",
+    "driver_history_count",
+    "rookie",
+    "constructor_points_rate_last5_events",
+    "constructor_history_events",
+    "constructor_new",
+    "circuit_id",
+    "constructor_id"
+  ],
+  "calibration": "raw",
+  "threshold": 0.5,
+  "seed": 42,
+  "test_season": 2025,
+  "protocols": {
+    "fixed_season": "fit seasons 2018-2024; score every 2025 race once",
+    "walk_forward": "refit before each 2025 race on all earlier races with these frozen settings"
+  }
+}
