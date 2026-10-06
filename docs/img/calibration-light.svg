@@ -1,0 +1,28 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 360' role='img' aria-label='Calibration: predicted chance versus how often drivers actually scored'>
+<rect width='360' height='360' rx='8' fill='#fcfcfb'/>
+<text x='48' y='22' font-family='-apple-system, Segoe UI, Helvetica, Arial, sans-serif' font-size='15' font-weight='600' fill='#0b0b0b'>Do the percentages hold up?</text>
+<text x='48' y='40' font-family='-apple-system, Segoe UI, Helvetica, Arial, sans-serif' font-size='12' fill='#52514e'>2026 backtest, qualifying-rank model, 10% bins</text>
+<line x1='48' x2='312' y1='316' y2='316' stroke='#c3c2b7'/>
+<text x='40' y='320' font-family='-apple-system, Segoe UI, Helvetica, Arial, sans-serif' font-size='11' fill='#898781' text-anchor='end'>0%</text>
+<text x='48' y='332' font-family='-apple-system, Segoe UI, Helvetica, Arial, sans-serif' font-size='11' fill='#898781' text-anchor='middle'>0%</text>
+<line x1='48' x2='312' y1='184.0' y2='184.0' stroke='#e1e0d9'/>
+<text x='40' y='188.0' font-family='-apple-system, Segoe UI, Helvetica, Arial, sans-serif' font-size='11' fill='#898781' text-anchor='end'>50%</text>
+<text x='180.0' y='332' font-family='-apple-system, Segoe UI, Helvetica, Arial, sans-serif' font-size='11' fill='#898781' text-anchor='middle'>50%</text>
+<line x1='48' x2='312' y1='52' y2='52' stroke='#e1e0d9'/>
+<text x='40' y='56' font-family='-apple-system, Segoe UI, Helvetica, Arial, sans-serif' font-size='11' fill='#898781' text-anchor='end'>100%</text>
+<text x='312' y='332' font-family='-apple-system, Segoe UI, Helvetica, Arial, sans-serif' font-size='11' fill='#898781' text-anchor='middle'>100%</text>
+<line x1='48' y1='316' x2='312' y2='52' stroke='#898781' stroke-width='1.5' stroke-dasharray='4 4'/>
+<text x='306.71999999999997' y='210.4' font-family='-apple-system, Segoe UI, Helvetica, Arial, sans-serif' font-size='11' fill='#52514e' text-anchor='end'>dashed line = perfect</text>
+<circle cx='66.5' cy='307.1' r='5' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'><title>predicted 7%, scored 3% (59 drivers)</title></circle>
+<circle cx='88.7' cy='277.5' r='5' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'><title>predicted 15%, scored 15% (48 drivers)</title></circle>
+<circle cx='116.2' cy='233.5' r='5' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'><title>predicted 26%, scored 31% (32 drivers)</title></circle>
+<circle cx='137.8' cy='250.0' r='5' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'><title>predicted 34%, scored 25% (16 drivers)</title></circle>
+<circle cx='162.5' cy='192.2' r='5' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'><title>predicted 43%, scored 47% (32 drivers)</title></circle>
+<circle cx='197.0' cy='151.0' r='5' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'><title>predicted 56%, scored 62% (32 drivers)</title></circle>
+<circle cx='221.7' cy='151.0' r='5' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'><title>predicted 66%, scored 62% (16 drivers)</title></circle>
+<circle cx='243.4' cy='93.2' r='5' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'><title>predicted 74%, scored 84% (32 drivers)</title></circle>
+<circle cx='271.0' cy='123.5' r='5' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'><title>predicted 84%, scored 73% (48 drivers)</title></circle>
+<circle cx='289.2' cy='76.8' r='5' fill='#2a78d6' stroke='#fcfcfb' stroke-width='2'><title>predicted 91%, scored 91% (32 drivers)</title></circle>
+<text x='180.0' y='352' font-family='-apple-system, Segoe UI, Helvetica, Arial, sans-serif' font-size='12' fill='#52514e' text-anchor='middle'>predicted chance of points</text>
+<text transform='translate(14 184.0) rotate(-90)' font-family='-apple-system, Segoe UI, Helvetica, Arial, sans-serif' font-size='12' fill='#52514e' text-anchor='middle'>actually scored</text>
+</svg>
