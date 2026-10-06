@@ -30,3 +30,11 @@ def test_offline_missing_cache_logs_failure_and_exits_nonzero(tmp_path, monkeypa
     saved = json.loads(report.read_text())
     assert saved['failures'][0]['stage'] == 'schedule'
     assert saved['events'] == []
+
+
+def test_seasons_beyond_prospective_rejected(monkeypatch):
+    import pytest
+
+    monkeypatch.setattr('sys.argv', ['f1_points', 'collect', '--start', '2027', '--end', '2027'])
+    with pytest.raises(SystemExit):
+        cli.main()

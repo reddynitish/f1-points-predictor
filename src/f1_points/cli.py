@@ -10,6 +10,8 @@ from .collection import audit_event, fetch_races, session_rows
 from .data import SnapshotClient
 
 logger = logging.getLogger('f1_points')
+# 2018–2025 is the study period; 2026 is prospective history/shadow evaluation, never used for tuning.
+PROSPECTIVE_SEASON = 2026
 
 
 def _fail(report, **entry):
@@ -31,8 +33,8 @@ def main():
     collect.add_argument('--report', type=Path, default=Path('reports/coverage.json'))
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s: %(message)s')
-    if not 2018 <= args.start <= args.end <= 2025:
-        parser.error('Study seasons must be within 2018–2025')
+    if not 2018 <= args.start <= args.end <= PROSPECTIVE_SEASON:
+        parser.error(f'Seasons must be within 2018–{PROSPECTIVE_SEASON}')
     if args.round is not None and args.round < 1:
         parser.error('Round must be positive')
     client = SnapshotClient(args.cache)
