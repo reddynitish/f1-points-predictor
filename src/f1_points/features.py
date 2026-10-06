@@ -172,3 +172,73 @@ def build_labels(entries, labels):
     merged = roster.merge(labels[[*KEY, 'race_points']], on=KEY, how='inner')
     merged['scored_points'] = (merged['race_points'] > 0).astype(int)
     return merged[[*KEY, 'scored_points']]
+
+
+# v2 additions (pre-registered in docs/PREREGISTRATION_V2.md).
+SESSION_FEATURES = [
+    'qualifying_gap_pct',
+    'practice_gap_pct',
+    'practice_sessions',
+    'qualifying_rain',
+    'qualifying_track_temp',
+]
+GRID_FEATURES = ['grid_position', 'grid_pitlane', 'grid_change']
+V2_QUALIFYING_FEATURES = NUMERIC_FEATURES + SESSION_FEATURES
+V2_PRE_RACE_FEATURES = V2_QUALIFYING_FEATURES + GRID_FEATURES
+
+
+def _gap_pct(times):
+    """Percent slower than the fastest valid time in the same group; None stays None."""
+    valid = [t for t in times if t is not None and not pd.isna(t)]
+    fastest = min(valid) if valid else None
+    return [None if fastest is None or t is None or pd.isna(t) else 100 * (t / fastest - 1) for t in times]
+
+
+def _practice_by_driver(record, event_entries):
+    """Best pre-qualifying practice lap per driver_id, joined on car number and checked against the code."""
+    by_number = {str(int(e['car_number'])): e for e in event_entries.to_dict('records') if not pd.isna(e['car_number'])}
+    best, sessions = {}, {}
+    for practice in record.get('practice', []):
+        for number, lap in practice['best_laps'].items():
+            entry = by_number.get(number)
+            code = practice['codes'].get(number)
+            if entry is None or lap is None or (code and entry['driver_code'] and code != entry['driver_code']):
+                continue
+            driver = entry['driver_id']
+            best[driver] = min(lap, best.get(driver, lap))
+            sessions[driver] = sessions.get(driver, 0) + 1
+    return best, sessions
+
+
+def add_session_features(features, entries, session_dir):
+    """Current-event qualifying gap, pre-qualifying practice pace, qualifying weather and starting grid."""
+    features = features.copy()
+    lookup = entries.set_index(KEY)
+    best_q = lookup[['q1_seconds', 'q2_seconds', 'q3_seconds']].min(axis=1, skipna=True)
+    columns = {name: {} for name in SESSION_FEATURES + GRID_FEATURES}
+    for event_id, group in features.groupby('event_id', sort=False):
+        drivers = group['driver_id'].tolist()
+        q_gaps = _gap_pct([best_q.get((event_id, d)) for d in drivers])
+        path = Path(session_dir) / f'{event_id}.json' if session_dir else None
+        record = json.loads(path.read_text()) if path is not None and path.exists() else {}
+        best, sessions = _practice_by_driver(record, entries[entries['event_id'] == event_id])
+        p_gaps = _gap_pct([best.get(d) for d in drivers])
+        weather = record.get('qualifying_weather') or {}
+        field = int((entries['event_id'] == event_id).sum())
+        for index, (row_index, driver) in enumerate(zip(group.index, drivers, strict=True)):
+            row = lookup.loc[(event_id, driver)]
+            grid = row.get('starting_grid')
+            grid = None if grid is None or pd.isna(grid) else int(grid)
+            rank = group['qualifying_rank'].iloc[index]
+            position = None if grid is None else (field if grid == 0 else grid)
+            columns['qualifying_gap_pct'][row_index] = q_gaps[index]
+            columns['practice_gap_pct'][row_index] = p_gaps[index]
+            columns['practice_sessions'][row_index] = sessions.get(driver, 0) if record else None
+            columns['qualifying_rain'][row_index] = None if 'rain' not in weather else int(weather['rain'])
+            columns['qualifying_track_temp'][row_index] = weather.get('track_temp_mean')
+            columns['grid_position'][row_index] = position
+            columns['grid_pitlane'][row_index] = None if grid is None else int(grid == 0)
+            columns['grid_change'][row_index] = None if position is None or pd.isna(rank) else position - rank
+    for name, values in columns.items():
+        features[name] = pd.Series(values, dtype='float64').reindex(features.index)
+    return features

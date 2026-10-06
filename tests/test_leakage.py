@@ -137,3 +137,35 @@ def test_renamed_team_inherits_lineage_history_but_keeps_original_id():
     assert c['constructor_id'] == 'audi'
     assert c['constructor_new'] == 0
     assert c['constructor_points_rate_last5_events'] == 0.5
+
+
+def test_session_features_gap_practice_weather_and_grid(tmp_path):
+    import json
+
+    from f1_points.features import add_session_features
+
+    events, entries, labels = fixture()
+    entries['car_number'] = entries['driver_id'].map({'a': 1, 'b': 2, 'c': 3, 'd': 4})
+    entries['driver_code'] = entries['driver_id'].str.upper() * 3
+    entries['q1_seconds'] = entries['qualifying_rank'].map({1: 80.0, 2: 80.8, 3: 81.6, 4: 82.4})
+    entries['q2_seconds'] = None
+    entries['q3_seconds'] = None
+    entries['starting_grid'] = entries['qualifying_rank'].map({1: 1, 2: 0, 3: 2, 4: 3})
+    record = {
+        'practice': [
+            {'best_laps': {'1': 90.0, '2': 91.8, '3': None}, 'codes': {'1': 'AAA', '2': 'XXX', '3': 'CCC'}},
+            {'best_laps': {'1': 89.0, '3': 90.78}, 'codes': {'1': 'AAA', '3': 'CCC'}},
+        ],
+        'qualifying_weather': {'rain': True, 'track_temp_mean': 31.5},
+    }
+    (tmp_path / '2024-03.json').write_text(json.dumps(record))
+    features = add_session_features(build_features(events, entries, labels), entries, tmp_path)
+    a, b, c = (row(features, '2024-03', d) for d in 'abc')
+    assert a['qualifying_gap_pct'] == 0 and c['qualifying_gap_pct'] == pytest.approx(2.0)
+    assert a['practice_gap_pct'] == 0 and a['practice_sessions'] == 2
+    assert c['practice_gap_pct'] == pytest.approx(2.0)
+    assert pd.isna(b['practice_gap_pct'])  # code mismatch: not joined rather than guessed
+    assert a['qualifying_rain'] == 1 and a['qualifying_track_temp'] == 31.5
+    assert b['grid_pitlane'] == 1 and b['grid_position'] == 4 and b['grid_change'] == 2
+    no_record = row(features, '2024-01', 'a')
+    assert pd.isna(no_record['practice_sessions']) and pd.isna(no_record['qualifying_rain'])
