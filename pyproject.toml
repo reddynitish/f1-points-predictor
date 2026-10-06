@@ -44,3 +44,7 @@ quote-style = "single"
 python_version = "3.12"
 files = ["src"]
 warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = ["sklearn.*", "fastf1.*"]
+ignore_missing_imports = true
