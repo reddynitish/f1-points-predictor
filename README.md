@@ -15,8 +15,8 @@ Not affiliated with Formula 1, the FIA, teams, or drivers. Educational forecasti
 ## Local data audit
 
 ```sh
-uv sync --locked
-uv run pytest -q
+make install
+make check        # ruff format/lint, mypy, pytest; same gate as CI
 uv run python -m f1_points.cli collect
 uv run python -m f1_points.cli collect --offline --report data/offline-coverage.json
 ```

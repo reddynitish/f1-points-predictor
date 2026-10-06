@@ -34,6 +34,14 @@ https://arxiv.org/abs/2512.00640
 
 Research direction for a later tyre/pace module, not a requirement for version 1. Separating latent degradation from observed timing is more rigorous than assuming any pace change is tyre wear.
 
+## Egor Howell — Production-Grade ML Project Tutorial (video)
+
+https://www.youtube.com/watch?v=2BvLAJwvfgo — reviewed October 6, 2026 from auto-generated captions (full 87 minutes); code repository not inspected or copied.
+
+Stock-price forecaster with portfolio optimisation, used here only as an engineering-workflow reference. Adopted: a Makefile with one `make check` gate (format, lint, type check, tests), ruff and mypy, CI that runs the same gate on every pull request, logging instead of prints, secrets kept out of code, and a protected main branch that only accepts merges through pull requests after CI passes. CircleCI is replaced by GitHub Actions to avoid another account.
+
+Not adopted: paid VPS hosting and a hosted database (conflict with the no-paid-services constraint; the plan keeps a local dashboard reading saved artifacts), and scheduled daily predictions (deferred to milestone F, after data and leakage gates). The video's model is refit and scored without a chronological backtest or baseline comparison; our evaluation protocol (frozen splits, B0/B1 baselines, sealed 2025 test) stays as planned. The suggestion that test code should outweigh source code is treated as a heuristic, not a target.
+
 ## Evaluation references
 
 - https://scikit-learn.org/stable/modules/cross_validation.html — chronological and grouped splitting.
