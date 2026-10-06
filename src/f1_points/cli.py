@@ -2,11 +2,20 @@
 
 import argparse
 import json
+import logging
 from datetime import UTC, datetime
 from pathlib import Path
 
 from .collection import audit_event, fetch_races, session_rows
 from .data import SnapshotClient
+
+logger = logging.getLogger('f1_points')
+
+
+def _fail(report, **entry):
+    """Record a coverage failure and surface it immediately instead of only in the report."""
+    report['failures'].append(entry)
+    logger.warning('collection failure: %s', entry)
 
 
 def main():
@@ -21,6 +30,7 @@ def main():
     collect.add_argument('--output', type=Path, default=Path('data/normalized'))
     collect.add_argument('--report', type=Path, default=Path('reports/coverage.json'))
     args = parser.parse_args()
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s: %(message)s')
     if not 2018 <= args.start <= args.end <= 2025:
         parser.error('Study seasons must be within 2018–2025')
     if args.round is not None and args.round < 1:
@@ -40,11 +50,11 @@ def main():
             schedule, manifests = fetch_races(client, f'{year}.json', offline=args.offline)
             report['manifests'].extend(manifests)
         except Exception as error:
-            report['failures'].append({'season': year, 'stage': 'schedule', 'error': str(error)})
+            _fail(report, season=year, stage='schedule', error=str(error))
             continue
         selected = [race for race in schedule if args.round is None or int(race['round']) == args.round]
         if not selected:
-            report['failures'].append({'season': year, 'stage': 'selection', 'error': 'No matching events'})
+            _fail(report, season=year, stage='selection', error='No matching events')
             continue
         sessions = {}
         for name, key in [('qualifying', 'QualifyingResults'), ('results', 'Results')]:
@@ -54,7 +64,7 @@ def main():
                 report['manifests'].extend(manifests)
                 sessions[name] = session_rows(races, key)
             except Exception as error:
-                report['failures'].append({'season': year, 'stage': name, 'error': str(error)})
+                _fail(report, season=year, stage=name, error=str(error))
                 sessions[name] = {}
         for race in selected:
             number = int(race['round'])
@@ -69,11 +79,11 @@ def main():
                 (args.output / f'{coverage["event_id"]}.json').write_text(json.dumps(normalized, indent=2) + '\n')
                 report['events'].append(coverage)
             except Exception as error:
-                report['failures'].append({'season': year, 'round': number, 'stage': 'normalize', 'error': str(error)})
-        print(f'{year}: audited {len(selected)} scheduled events', flush=True)
+                _fail(report, season=year, round=number, stage='normalize', error=str(error))
+        logger.info('%s: audited %d scheduled events', year, len(selected))
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=2) + '\n')
-    print(f'Report: {args.report}; events={len(report["events"])}; failures={len(report["failures"])}')
+    logger.info('report=%s events=%d failures=%d', args.report, len(report['events']), len(report['failures']))
     return 1 if report['failures'] else 0
 
 
