@@ -10,6 +10,8 @@ from .collection import audit_event, fetch_races, session_rows
 from .data import SnapshotClient
 from .experiments import run_sealed_evaluation, run_selection
 from .features import FEATURE_COLUMNS, apply_qualifying_overrides, build_features, build_labels, load_normalized
+from .livetiming import BASE_URL as livetiming_base
+from .livetiming import LiveTimingClient, event_sessions, match_meeting, season_meetings
 from .predict import QualifyingUnavailable, archive, load_combined, predict_event
 
 logger = logging.getLogger('f1_points')
@@ -100,6 +102,58 @@ def build_dataset(args):
     return 0
 
 
+def collect_session_season(client, events, year, output, offline, schedule_cache=Path('data/fastf1')):
+    """Write one live-timing record per normalized event of a season; returns coverage rows and failures."""
+    rows, failures = [], []
+    try:
+        meetings = season_meetings(year, schedule_cache)
+    except Exception as error:
+        return rows, [{'season': year, 'stage': 'index', 'error': str(error)}]
+    output.mkdir(parents=True, exist_ok=True)
+    for event in events[events['season'] == year].sort_values('round').to_dict('records'):
+        meeting = match_meeting(meetings, event['race_start_utc']) if event['race_start_utc'] else None
+        if meeting is None:
+            failures.append({'event_id': event['event_id'], 'stage': 'match', 'error': 'no archive meeting'})
+            continue
+        try:
+            record = event_sessions(client, meeting, offline=offline)
+        except Exception as error:
+            failures.append({'event_id': event['event_id'], 'stage': 'sessions', 'error': str(error)})
+            continue
+        record['event_id'] = event['event_id']
+        (output / f'{event["event_id"]}.json').write_text(json.dumps(record, indent=2, default=str) + '\n')
+        weather = record['qualifying_weather']
+        rows.append(
+            {
+                'event_id': event['event_id'],
+                'meeting': record['meeting'],
+                'practice_sessions': [p['session'] for p in record['practice']],
+                'practice_drivers_with_lap': max(
+                    (sum(v is not None for v in p['best_laps'].values()) for p in record['practice']), default=0
+                ),
+                'qualifying_weather_available': weather is not None,
+                'qualifying_rain': weather['rain'] if weather else None,
+            }
+        )
+    return rows, failures
+
+
+def collect_sessions(args):
+    events, _, _ = load_normalized(args.normalized)
+    client = LiveTimingClient(args.cache)
+    report = {'generated_at': datetime.now(UTC).isoformat(), 'source': livetiming_base, 'events': [], 'failures': []}
+    for year in range(args.start, args.end + 1):
+        rows, failures = collect_session_season(client, events, year, args.output, args.offline)
+        report['events'] += rows
+        for failure in failures:
+            _fail(report, **failure)
+        logger.info('%s: %d events with session data', year, len(rows))
+    args.report.parent.mkdir(parents=True, exist_ok=True)
+    args.report.write_text(json.dumps(report, indent=2) + '\n')
+    logger.info('report=%s events=%d failures=%d', args.report, len(report['events']), len(report['failures']))
+    return 1 if report['failures'] else 0
+
+
 def run_predict(args):
     live = args.live
     if live is None:
@@ -164,10 +218,20 @@ def main():
     forecast.add_argument('--config', type=Path, default=Path('configs/final.json'))
     forecast.add_argument('--overrides', type=Path, default=Path('overrides/qualifying.csv'))
     forecast.add_argument('--archive', type=Path, default=Path('predictions'))
+    sessions = commands.add_parser('collect-sessions', help='pre-qualifying practice laps and qualifying weather')
+    sessions.add_argument('--start', type=int, default=2018)
+    sessions.add_argument('--end', type=int, default=PROSPECTIVE_SEASON)
+    sessions.add_argument('--offline', action='store_true')
+    sessions.add_argument('--normalized', type=Path, default=Path('data/normalized'))
+    sessions.add_argument('--cache', type=Path, default=Path('data/livetiming-snapshots'))
+    sessions.add_argument('--output', type=Path, default=Path('data/livetiming'))
+    sessions.add_argument('--report', type=Path, default=Path('reports/session-coverage.json'))
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s: %(message)s')
     if args.command == 'build-dataset':
         return build_dataset(args)
+    if args.command == 'collect-sessions':
+        return collect_sessions(args)
     if args.command == 'predict':
         return run_predict(args)
     if args.command == 'select':
