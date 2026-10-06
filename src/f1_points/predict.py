@@ -16,6 +16,10 @@ PRIMARY_RULE = (
 )
 
 
+class InsufficientHistory(RuntimeError):
+    """Raised when no earlier labeled race exists to fit on."""
+
+
 class QualifyingUnavailable(RuntimeError):
     """Raised instead of guessing when the target event has no usable qualifying classification."""
 
@@ -50,6 +54,8 @@ def predict_event(events, entries, labels, event_id, config, *, now=None, overri
     order = (int(event['season']), int(event['round']))
     earlier = features[[(s, r) < order for s, r in zip(features['season'], features['round'], strict=True)]]
     train = earlier.merge(build_labels(entries, labels), on=KEY, how='inner')
+    if train.empty:
+        raise InsufficientHistory(f'No earlier labeled races before {event_id}')
     target['p_B1'], _ = fit_predict(Candidate('B1', 'rank_logistic'), train, target)
     target['p_M1'], _ = fit_predict(frozen_candidate(config), train, target)
 

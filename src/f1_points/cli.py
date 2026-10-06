@@ -6,6 +6,7 @@ import logging
 from datetime import UTC, datetime
 from pathlib import Path
 
+from .backtest import run_backtest, summarize, write_outputs
 from .collection import audit_event, fetch_races, session_rows
 from .data import SnapshotClient
 from .experiments import run_sealed_evaluation, run_selection
@@ -226,12 +227,25 @@ def main():
     sessions.add_argument('--cache', type=Path, default=Path('data/livetiming-snapshots'))
     sessions.add_argument('--output', type=Path, default=Path('data/livetiming'))
     sessions.add_argument('--report', type=Path, default=Path('reports/session-coverage.json'))
+    replay = commands.add_parser('backtest', help='retrospective walk-forward replay of a completed season')
+    replay.add_argument('--season', type=int, default=PROSPECTIVE_SEASON)
+    replay.add_argument('--normalized', type=Path, default=Path('data/normalized'))
+    replay.add_argument('--config', type=Path, default=Path('configs/final.json'))
+    replay.add_argument('--overrides', type=Path, default=Path('overrides/qualifying.csv'))
+    replay.add_argument('--output', type=Path, default=Path('reports/backtest-2026'))
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s: %(message)s')
     if args.command == 'build-dataset':
         return build_dataset(args)
     if args.command == 'collect-sessions':
         return collect_sessions(args)
+    if args.command == 'backtest':
+        events, entries, labels = load_normalized(args.normalized)
+        frame = run_backtest(events, entries, labels, args.season, json.loads(args.config.read_text()), args.overrides)
+        summary = summarize(frame, args.season, args.config)
+        write_outputs(frame, summary, args.output)
+        logger.info('backtest races=%d rows=%d output=%s', summary['races'], summary['rows'], args.output)
+        return 0
     if args.command == 'predict':
         return run_predict(args)
     if args.command == 'select':
