@@ -1,0 +1,49 @@
+name: Live forecasts
+
+# Race weekends: forecast once qualifying is in, score once the race result is published.
+on:
+  schedule:
+    - cron: '17 */2 * * 5,6,0,1'  # every two hours, Friday to Monday (UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: live-forecasts
+  cancel-in-progress: false
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+          enable-cache: true
+      - name: Install locked environment
+        run: make install
+      # Completed seasons never change shape; cache their snapshots so Jolpica is not re-downloaded each run.
+      - name: Restore 2018-2025 snapshot cache
+        uses: actions/cache@v4
+        with:
+          path: data/snapshots
+          key: jolpica-2018-2025-v1
+      - name: Build 2018-2025 history
+        run: uv run python -m f1_points.cli collect --start 2018 --end 2025 --report data/history-coverage.json
+      - name: Forecast and score
+        run: uv run python -m f1_points.cli live
+      - name: Commit new forecasts and scores
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add predictions reports/live-2026 README.md
+          if git diff --cached --quiet; then
+            echo 'Nothing new this run.'
+            exit 0
+          fi
+          git commit -m "live: forecasts and scorecard update $(date -u +%Y-%m-%dT%H:%MZ)"
+          git pull --rebase origin main
+          git push origin HEAD:main

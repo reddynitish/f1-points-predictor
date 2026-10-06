@@ -22,6 +22,7 @@ from .features import (
     build_labels,
     load_normalized,
 )
+from .live import forecast_due, score_archives, scorecard_markdown, update_readme, write_scorecard
 from .livetiming import BASE_URL as livetiming_base
 from .livetiming import LiveTimingClient, event_sessions, match_meeting, season_meetings
 from .predict import QualifyingUnavailable, archive, load_combined, predict_event
@@ -213,6 +214,28 @@ def run_predict(args):
     return 0
 
 
+def run_live(args):
+    now = datetime.now(UTC)
+    run_dir = args.live_root / now.strftime('%Y%m%dT%H%M%SZ')
+    report = collect(
+        SnapshotClient(run_dir / 'snapshots'), args.season, args.season, None, False, run_dir / 'normalized'
+    )
+    if report['failures']:
+        logger.error('season collection failed: %s', report['failures'])
+        return 1
+    events, entries, labels = load_combined(args.base, run_dir / 'normalized', args.season)
+    config = json.loads(args.config.read_text())
+    for path in forecast_due(
+        events, entries, labels, config, args.archive, args.config, args.season, now, args.overrides
+    ):
+        logger.info('archived prospective forecast %s', path)
+    races = score_archives(args.archive, labels)
+    write_scorecard(races, args.scorecard, now.isoformat())
+    changed = update_readme(args.readme, scorecard_markdown(races))
+    logger.info('scored races=%d readme_changed=%s', len(races), changed)
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
@@ -264,6 +287,15 @@ def main():
     replay.add_argument('--overrides', type=Path, default=Path('overrides/qualifying.csv'))
     replay.add_argument('--output', type=Path, default=Path('reports/backtest-2026'))
     replay.add_argument('--sessions', type=Path, default=Path('data/livetiming'))
+    loop = commands.add_parser('live', help='unattended: forecast after qualifying, score after the race')
+    loop.add_argument('--season', type=int, default=PROSPECTIVE_SEASON)
+    loop.add_argument('--base', type=Path, default=Path('data/normalized'))
+    loop.add_argument('--live-root', type=Path, default=Path('data/live'))
+    loop.add_argument('--config', type=Path, default=Path('configs/final.json'))
+    loop.add_argument('--overrides', type=Path, default=Path('overrides/qualifying.csv'))
+    loop.add_argument('--archive', type=Path, default=Path('predictions'))
+    loop.add_argument('--scorecard', type=Path, default=Path('reports/live-2026'))
+    loop.add_argument('--readme', type=Path, default=Path('README.md'))
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s: %(message)s')
     if args.command == 'build-dataset':
@@ -280,6 +312,8 @@ def main():
         return 0
     if args.command == 'predict':
         return run_predict(args)
+    if args.command == 'live':
+        return run_live(args)
     if args.command == 'select':
         spec = FEATURE_SETS[args.feature_set]
         report = run_selection(args.dataset, args.report, args.config, **spec)

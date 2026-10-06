@@ -31,6 +31,14 @@ It's built like a production ML system. The data is cached and audited, a test s
 
 > These numbers come from a retrospective backtest run in October 2026, not from forecasts published before each race. Live, archived forecasts will start with the 2026 Singapore Grand Prix (round 17). Full write-up: [2026 backtest](reports/BACKTEST_2026.md) · [model card](reports/MODEL_CARD.md).
 
+## Live 2026 scorecard
+
+Forecasts saved after qualifying and committed **before** each race, then scored automatically once results are published ([how it works](#live-forecasts)).
+
+<!-- live-scorecard:start -->
+_No live forecast has been scored yet. Forecasts are saved after qualifying and committed before each race; the first is the 2026 Singapore Grand Prix._
+<!-- live-scorecard:end -->
+
 ## How it works
 
 ```mermaid
@@ -70,6 +78,14 @@ uv run python -m f1_points.cli build-dataset                     # leakage-safe 
 uv run python -m f1_points.cli backtest --season 2026            # replay this season
 uv run python -m f1_points.cli predict --season 2026 --round 17  # after qualifying
 ```
+
+## Live forecasts
+
+A [scheduled GitHub Action](.github/workflows/live.yml) runs every two hours from Friday to Monday (UTC):
+
+1. Once at least an hour has passed since the scheduled qualifying start, and qualifying results are published, it saves a forecast to `predictions/<race>-prospective.json` and commits it. The git timestamp proves it came before the race.
+2. After the race, it scores every saved forecast against the published results and updates the scorecard above.
+3. Saved forecasts are never overwritten. A forecast is only counted as live if it was made before the race started.
 
 ## In progress
 
