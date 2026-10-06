@@ -1,0 +1,414 @@
+{
+  "generated_at": "2026-10-06T15:04:26.874477+00:00",
+  "git_commit": "edb572f2323b04e913ad7d70921dbbd80e4cfa2f",
+  "environment": {
+    "python": "3.12.13",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "scikit_learn": "1.9.1",
+    "pandas": "2.3.3",
+    "seed": 42
+  },
+  "duration_seconds": 12.2,
+  "protocol": "expanding seasonal blocks; validate 2021-2025; 2026 excluded from all selection inputs",
+  "cutoff": "qualifying_end",
+  "validation_rows": 2276,
+  "validation_events": 114,
+  "candidates": [
+    {
+      "candidate": "M2 learning_rate=0.05,max_leaf_nodes=7,l2_regularization=1.0",
+      "name": "M2",
+      "family": "hgb",
+      "params": {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 7,
+        "l2_regularization": 1.0
+      },
+      "race_brier": 0.15690546995022886,
+      "race_brier_by_season": {
+        "2021": 0.1639366488503378,
+        "2022": 0.16241226108981466,
+        "2023": 0.15065028979742745,
+        "2024": 0.13755072621781783,
+        "2025": 0.17050098961965424
+      },
+      "log_loss": 0.48619199465661,
+      "roc_auc": 0.8502675593031875,
+      "pr_auc": 0.8279449279735218
+    },
+    {
+      "candidate": "M2 learning_rate=0.05,max_leaf_nodes=7,l2_regularization=0.0",
+      "name": "M2",
+      "family": "hgb",
+      "params": {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 7,
+        "l2_regularization": 0.0
+      },
+      "race_brier": 0.15710523510423377,
+      "race_brier_by_season": {
+        "2021": 0.16461808899157582,
+        "2022": 0.16222267016270558,
+        "2023": 0.15151512023148464,
+        "2024": 0.13792064828476314,
+        "2025": 0.16983632902339507
+      },
+      "log_loss": 0.48733784840827415,
+      "roc_auc": 0.8492764702248579,
+      "pr_auc": 0.8273489521597314
+    },
+    {
+      "candidate": "B1",
+      "name": "B1",
+      "family": "rank_logistic",
+      "params": {},
+      "race_brier": 0.16029309291746527,
+      "race_brier_by_season": {
+        "2021": 0.16448892934524378,
+        "2022": 0.1674556070708777,
+        "2023": 0.17550119835143632,
+        "2024": 0.13055871436200153,
+        "2025": 0.1656748867923638
+      },
+      "log_loss": 0.49434389327032674,
+      "roc_auc": 0.8409512447491969,
+      "pr_auc": 0.8269154515829973
+    },
+    {
+      "candidate": "M2 learning_rate=0.1,max_leaf_nodes=7,l2_regularization=1.0",
+      "name": "M2",
+      "family": "hgb",
+      "params": {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 7,
+        "l2_regularization": 1.0
+      },
+      "race_brier": 0.16283264060270344,
+      "race_brier_by_season": {
+        "2021": 0.1728728501281006,
+        "2022": 0.1707017474451806,
+        "2023": 0.15490086504871292,
+        "2024": 0.14332435903463478,
+        "2025": 0.17319484309137848
+      },
+      "log_loss": 0.5024243982470837,
+      "roc_auc": 0.8393578576723499,
+      "pr_auc": 0.8156223969059614
+    },
+    {
+      "candidate": "M2 learning_rate=0.1,max_leaf_nodes=7,l2_regularization=0.0",
+      "name": "M2",
+      "family": "hgb",
+      "params": {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 7,
+        "l2_regularization": 0.0
+      },
+      "race_brier": 0.16413887659138743,
+      "race_brier_by_season": {
+        "2021": 0.1774639245607927,
+        "2022": 0.17049584351405736,
+        "2023": 0.15674930550609145,
+        "2024": 0.14205375712088628,
+        "2025": 0.17495592257234097
+      },
+      "log_loss": 0.5098174883578062,
+      "roc_auc": 0.8365193353101061,
+      "pr_auc": 0.8097858332945123
+    },
+    {
+      "candidate": "M2 learning_rate=0.05,max_leaf_nodes=15,l2_regularization=0.0",
+      "name": "M2",
+      "family": "hgb",
+      "params": {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 15,
+        "l2_regularization": 0.0
+      },
+      "race_brier": 0.16429223284376232,
+      "race_brier_by_season": {
+        "2021": 0.17358418936684555,
+        "2022": 0.17139808928562983,
+        "2023": 0.1593514279226652,
+        "2024": 0.14483148250587044,
+        "2025": 0.1732507258081218
+      },
+      "log_loss": 0.5095910798109587,
+      "roc_auc": 0.8349224734371139,
+      "pr_auc": 0.8085907704211797
+    },
+    {
+      "candidate": "M2 learning_rate=0.05,max_leaf_nodes=15,l2_regularization=1.0",
+      "name": "M2",
+      "family": "hgb",
+      "params": {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 15,
+        "l2_regularization": 1.0
+      },
+      "race_brier": 0.16429245859061262,
+      "race_brier_by_season": {
+        "2021": 0.17568506579208792,
+        "2022": 0.1699283770794529,
+        "2023": 0.15782146175100767,
+        "2024": 0.14598337096932495,
+        "2025": 0.17292381143208224
+      },
+      "log_loss": 0.5077336593701305,
+      "roc_auc": 0.8349985328638497,
+      "pr_auc": 0.8050471364029341
+    },
+    {
+      "candidate": "M2 learning_rate=0.1,max_leaf_nodes=15,l2_regularization=1.0",
+      "name": "M2",
+      "family": "hgb",
+      "params": {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 15,
+        "l2_regularization": 1.0
+      },
+      "race_brier": 0.1745875688658217,
+      "race_brier_by_season": {
+        "2021": 0.19501219256669888,
+        "2022": 0.1926312417496644,
+        "2023": 0.15981564152280892,
+        "2024": 0.1513887327768805,
+        "2025": 0.1760647331498647
+      },
+      "log_loss": 0.539866954454702,
+      "roc_auc": 0.8197993884358784,
+      "pr_auc": 0.7869494326747971
+    },
+    {
+      "candidate": "M2 learning_rate=0.1,max_leaf_nodes=15,l2_regularization=0.0",
+      "name": "M2",
+      "family": "hgb",
+      "params": {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 15,
+        "l2_regularization": 0.0
+      },
+      "race_brier": 0.17549598929351676,
+      "race_brier_by_season": {
+        "2021": 0.1982630447032655,
+        "2022": 0.1895532209025381,
+        "2023": 0.1602702399564948,
+        "2024": 0.15209326909151924,
+        "2025": 0.1791000499539118
+      },
+      "log_loss": 0.5511323537459185,
+      "roc_auc": 0.8205182851494934,
+      "pr_auc": 0.7908016775697052
+    },
+    {
+      "candidate": "M1 C=0.1",
+      "name": "M1",
+      "family": "logistic",
+      "params": {
+        "C": 0.1
+      },
+      "race_brier": 0.20841709317270332,
+      "race_brier_by_season": {
+        "2021": 0.15807904360205402,
+        "2022": 0.45617451823070715,
+        "2023": 0.1515328629658935,
+        "2024": 0.12455435889427169,
+        "2025": 0.16345594427730217
+      },
+      "log_loss": 0.7366468367603087,
+      "roc_auc": 0.7565959352606868,
+      "pr_auc": 0.6975162314865886
+    },
+    {
+      "candidate": "M1 C=1.0",
+      "name": "M1",
+      "family": "logistic",
+      "params": {
+        "C": 1.0
+      },
+      "race_brier": 0.21589546290605677,
+      "race_brier_by_season": {
+        "2021": 0.16123689773746752,
+        "2022": 0.4834100594701885,
+        "2023": 0.151321794781844,
+        "2024": 0.129465885468904,
+        "2025": 0.16639954067782387
+      },
+      "log_loss": 0.9566355118781373,
+      "roc_auc": 0.748851772918211,
+      "pr_auc": 0.6889602657723981
+    },
+    {
+      "candidate": "M1 C=10.0",
+      "name": "M1",
+      "family": "logistic",
+      "params": {
+        "C": 10.0
+      },
+      "race_brier": 0.21717304606160487,
+      "race_brier_by_season": {
+        "2021": 0.1621588663311301,
+        "2022": 0.48696341408645777,
+        "2023": 0.1514801433109425,
+        "2024": 0.13066788606104165,
+        "2025": 0.16701852764709538
+      },
+      "log_loss": 1.8026238323122774,
+      "roc_auc": 0.7479529589819619,
+      "pr_auc": 0.6888607609747417
+    },
+    {
+      "candidate": "B0",
+      "name": "B0",
+      "family": "prior",
+      "params": {},
+      "race_brier": 0.24999965934969232,
+      "race_brier_by_season": {
+        "2021": 0.25,
+        "2022": 0.25000009561366565,
+        "2023": 0.25000005908420886,
+        "2024": 0.24999960097273377,
+        "2025": 0.24999863913191975
+      },
+      "log_loss": 0.6931465381706147,
+      "roc_auc": 0.5001621571534469,
+      "pr_auc": 0.5011342453699024
+    }
+  ],
+  "selected": "M2 learning_rate=0.05,max_leaf_nodes=7,l2_regularization=1.0",
+  "tie_rule": "simplest family within 0.0005 of best race-averaged Brier",
+  "calibration": {
+    "compared_on_seasons": [
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "raw_race_brier": 0.15522410108281148,
+    "sigmoid_race_brier": 0.15468021873761623,
+    "selected": "sigmoid",
+    "reliability_raw": [
+      {
+        "bin": "(-0.001, 0.1]",
+        "count": 180.0,
+        "mean_predicted": 0.06448577107682826,
+        "observed_rate": 0.09444444444444444
+      },
+      {
+        "bin": "(0.1, 0.2]",
+        "count": 260.0,
+        "mean_predicted": 0.14793806529747466,
+        "observed_rate": 0.14615384615384616
+      },
+      {
+        "bin": "(0.2, 0.3]",
+        "count": 143.0,
+        "mean_predicted": 0.24869189210443926,
+        "observed_rate": 0.20279720279720279
+      },
+      {
+        "bin": "(0.3, 0.4]",
+        "count": 120.0,
+        "mean_predicted": 0.3463597078979083,
+        "observed_rate": 0.23333333333333334
+      },
+      {
+        "bin": "(0.4, 0.5]",
+        "count": 128.0,
+        "mean_predicted": 0.44530531621504,
+        "observed_rate": 0.34375
+      },
+      {
+        "bin": "(0.5, 0.6]",
+        "count": 130.0,
+        "mean_predicted": 0.5533866819522899,
+        "observed_rate": 0.4846153846153846
+      },
+      {
+        "bin": "(0.6, 0.7]",
+        "count": 172.0,
+        "mean_predicted": 0.6515064566718776,
+        "observed_rate": 0.5813953488372093
+      },
+      {
+        "bin": "(0.7, 0.8]",
+        "count": 274.0,
+        "mean_predicted": 0.7580879896898342,
+        "observed_rate": 0.791970802919708
+      },
+      {
+        "bin": "(0.8, 0.9]",
+        "count": 369.0,
+        "mean_predicted": 0.8522892120306172,
+        "observed_rate": 0.8888888888888888
+      },
+      {
+        "bin": "(0.9, 1.0]",
+        "count": 61.0,
+        "mean_predicted": 0.9229855782880386,
+        "observed_rate": 0.9180327868852459
+      }
+    ],
+    "reliability_sigmoid": [
+      {
+        "bin": "(-0.001, 0.1]",
+        "count": 245.0,
+        "mean_predicted": 0.060768853388352057,
+        "observed_rate": 0.11020408163265306
+      },
+      {
+        "bin": "(0.1, 0.2]",
+        "count": 250.0,
+        "mean_predicted": 0.14562024880325358,
+        "observed_rate": 0.156
+      },
+      {
+        "bin": "(0.2, 0.3]",
+        "count": 133.0,
+        "mean_predicted": 0.249563230861751,
+        "observed_rate": 0.20300751879699247
+      },
+      {
+        "bin": "(0.3, 0.4]",
+        "count": 131.0,
+        "mean_predicted": 0.34877114537412696,
+        "observed_rate": 0.2748091603053435
+      },
+      {
+        "bin": "(0.4, 0.5]",
+        "count": 104.0,
+        "mean_predicted": 0.4486032596109448,
+        "observed_rate": 0.38461538461538464
+      },
+      {
+        "bin": "(0.5, 0.6]",
+        "count": 139.0,
+        "mean_predicted": 0.5496725207558053,
+        "observed_rate": 0.5179856115107914
+      },
+      {
+        "bin": "(0.6, 0.7]",
+        "count": 167.0,
+        "mean_predicted": 0.6517441564464783,
+        "observed_rate": 0.6526946107784432
+      },
+      {
+        "bin": "(0.7, 0.8]",
+        "count": 276.0,
+        "mean_predicted": 0.7527732014714522,
+        "observed_rate": 0.7934782608695652
+      },
+      {
+        "bin": "(0.8, 0.9]",
+        "count": 316.0,
+        "mean_predicted": 0.8538202218014014,
+        "observed_rate": 0.8892405063291139
+      },
+      {
+        "bin": "(0.9, 1.0]",
+        "count": 76.0,
+        "mean_predicted": 0.9236221554765707,
+        "observed_rate": 0.9210526315789473
+      }
+    ]
+  }
+}

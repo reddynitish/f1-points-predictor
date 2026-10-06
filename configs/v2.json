@@ -1,0 +1,63 @@
+{
+  "frozen_at": "2026-10-06T15:04:26.874477+00:00",
+  "selected_from_commit": "edb572f2323b04e913ad7d70921dbbd80e4cfa2f",
+  "model": {
+    "name": "M2",
+    "family": "hgb",
+    "params": {
+      "learning_rate": 0.05,
+      "max_leaf_nodes": 7,
+      "l2_regularization": 1.0
+    }
+  },
+  "feature_columns": [
+    "qualifying_rank",
+    "qualifying_rank_missing",
+    "field_size",
+    "qualifying_percentile",
+    "driver_points_rate_last5",
+    "driver_finish_mean_last5",
+    "driver_dnf_rate_last5",
+    "driver_history_count",
+    "rookie",
+    "constructor_points_rate_last5_events",
+    "constructor_history_events",
+    "constructor_new",
+    "qualifying_gap_pct",
+    "practice_gap_pct",
+    "practice_sessions",
+    "qualifying_rain",
+    "qualifying_track_temp",
+    "circuit_id",
+    "constructor_id"
+  ],
+  "numeric_features": [
+    "qualifying_rank",
+    "qualifying_rank_missing",
+    "field_size",
+    "qualifying_percentile",
+    "driver_points_rate_last5",
+    "driver_finish_mean_last5",
+    "driver_dnf_rate_last5",
+    "driver_history_count",
+    "rookie",
+    "constructor_points_rate_last5_events",
+    "constructor_history_events",
+    "constructor_new",
+    "qualifying_gap_pct",
+    "practice_gap_pct",
+    "practice_sessions",
+    "qualifying_rain",
+    "qualifying_track_temp"
+  ],
+  "baseline": "rank_logistic",
+  "cutoff": "qualifying_end",
+  "calibration": "sigmoid",
+  "threshold": 0.5,
+  "seed": 42,
+  "test_season": 2026,
+  "protocols": {
+    "fixed_season": "fit seasons 2018-2025; score every 2026 race once",
+    "walk_forward": "refit before each 2026 race on all earlier races with these frozen settings"
+  }
+}
