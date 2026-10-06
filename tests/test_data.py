@@ -174,3 +174,16 @@ def test_sprint_order_unknown_without_times():
     del source['Sprint']['time']
     event, _, _ = normalize_event(source, [], [])
     assert event['sprint_scheduled_before_qualifying'] is None
+
+
+def test_repeated_rank_rows_are_flagged_per_driver():
+    _, entries, _ = normalize_event(schedule(), [driver('a'), driver('b'), driver('c', '2')], [])
+    assert [row['qualifying_rank_repeated'] for row in entries] == [True, True, False]
+
+
+def test_missing_rank_is_not_flagged_as_repeated():
+    rows = [driver('a', Q1='1:20'), driver('b', Q1='1:21')]
+    for row in rows:
+        del row['position']
+    _, entries, _ = normalize_event(schedule(), rows, [])
+    assert not any(row['qualifying_rank_repeated'] for row in entries)

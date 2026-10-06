@@ -156,4 +156,10 @@ def normalize_event(schedule, qualifying, results):
                 raise ValueError('Invalid race label')
             labels.append({'event_id': event_id, 'driver_id': identifier, 'race_points': points,
                            'final_position': position, 'result_status': row['status']})
+    counts = {}
+    for entry in entries:
+        counts[entry['qualifying_rank']] = counts.get(entry['qualifying_rank'], 0) + 1
+    for entry in entries:
+        # Flag only; observed post-session reclassifications leave collisions that need a design decision.
+        entry['qualifying_rank_repeated'] = entry['qualifying_rank'] is not None and counts[entry['qualifying_rank']] > 1
     return event, entries, labels

@@ -35,10 +35,13 @@ def audit_event(schedule, qualifying, results):
     missing = sum(not row['qualifying_available'] for row in entries)
     ranks = [row['qualifying_rank'] for row in entries if row['qualifying_rank'] is not None]
     repeated = len(ranks) - len(set(ranks))
+    unused_ranks = sorted(set(range(1, len(entries) + 1)) - set(ranks))
     report = {'event_id': event['event_id'], 'season': event['season'], 'round': event['round'],
               'entries': len(entries), 'qualifying_rows': len(qualifying), 'labels': len(labels),
               'missing_labels': len(entries) - len(labels),
               'missing_qualifying': missing, 'repeated_rank_rows': repeated,
+              'repeated_rank_drivers': sorted(row['driver_id'] for row in entries if row['qualifying_rank_repeated']),
+              'unused_ranks': unused_ranks,
               'missing_rank': sum(row['qualifying_rank'] is None for row in entries),
               'missing_q3': sum(row['q3_seconds'] is None for row in entries),
               'sprint_weekend': event['sprint_weekend'], 'weekend_format': event['weekend_format'],

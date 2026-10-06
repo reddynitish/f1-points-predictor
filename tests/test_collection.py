@@ -59,3 +59,9 @@ def test_sprint_grid_qualifying_limitation():
     from test_data import sprint_schedule
     report, _ = audit_event(sprint_schedule(), [driver('a')], [])
     assert 'qualifying sets sprint grid; race grid comes from sprint result' in report['limitations']
+
+
+def test_repeated_rank_detail_names_drivers_and_gap():
+    report, _ = audit_event(schedule(), [driver('a'), driver('b')], [])
+    assert report['repeated_rank_drivers'] == ['a', 'b']
+    assert report['unused_ranks'] == [2]
