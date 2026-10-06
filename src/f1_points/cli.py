@@ -10,6 +10,7 @@ from .collection import audit_event, fetch_races, session_rows
 from .data import SnapshotClient
 from .experiments import run_sealed_evaluation, run_selection
 from .features import FEATURE_COLUMNS, apply_qualifying_overrides, build_features, build_labels, load_normalized
+from .predict import QualifyingUnavailable, archive, load_combined, predict_event
 
 logger = logging.getLogger('f1_points')
 # 2018–2025 is the study period; 2026 is prospective history/shadow evaluation, never used for tuning.
@@ -99,6 +100,36 @@ def build_dataset(args):
     return 0
 
 
+def run_predict(args):
+    live = args.live
+    if live is None:
+        # Fresh immutable cache per run: the audited snapshots are never overwritten with newer upstream data.
+        run_dir = args.live_root / datetime.now(UTC).strftime('%Y%m%dT%H%M%SZ')
+        report = collect(
+            SnapshotClient(run_dir / 'snapshots'), args.season, args.season, None, False, run_dir / 'normalized'
+        )
+        if report['failures']:
+            logger.error('target season collection failed: %s', report['failures'])
+            return 1
+        live = run_dir / 'normalized'
+    events, entries, labels = load_combined(args.base, live, args.season)
+    event_id = f'{args.season}-{args.round:02d}'
+    config = json.loads(args.config.read_text())
+    try:
+        predictions, metadata = predict_event(events, entries, labels, event_id, config, overrides=args.overrides)
+    except QualifyingUnavailable as error:
+        logger.error('%s', error)
+        return 2
+    path = archive(predictions, metadata, args.config, args.archive)
+    print(f'{event_id} {metadata["circuit_id"]} [{metadata["mode"]}] trained through {metadata["training_last_event"]}')
+    print(predictions.to_string(index=False, float_format=lambda v: f'{v:.3f}'))
+    for warning in metadata['warnings']:
+        print('warning:', warning)
+    print(metadata['primary_rule'])
+    logger.info('archived %s', path)
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
@@ -124,10 +155,21 @@ def main():
     sealed.add_argument('--config', type=Path, default=Path('configs/final.json'))
     sealed.add_argument('--report', type=Path, default=Path('reports/experiments/test_2025.json'))
     sealed.add_argument('--predictions', type=Path, default=Path('reports/experiments/test_2025_predictions.csv'))
+    forecast = commands.add_parser('predict', help='frozen-model forecast for one event after qualifying')
+    forecast.add_argument('--season', type=int, required=True)
+    forecast.add_argument('--round', type=int, required=True)
+    forecast.add_argument('--base', type=Path, default=Path('data/normalized'))
+    forecast.add_argument('--live-root', type=Path, default=Path('data/live'))
+    forecast.add_argument('--live', type=Path, help='reuse an already fetched normalized target season')
+    forecast.add_argument('--config', type=Path, default=Path('configs/final.json'))
+    forecast.add_argument('--overrides', type=Path, default=Path('overrides/qualifying.csv'))
+    forecast.add_argument('--archive', type=Path, default=Path('predictions'))
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s: %(message)s')
     if args.command == 'build-dataset':
         return build_dataset(args)
+    if args.command == 'predict':
+        return run_predict(args)
     if args.command == 'select':
         report = run_selection(args.dataset, args.report, args.config)
         logger.info(
