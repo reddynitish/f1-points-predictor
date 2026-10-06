@@ -111,7 +111,7 @@ def normalize_event(schedule, qualifying, results):
     for identifier in identifiers:
         qrow = qrows.get(identifier)
         source = qrow if qrow is not None else rrows[identifier]
-        rank = int(qrow['position']) if qrow else None
+        rank = int(qrow['position']) if qrow and qrow.get('position') is not None else None
         if rank is not None:
             if rank < 1 or rank > len(identifiers) or rank in ranks:
                 raise ValueError('Impossible or duplicate qualifying rank')

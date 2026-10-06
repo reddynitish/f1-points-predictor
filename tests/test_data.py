@@ -77,3 +77,52 @@ def test_three_attempts(tmp_path):
         SnapshotClient(tmp_path, fetch=fetch, sleep=waits.append).get('2024.json')
     assert len(calls) == 3
     assert waits == [1, 2]
+
+
+def test_rate_limit_retry_after(tmp_path):
+    import requests
+    waits = []
+    class Limited(Response):
+        status_code = 429
+        headers = {'Retry-After': '5'}
+        def raise_for_status(self):
+            raise requests.HTTPError('rate limited')
+    responses = iter([Limited(), Response()])
+    SnapshotClient(tmp_path, fetch=lambda *a, **k: next(responses), sleep=waits.append).get('2024.json')
+    assert waits == [5, 1]
+
+
+@pytest.mark.parametrize('points', ['nan', 'inf', '-1'])
+def test_invalid_points_rejected(points):
+    with pytest.raises(ValueError, match='label'):
+        normalize_event(schedule(), [], [driver('a', points=points, status='Finished')])
+
+
+def test_duplicate_result_driver_rejected():
+    with pytest.raises(ValueError, match='duplicate'):
+        normalize_event(schedule(), [], [driver('a'), driver('a')])
+
+
+def test_missing_session_start_stays_unknown():
+    source = schedule()
+    del source['Qualifying']
+    source.pop('time')
+    event, _, _ = normalize_event(source, [], [])
+    assert event['race_start_utc'] is None
+    assert event['qualifying_scheduled_start_utc'] is None
+
+
+def test_constructor_comes_from_qualifying_when_results_differ():
+    q = driver('a')
+    race = driver('a', points='0', status='DNS')
+    race['Constructor'] = {'constructorId': 'different'}
+    _, entries, _ = normalize_event(schedule(), [q], [race])
+    assert entries[0]['constructor_id'] == 'team'
+
+
+def test_qualifying_row_without_position_retains_missing_rank():
+    row = driver('a', Q1='1:20.123')
+    del row['position']
+    _, entries, _ = normalize_event(schedule(), [row], [])
+    assert entries[0]['qualifying_available'] is True
+    assert entries[0]['qualifying_rank'] is None
