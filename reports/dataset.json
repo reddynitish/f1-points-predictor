@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-06T13:36:04.148772+00:00",
+  "feature_columns": [
+    "qualifying_rank",
+    "qualifying_rank_missing",
+    "field_size",
+    "qualifying_percentile",
+    "driver_points_rate_last5",
+    "driver_finish_mean_last5",
+    "driver_dnf_rate_last5",
+    "driver_history_count",
+    "rookie",
+    "constructor_points_rate_last5_events",
+    "constructor_history_events",
+    "constructor_new",
+    "circuit_id",
+    "constructor_id"
+  ],
+  "rows": 3802,
+  "labeled_rows": 3801,
+  "events": 189,
+  "rows_by_season": {
+    "2018": 420,
+    "2019": 418,
+    "2020": 340,
+    "2021": 439,
+    "2022": 440,
+    "2023": 440,
+    "2024": 479,
+    "2025": 479,
+    "2026": 347
+  },
+  "missing_by_feature": {
+    "qualifying_rank": 5,
+    "qualifying_rank_missing": 0,
+    "field_size": 0,
+    "qualifying_percentile": 5,
+    "driver_points_rate_last5": 44,
+    "driver_finish_mean_last5": 44,
+    "driver_dnf_rate_last5": 44,
+    "driver_history_count": 0,
+    "rookie": 0,
+    "constructor_points_rate_last5_events": 22,
+    "constructor_history_events": 0,
+    "constructor_new": 0,
+    "circuit_id": 0,
+    "constructor_id": 0
+  },
+  "overrides_applied": 5,
+  "lineage": "history features use labels of strictly earlier events only; see tests/test_leakage.py"
+}

@@ -8,6 +8,7 @@ from pathlib import Path
 
 from .collection import audit_event, fetch_races, session_rows
 from .data import SnapshotClient
+from .features import FEATURE_COLUMNS, apply_qualifying_overrides, build_features, build_labels, load_normalized
 
 logger = logging.getLogger('f1_points')
 # 2018–2025 is the study period; 2026 is prospective history/shadow evaluation, never used for tuning.
@@ -18,6 +19,33 @@ def _fail(report, **entry):
     """Record a coverage failure and surface it immediately instead of only in the report."""
     report['failures'].append(entry)
     logger.warning('collection failure: %s', entry)
+
+
+def build_dataset(args):
+    """Write physically separate feature and label files plus a committed missingness/lineage report."""
+    events, entries, labels = load_normalized(args.input)
+    entries = apply_qualifying_overrides(entries, args.overrides)
+    features = build_features(events, entries, labels)
+    target = build_labels(entries, labels)
+    args.output.mkdir(parents=True, exist_ok=True)
+    features.to_parquet(args.output / 'features.parquet', index=False)
+    target.to_parquet(args.output / 'labels.parquet', index=False)
+    report = {
+        'schema_version': 1,
+        'generated_at': datetime.now(UTC).isoformat(),
+        'feature_columns': FEATURE_COLUMNS,
+        'rows': len(features),
+        'labeled_rows': len(target),
+        'events': int(features['event_id'].nunique()),
+        'rows_by_season': {str(k): int(v) for k, v in features.groupby('season').size().items()},
+        'missing_by_feature': {c: int(features[c].isna().sum()) for c in FEATURE_COLUMNS},
+        'overrides_applied': sum(1 for _ in open(args.overrides)) - 1,
+        'lineage': 'history features use labels of strictly earlier events only; see tests/test_leakage.py',
+    }
+    args.report.parent.mkdir(parents=True, exist_ok=True)
+    args.report.write_text(json.dumps(report, indent=2) + '\n')
+    logger.info('dataset rows=%d labeled=%d report=%s', len(features), len(target), args.report)
+    return 0
 
 
 def main():
@@ -31,8 +59,15 @@ def main():
     collect.add_argument('--cache', type=Path, default=Path('data/snapshots'))
     collect.add_argument('--output', type=Path, default=Path('data/normalized'))
     collect.add_argument('--report', type=Path, default=Path('reports/coverage.json'))
+    dataset = commands.add_parser('build-dataset')
+    dataset.add_argument('--input', type=Path, default=Path('data/normalized'))
+    dataset.add_argument('--overrides', type=Path, default=Path('overrides/qualifying.csv'))
+    dataset.add_argument('--output', type=Path, default=Path('data/dataset'))
+    dataset.add_argument('--report', type=Path, default=Path('reports/dataset.json'))
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s: %(message)s')
+    if args.command == 'build-dataset':
+        return build_dataset(args)
     if not 2018 <= args.start <= args.end <= PROSPECTIVE_SEASON:
         parser.error(f'Seasons must be within 2018–{PROSPECTIVE_SEASON}')
     if args.round is not None and args.round < 1:
