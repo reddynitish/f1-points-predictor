@@ -18,6 +18,8 @@ from .data import USER_AGENT
 BASE_URL = 'https://livetiming.formula1.com/static/'
 MIN_INTERVAL_SECONDS = 3.0
 MATCH_TOLERANCE = timedelta(hours=36)
+# A missing page is only cached as permanently absent once its session is comfortably in the past.
+ABSENT_SETTLE = timedelta(days=2)
 
 
 class LiveTimingClient:
@@ -28,7 +30,7 @@ class LiveTimingClient:
         self.fetch, self.sleep, self.clock = fetch, sleep, clock
         self.last_request = None
 
-    def get(self, path, *, offline=False):
+    def get(self, path, *, offline=False, cache_absent=True):
         url = BASE_URL + path
         location = self.root / f'{hashlib.sha256(url.encode()).hexdigest()}.json'
         if location.exists():
@@ -62,6 +64,8 @@ class LiveTimingClient:
             'status': status,
             'sha256': hashlib.sha256(body.encode()).hexdigest() if body is not None else None,
         }
+        if body is None and not cache_absent:
+            return body, manifest  # page may appear later (session not run yet); do not freeze its absence
         self.root.mkdir(parents=True, exist_ok=True)
         temp = location.with_suffix('.tmp')
         temp.write_text(json.dumps({'body': body, 'manifest': manifest}))
@@ -139,8 +143,13 @@ def match_meeting(meetings, race_start_utc):
     return best[1] if best else None
 
 
-def event_sessions(client, meeting, *, offline=False):
+def event_sessions(client, meeting, *, offline=False, now=None):
     """Best laps from practice sessions that started before qualifying, plus observed qualifying weather."""
+    now = now or datetime.now(UTC)
+
+    def settled(session):
+        return session['start_utc'] is not None and session['start_utc'] < now - ABSENT_SETTLE
+
     names = [s['name'] for s in meeting['sessions']]
     if 'Qualifying' not in names:
         raise ValueError(f'No qualifying session in {meeting["name"]}')
@@ -157,8 +166,9 @@ def event_sessions(client, meeting, *, offline=False):
     for session in meeting['sessions'][:qualifying_index]:
         if session['type'] != 'Practice':
             continue
-        stats, stats_manifest = client.get(session['path'] + 'TimingStats.json', offline=offline)
-        drivers, drivers_manifest = client.get(session['path'] + 'DriverList.json', offline=offline)
+        keep = settled(session)
+        stats, stats_manifest = client.get(session['path'] + 'TimingStats.json', offline=offline, cache_absent=keep)
+        drivers, drivers_manifest = client.get(session['path'] + 'DriverList.json', offline=offline, cache_absent=keep)
         record['manifests'] += [stats_manifest, drivers_manifest]
         if stats is None:
             continue
@@ -177,13 +187,20 @@ def event_sessions(client, meeting, *, offline=False):
                 'codes': codes,
             }
         )
-    weather, weather_manifest = client.get(qualifying['path'] + 'WeatherData.jsonStream', offline=offline)
+    weather, weather_manifest = client.get(
+        qualifying['path'] + 'WeatherData.jsonStream', offline=offline, cache_absent=settled(qualifying)
+    )
     record['manifests'].append(weather_manifest)
     if weather:
         samples = [values for _, values in parse_stream(weather)]
         record['qualifying_weather'] = {
             'samples': len(samples),
-            'rain': any(str(v.get('Rainfall', '0')) not in ('0', 'False', 'false') for v in samples),
+            # Share of readings with rain; the stream also covers minutes around the session, so a single
+            # reading is not evidence of a wet session.
+            'rain_fraction': sum(str(v.get('Rainfall', '0')) not in ('0', 'False', 'false') for v in samples)
+            / len(samples)
+            if samples
+            else None,
             'track_temp_mean': _mean_of(samples, 'TrackTemp'),
             'air_temp_mean': _mean_of(samples, 'AirTemp'),
         }

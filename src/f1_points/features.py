@@ -234,7 +234,7 @@ def add_session_features(features, entries, session_dir):
             columns['qualifying_gap_pct'][row_index] = q_gaps[index]
             columns['practice_gap_pct'][row_index] = p_gaps[index]
             columns['practice_sessions'][row_index] = sessions.get(driver, 0) if record else None
-            columns['qualifying_rain'][row_index] = None if 'rain' not in weather else int(weather['rain'])
+            columns['qualifying_rain'][row_index] = weather.get('rain_fraction')
             columns['qualifying_track_temp'][row_index] = weather.get('track_temp_mean')
             columns['grid_position'][row_index] = position
             columns['grid_pitlane'][row_index] = None if grid is None else int(grid == 0)

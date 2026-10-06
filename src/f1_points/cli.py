@@ -162,7 +162,7 @@ def collect_session_season(client, events, year, output, offline, schedule_cache
                     (sum(v is not None for v in p['best_laps'].values()) for p in record['practice']), default=0
                 ),
                 'qualifying_weather_available': weather is not None,
-                'qualifying_rain': weather['rain'] if weather else None,
+                'qualifying_rain_fraction': weather['rain_fraction'] if weather else None,
             }
         )
     return rows, failures

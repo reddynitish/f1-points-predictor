@@ -1,0 +1,2192 @@
+{
+  "generated_at": "2026-10-06T15:01:33.666930+00:00",
+  "source": "https://livetiming.formula1.com/static/",
+  "events": [
+    {
+      "event_id": "2018-01",
+      "meeting": "Australian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2018-02",
+      "meeting": "Bahrain Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2018-03",
+      "meeting": "Chinese Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2018-04",
+      "meeting": "Azerbaijan Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.07352941176470588
+    },
+    {
+      "event_id": "2018-05",
+      "meeting": "Spanish Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.582089552238806
+    },
+    {
+      "event_id": "2018-06",
+      "meeting": "Monaco Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2018-07",
+      "meeting": "Canadian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2018-08",
+      "meeting": "French Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.5753424657534246
+    },
+    {
+      "event_id": "2018-09",
+      "meeting": "Austrian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.09090909090909091
+    },
+    {
+      "event_id": "2018-10",
+      "meeting": "British Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2018-11",
+      "meeting": "German Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2018-12",
+      "meeting": "Hungarian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.8676470588235294
+    },
+    {
+      "event_id": "2018-13",
+      "meeting": "Belgian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.1518987341772152
+    },
+    {
+      "event_id": "2018-14",
+      "meeting": "Italian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.16455696202531644
+    },
+    {
+      "event_id": "2018-15",
+      "meeting": "Singapore Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2018-16",
+      "meeting": "Russian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2018-17",
+      "meeting": "Japanese Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.3170731707317073
+    },
+    {
+      "event_id": "2018-18",
+      "meeting": "United States Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2018-19",
+      "meeting": "Mexican Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.05128205128205128
+    },
+    {
+      "event_id": "2018-20",
+      "meeting": "Brazilian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.4230769230769231
+    },
+    {
+      "event_id": "2018-21",
+      "meeting": "Abu Dhabi Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-01",
+      "meeting": "Australian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-02",
+      "meeting": "Bahrain Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.02564102564102564
+    },
+    {
+      "event_id": "2019-03",
+      "meeting": "Chinese Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-04",
+      "meeting": "Azerbaijan Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-05",
+      "meeting": "Spanish Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-06",
+      "meeting": "Monaco Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-07",
+      "meeting": "Canadian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-08",
+      "meeting": "French Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-09",
+      "meeting": "Austrian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-10",
+      "meeting": "British Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-11",
+      "meeting": "German Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-12",
+      "meeting": "Hungarian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-13",
+      "meeting": "Belgian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-14",
+      "meeting": "Italian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-15",
+      "meeting": "Singapore Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-16",
+      "meeting": "Russian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-17",
+      "meeting": "Japanese Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-18",
+      "meeting": "Mexican Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-19",
+      "meeting": "United States Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-20",
+      "meeting": "Brazilian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2019-21",
+      "meeting": "Abu Dhabi Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-01",
+      "meeting": "Austrian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-02",
+      "meeting": "Styrian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 19,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 1.0
+    },
+    {
+      "event_id": "2020-03",
+      "meeting": "Hungarian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-04",
+      "meeting": "British Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-05",
+      "meeting": "70th Anniversary Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-06",
+      "meeting": "Spanish Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-07",
+      "meeting": "Belgian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-08",
+      "meeting": "Italian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-09",
+      "meeting": "Tuscan Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-10",
+      "meeting": "Russian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-11",
+      "meeting": "Eifel Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 19,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-12",
+      "meeting": "Portuguese Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-13",
+      "meeting": "Emilia Romagna Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-14",
+      "meeting": "Turkish Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.1953125
+    },
+    {
+      "event_id": "2020-15",
+      "meeting": "Bahrain Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-16",
+      "meeting": "Sakhir Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2020-17",
+      "meeting": "Abu Dhabi Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-01",
+      "meeting": "Bahrain Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-02",
+      "meeting": "Emilia Romagna Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-03",
+      "meeting": "Portuguese Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-04",
+      "meeting": "Spanish Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-05",
+      "meeting": "Monaco Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-06",
+      "meeting": "Azerbaijan Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-07",
+      "meeting": "French Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-08",
+      "meeting": "Styrian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-09",
+      "meeting": "Austrian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-10",
+      "meeting": "British Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-11",
+      "meeting": "Hungarian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-12",
+      "meeting": "Belgian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.3656716417910448
+    },
+    {
+      "event_id": "2021-13",
+      "meeting": "Dutch Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-14",
+      "meeting": "Italian Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-15",
+      "meeting": "Russian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.17721518987341772
+    },
+    {
+      "event_id": "2021-16",
+      "meeting": "Turkish Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.21333333333333335
+    },
+    {
+      "event_id": "2021-17",
+      "meeting": "United States Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.012658227848101266
+    },
+    {
+      "event_id": "2021-18",
+      "meeting": "Mexico City Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-19",
+      "meeting": "S\u00e3o Paulo Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-20",
+      "meeting": "Qatar Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-21",
+      "meeting": "Saudi Arabian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2021-22",
+      "meeting": "Abu Dhabi Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2022-01",
+      "meeting": "Bahrain Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-02",
+      "meeting": "Saudi Arabian Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-03",
+      "meeting": "Australian Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-04",
+      "meeting": "Emilia Romagna Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-05",
+      "meeting": "Miami Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-06",
+      "meeting": "Spanish Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-07",
+      "meeting": "Monaco Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-08",
+      "meeting": "Azerbaijan Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-09",
+      "meeting": "Canadian Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-10",
+      "meeting": "British Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-11",
+      "meeting": "Austrian Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-12",
+      "meeting": "French Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-13",
+      "meeting": "Hungarian Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-14",
+      "meeting": "Belgian Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-15",
+      "meeting": "Dutch Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-16",
+      "meeting": "Italian Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-17",
+      "meeting": "Singapore Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-18",
+      "meeting": "Japanese Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-19",
+      "meeting": "United States Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-20",
+      "meeting": "Mexico City Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-21",
+      "meeting": "S\u00e3o Paulo Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2022-22",
+      "meeting": "Abu Dhabi Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2023-01",
+      "meeting": "Bahrain Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2023-02",
+      "meeting": "Saudi Arabian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2023-03",
+      "meeting": "Australian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.042105263157894736
+    },
+    {
+      "event_id": "2023-04",
+      "meeting": "Azerbaijan Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2023-05",
+      "meeting": "Miami Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2023-06",
+      "meeting": "Monaco Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2023-07",
+      "meeting": "Spanish Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.20454545454545456
+    },
+    {
+      "event_id": "2023-08",
+      "meeting": "Canadian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.33707865168539325
+    },
+    {
+      "event_id": "2023-09",
+      "meeting": "Austrian Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2023-10",
+      "meeting": "British Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.23404255319148937
+    },
+    {
+      "event_id": "2023-11",
+      "meeting": "Hungarian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 33,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2023-12",
+      "meeting": "Belgian Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 15,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.010526315789473684
+    },
+    {
+      "event_id": "2023-13",
+      "meeting": "Dutch Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.15
+    },
+    {
+      "event_id": "2023-14",
+      "meeting": "Italian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2023-15",
+      "meeting": "Singapore Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2023-16",
+      "meeting": "Japanese Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2023-17",
+      "meeting": "Qatar Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2023-18",
+      "meeting": "United States Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2023-19",
+      "meeting": "Mexico City Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2023-20",
+      "meeting": "S\u00e3o Paulo Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.023255813953488372
+    },
+    {
+      "event_id": "2023-21",
+      "meeting": "Las Vegas Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2023-22",
+      "meeting": "Abu Dhabi Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-01",
+      "meeting": "Bahrain Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-02",
+      "meeting": "Saudi Arabian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-03",
+      "meeting": "Australian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.02564102564102564
+    },
+    {
+      "event_id": "2024-04",
+      "meeting": "Japanese Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-05",
+      "meeting": "Chinese Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-06",
+      "meeting": "Miami Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-07",
+      "meeting": "Emilia Romagna Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-08",
+      "meeting": "Monaco Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-09",
+      "meeting": "Canadian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.1794871794871795
+    },
+    {
+      "event_id": "2024-10",
+      "meeting": "Spanish Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-11",
+      "meeting": "Austrian Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-12",
+      "meeting": "British Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.07058823529411765
+    },
+    {
+      "event_id": "2024-13",
+      "meeting": "Hungarian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.7619047619047619
+    },
+    {
+      "event_id": "2024-14",
+      "meeting": "Belgian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.4177215189873418
+    },
+    {
+      "event_id": "2024-15",
+      "meeting": "Dutch Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-16",
+      "meeting": "Italian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-17",
+      "meeting": "Azerbaijan Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-18",
+      "meeting": "Singapore Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-19",
+      "meeting": "United States Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-20",
+      "meeting": "Mexico City Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-21",
+      "meeting": "S\u00e3o Paulo Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.8130841121495327
+    },
+    {
+      "event_id": "2024-22",
+      "meeting": "Las Vegas Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-23",
+      "meeting": "Qatar Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2024-24",
+      "meeting": "Abu Dhabi Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-01",
+      "meeting": "Australian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-02",
+      "meeting": "Chinese Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-03",
+      "meeting": "Japanese Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-04",
+      "meeting": "Bahrain Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-05",
+      "meeting": "Saudi Arabian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-06",
+      "meeting": "Miami Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-07",
+      "meeting": "Emilia Romagna Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-08",
+      "meeting": "Monaco Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-09",
+      "meeting": "Spanish Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-10",
+      "meeting": "Canadian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-11",
+      "meeting": "Austrian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-12",
+      "meeting": "British Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-13",
+      "meeting": "Belgian Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-14",
+      "meeting": "Hungarian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-15",
+      "meeting": "Dutch Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-16",
+      "meeting": "Italian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 30,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-17",
+      "meeting": "Azerbaijan Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.2074074074074074
+    },
+    {
+      "event_id": "2025-18",
+      "meeting": "Singapore Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-19",
+      "meeting": "United States Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-20",
+      "meeting": "Mexico City Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-21",
+      "meeting": "S\u00e3o Paulo Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-22",
+      "meeting": "Las Vegas Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.4
+    },
+    {
+      "event_id": "2025-23",
+      "meeting": "Qatar Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2025-24",
+      "meeting": "Abu Dhabi Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 20,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-01",
+      "meeting": "Australian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 21,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-02",
+      "meeting": "Chinese Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 22,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-03",
+      "meeting": "Japanese Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 22,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-04",
+      "meeting": "Miami Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 22,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-05",
+      "meeting": "Canadian Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 21,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.012658227848101266
+    },
+    {
+      "event_id": "2026-06",
+      "meeting": "Monaco Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 22,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-07",
+      "meeting": "Barcelona Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 22,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-08",
+      "meeting": "Austrian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 22,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-09",
+      "meeting": "British Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 22,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-10",
+      "meeting": "Belgian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 22,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-11",
+      "meeting": "Hungarian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 22,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-12",
+      "meeting": "Dutch Grand Prix",
+      "practice_sessions": [
+        "Practice 1"
+      ],
+      "practice_drivers_with_lap": 22,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.06493506493506493
+    },
+    {
+      "event_id": "2026-13",
+      "meeting": "Italian Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 22,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-14",
+      "meeting": "Spanish Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 22,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-15",
+      "meeting": "Azerbaijan Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 22,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-16",
+      "meeting": "Bahrain Grand Prix",
+      "practice_sessions": [
+        "Practice 1",
+        "Practice 2",
+        "Practice 3"
+      ],
+      "practice_drivers_with_lap": 22,
+      "qualifying_weather_available": true,
+      "qualifying_rain_fraction": 0.0
+    },
+    {
+      "event_id": "2026-17",
+      "meeting": "Singapore Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2026-18",
+      "meeting": "United States Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2026-19",
+      "meeting": "Mexico City Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2026-20",
+      "meeting": "S\u00e3o Paulo Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2026-21",
+      "meeting": "Las Vegas Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2026-22",
+      "meeting": "Qatar Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    },
+    {
+      "event_id": "2026-23",
+      "meeting": "Abu Dhabi Grand Prix",
+      "practice_sessions": [],
+      "practice_drivers_with_lap": 0,
+      "qualifying_weather_available": false,
+      "qualifying_rain_fraction": null
+    }
+  ],
+  "failures": []
+}

@@ -1,4 +1,5 @@
 import json
+from datetime import UTC, datetime
 
 import pandas as pd
 import pytest
@@ -23,6 +24,9 @@ SCHEDULE = [
     }
 ]
 DATES = {'Practice 1': '2024-03-01', 'Qualifying': '2024-03-01', 'Practice 2': '2024-03-02', 'Race': '2024-03-02'}
+
+
+AFTER = datetime(2024, 4, 1, tzinfo=UTC)
 
 
 def path_for(round_number, name):
@@ -78,11 +82,16 @@ def test_matching_uses_race_start_within_tolerance():
 def test_only_practice_before_qualifying_and_weather_parsed(tmp_path):
     calls = []
     live = client(tmp_path, calls)
-    record = event_sessions(live, meetings_from_schedule(SCHEDULE, path_for)[0])
+    record = event_sessions(live, meetings_from_schedule(SCHEDULE, path_for)[0], now=AFTER)
     assert [p['session'] for p in record['practice']] == ['Practice 1']  # Practice 2 runs after qualifying
     assert record['practice'][0]['best_laps'] == {'1': 90.5, '44': None}
     assert record['practice'][0]['codes']['1'] == 'VER'
-    assert record['qualifying_weather'] == {'samples': 2, 'rain': True, 'track_temp_mean': 35.0, 'air_temp_mean': 23.0}
+    assert record['qualifying_weather'] == {
+        'samples': 2,
+        'rain_fraction': 0.5,
+        'track_temp_mean': 35.0,
+        'air_temp_mean': 23.0,
+    }
     assert not any('Practice_2' in url for url in calls)
 
 
@@ -100,3 +109,13 @@ def test_cache_is_reused_offline_and_missing_pages_are_recorded(tmp_path):
 
 def test_stream_parsing():
     assert parse_stream('00:00:01.5{"a": 1}\n\n') == [('00:00:01.5', {'a': 1})]
+
+
+def test_missing_pages_of_future_sessions_are_not_frozen(tmp_path):
+    calls = []
+    live = client(tmp_path, calls)
+    meeting = meetings_from_schedule(SCHEDULE, path_for)[0]
+    event_sessions(live, meeting, now=datetime(2024, 3, 1, 10, tzinfo=UTC))  # during the weekend
+    assert not list(tmp_path.glob('*.json')) or all(
+        json.loads(p.read_text())['body'] is not None for p in tmp_path.glob('*.json')
+    )

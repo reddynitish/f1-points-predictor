@@ -31,3 +31,11 @@ Not included: race-day weather. A free, leakage-safe archive of genuine pre-race
 - **Freeze:** the configuration is committed before scoring 2026.
 - **Test:** 2026 rounds 1–16, walk-forward, reported against B1 (qualifying cutoff) or the grid-only baseline (pre-race cutoff), including inconclusive or negative results.
 - **Caveat:** the v1 backtest numbers for the same races will already be known when v2 is scored. The v2 feature list and selection procedure are fixed here to limit that influence. Sixteen races give wide intervals.
+
+## Amendment 1 (October 6, 2026, before any v2 model was fit or scored)
+
+Made from data-quality checks on the downloaded session data, without looking at any v2 prediction or 2026 v2 outcome:
+
+- **Qualifying rain:** a yes/no flag set by *any* rain reading. Replaced by `qualifying_rain` = the share of weather readings showing rain (0–1). The weather stream also covers minutes around the session, and single drizzle readings made the flag fire for 10 of 21 qualifying sessions in 2018. With the share, at most a handful of sessions per season have at least 25% wet readings.
+- **2022 session data:** the live-timing archive refuses every 2022 request, including its season index (HTTP 403, checked on October 6, 2026; other seasons answer normally). 2022 practice and weather features are therefore missing. They're imputed with fold-local medians plus missing-value indicators, like any other missing feature. 2022 stays a development validation season, and its rows are noted as feature-incomplete in the report.
+- **Cache fix:** a missing page is only cached as permanently absent once its session is more than two days in the past. Otherwise upcoming 2026 sessions would have stayed "missing" forever.
