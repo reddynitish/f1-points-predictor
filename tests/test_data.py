@@ -202,3 +202,19 @@ def test_missing_rank_is_not_flagged_as_repeated():
         del row['position']
     _, entries, _ = normalize_event(schedule(), rows, [])
     assert not any(row['qualifying_rank_repeated'] for row in entries)
+
+
+def test_car_number_code_and_grid_are_kept_separately_from_labels():
+    q = driver('a', number='44')
+    q['Driver']['code'] = 'AAA'
+    race = driver('a', points='0', status='Finished', grid='0', number='44')
+    _, entries, labels = normalize_event(schedule(), [q], [race])
+    assert entries[0]['car_number'] == 44
+    assert entries[0]['driver_code'] == 'AAA'
+    assert entries[0]['starting_grid'] == 0
+    assert 'starting_grid' not in labels[0]
+
+
+def test_grid_unknown_without_result_row():
+    _, entries, _ = normalize_event(schedule(), [driver('a', number='1')], [])
+    assert entries[0]['starting_grid'] is None

@@ -124,6 +124,20 @@ def _before(first, second):
     return None if first is None or second is None else first < second
 
 
+def _car_number(row):
+    value = row.get('number') or row['Driver'].get('permanentNumber')
+    return int(value) if value not in (None, '') else None
+
+
+def _grid(row):
+    if row is None or row.get('grid') in (None, ''):
+        return None
+    grid = int(row['grid'])
+    if grid < 0:
+        raise ValueError('Invalid starting grid')
+    return grid
+
+
 def normalize_event(schedule, qualifying, results):
     """Use separate sessions; roster union is a disclosed retrospective approximation."""
     qrows, rrows = _rows_by_driver(qualifying), _rows_by_driver(results)
@@ -163,6 +177,11 @@ def normalize_event(schedule, qualifying, results):
             'qualifying_rank': rank,
             'qualifying_available': qrow is not None,
             'constructor_provenance': 'qualifying' if qrow else 'race result fallback',
+            'car_number': _car_number(source),
+            'driver_code': source['Driver'].get('code'),
+            # Published with race results but fixed before the start; only the pre-race cutoff may use it.
+            'starting_grid': _grid(rrows.get(identifier)),
+            'starting_grid_provenance': 'race result grid column (0 = pit lane)',
         }
         for segment in ('Q1', 'Q2', 'Q3'):
             entry[segment.lower() + '_seconds'] = _duration(qrow.get(segment)) if qrow else None
