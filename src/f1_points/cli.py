@@ -22,6 +22,56 @@ def _fail(report, **entry):
     logger.warning('collection failure: %s', entry)
 
 
+def collect(client, start, end, round_number, offline, output):
+    """Fetch (or replay) seasons, write normalized event records and return the coverage report."""
+    report = {
+        'schema_version': 1,
+        'generated_at': datetime.now(UTC).isoformat(),
+        'study': {'start': start, 'end': end, 'round': round_number},
+        'events': [],
+        'failures': [],
+        'manifests': [],
+    }
+    output.mkdir(parents=True, exist_ok=True)
+    for year in range(start, end + 1):
+        try:
+            schedule, manifests = fetch_races(client, f'{year}.json', offline=offline)
+            report['manifests'].extend(manifests)
+        except Exception as error:
+            _fail(report, season=year, stage='schedule', error=str(error))
+            continue
+        selected = [race for race in schedule if round_number is None or int(race['round']) == round_number]
+        if not selected:
+            _fail(report, season=year, stage='selection', error='No matching events')
+            continue
+        sessions = {}
+        for name, key in [('qualifying', 'QualifyingResults'), ('results', 'Results')]:
+            endpoint = f'{year}/{round_number}/{name}.json' if round_number else f'{year}/{name}.json'
+            try:
+                races, manifests = fetch_races(client, endpoint, offline=offline)
+                report['manifests'].extend(manifests)
+                sessions[name] = session_rows(races, key)
+            except Exception as error:
+                _fail(report, season=year, stage=name, error=str(error))
+                sessions[name] = {}
+        for race in selected:
+            number = int(race['round'])
+            try:
+                coverage, normalized = audit_event(
+                    race, sessions['qualifying'].get(number, []), sessions['results'].get(number, [])
+                )
+                normalized['manifests'] = [m for m in report['manifests'] if f'/{year}' in m['source_url']]
+                fetched_at = [m['fetched_at'] for m in normalized['manifests'] if '/results.json' in m['source_url']]
+                for label in normalized['labels']:
+                    label['fetched_at'] = max(fetched_at) if fetched_at else None
+                (output / f'{coverage["event_id"]}.json').write_text(json.dumps(normalized, indent=2) + '\n')
+                report['events'].append(coverage)
+            except Exception as error:
+                _fail(report, season=year, round=number, stage='normalize', error=str(error))
+        logger.info('%s: audited %d scheduled events', year, len(selected))
+    return report
+
+
 def build_dataset(args):
     """Write physically separate feature and label files plus a committed missingness/lineage report."""
     events, entries, labels = load_normalized(args.input)
@@ -52,14 +102,14 @@ def build_dataset(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    collect = commands.add_parser('collect')
-    collect.add_argument('--start', type=int, default=2018)
-    collect.add_argument('--end', type=int, default=2025)
-    collect.add_argument('--round', type=int)
-    collect.add_argument('--offline', action='store_true')
-    collect.add_argument('--cache', type=Path, default=Path('data/snapshots'))
-    collect.add_argument('--output', type=Path, default=Path('data/normalized'))
-    collect.add_argument('--report', type=Path, default=Path('reports/coverage.json'))
+    collect_parser = commands.add_parser('collect')
+    collect_parser.add_argument('--start', type=int, default=2018)
+    collect_parser.add_argument('--end', type=int, default=2025)
+    collect_parser.add_argument('--round', type=int)
+    collect_parser.add_argument('--offline', action='store_true')
+    collect_parser.add_argument('--cache', type=Path, default=Path('data/snapshots'))
+    collect_parser.add_argument('--output', type=Path, default=Path('data/normalized'))
+    collect_parser.add_argument('--report', type=Path, default=Path('reports/coverage.json'))
     dataset = commands.add_parser('build-dataset')
     dataset.add_argument('--input', type=Path, default=Path('data/normalized'))
     dataset.add_argument('--overrides', type=Path, default=Path('overrides/qualifying.csv'))
@@ -92,52 +142,7 @@ def main():
         parser.error(f'Seasons must be within 2018–{PROSPECTIVE_SEASON}')
     if args.round is not None and args.round < 1:
         parser.error('Round must be positive')
-    client = SnapshotClient(args.cache)
-    report = {
-        'schema_version': 1,
-        'generated_at': datetime.now(UTC).isoformat(),
-        'study': {'start': args.start, 'end': args.end, 'round': args.round},
-        'events': [],
-        'failures': [],
-        'manifests': [],
-    }
-    args.output.mkdir(parents=True, exist_ok=True)
-    for year in range(args.start, args.end + 1):
-        try:
-            schedule, manifests = fetch_races(client, f'{year}.json', offline=args.offline)
-            report['manifests'].extend(manifests)
-        except Exception as error:
-            _fail(report, season=year, stage='schedule', error=str(error))
-            continue
-        selected = [race for race in schedule if args.round is None or int(race['round']) == args.round]
-        if not selected:
-            _fail(report, season=year, stage='selection', error='No matching events')
-            continue
-        sessions = {}
-        for name, key in [('qualifying', 'QualifyingResults'), ('results', 'Results')]:
-            endpoint = f'{year}/{args.round}/{name}.json' if args.round else f'{year}/{name}.json'
-            try:
-                races, manifests = fetch_races(client, endpoint, offline=args.offline)
-                report['manifests'].extend(manifests)
-                sessions[name] = session_rows(races, key)
-            except Exception as error:
-                _fail(report, season=year, stage=name, error=str(error))
-                sessions[name] = {}
-        for race in selected:
-            number = int(race['round'])
-            try:
-                coverage, normalized = audit_event(
-                    race, sessions['qualifying'].get(number, []), sessions['results'].get(number, [])
-                )
-                normalized['manifests'] = [m for m in report['manifests'] if f'/{year}' in m['source_url']]
-                fetched_at = [m['fetched_at'] for m in normalized['manifests'] if '/results.json' in m['source_url']]
-                for label in normalized['labels']:
-                    label['fetched_at'] = max(fetched_at) if fetched_at else None
-                (args.output / f'{coverage["event_id"]}.json').write_text(json.dumps(normalized, indent=2) + '\n')
-                report['events'].append(coverage)
-            except Exception as error:
-                _fail(report, season=year, round=number, stage='normalize', error=str(error))
-        logger.info('%s: audited %d scheduled events', year, len(selected))
+    report = collect(SnapshotClient(args.cache), args.start, args.end, args.round, args.offline, args.output)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=2) + '\n')
     logger.info('report=%s events=%d failures=%d', args.report, len(report['events']), len(report['failures']))
