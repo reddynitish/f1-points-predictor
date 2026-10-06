@@ -41,3 +41,8 @@ def test_repeated_ranks_are_flagged():
     report, _ = audit_event(schedule(), [driver('a'), driver('b')], [])
     assert report['repeated_rank_rows'] == 1
     assert 'repeated upstream qualifying ranks require review' in report['limitations']
+
+
+def test_unlabeled_entries_are_reported():
+    report, _ = audit_event(schedule(), [driver('a')], [])
+    assert report['missing_labels'] == 1

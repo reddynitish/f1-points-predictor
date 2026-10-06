@@ -1,5 +1,3 @@
-import copy
-import json
 
 import pytest
 

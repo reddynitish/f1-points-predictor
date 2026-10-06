@@ -37,6 +37,7 @@ def audit_event(schedule, qualifying, results):
     repeated = len(ranks) - len(set(ranks))
     report = {'event_id': event['event_id'], 'season': event['season'], 'round': event['round'],
               'entries': len(entries), 'qualifying_rows': len(qualifying), 'labels': len(labels),
+              'missing_labels': len(entries) - len(labels),
               'missing_qualifying': missing, 'repeated_rank_rows': repeated,
               'missing_rank': sum(row['qualifying_rank'] is None for row in entries),
               'missing_q3': sum(row['q3_seconds'] is None for row in entries),

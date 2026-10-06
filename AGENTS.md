@@ -6,7 +6,7 @@ Read README.md, docs/MASTER_PLAN.md and docs/RELATED_WORK.md before working.
 
 - Local project: /Users/nitishreddy/f1-points-predictor
 - GitHub: https://github.com/reddynitish/f1-points-predictor
-- Planning documents are pushed. No predictive model, dataset, application or experiments exist yet.
+- Milestone A environment, snapshot adapter, normalized local audit records and 2018–2025 availability report are implemented. Read reports/DATA_AUDIT.md and reports/coverage.json. No predictive features, models, application or experiments exist yet.
 - User wants a Formula 1 ML project for learning and software-engineering/applied-AI portfolio evidence.
 
 ## Constraints
@@ -21,6 +21,6 @@ Read README.md, docs/MASTER_PLAN.md and docs/RELATED_WORK.md before working.
 
 ## Next work
 
-The next milestone is A: environment, data adapter, one-weekend data audit and full availability report. Read the master plan, identify any design issues, and discuss necessary changes with Nitish before implementation. Do not begin model tuning or dashboard work until data and leakage gates pass.
+Finish the milestone A data gate: actual qualifying-end timing, independent entry/team provenance, qualifying revisions/repeated ranks and sprint format semantics. The 173-event collection succeeds offline but cutoff_ready is false throughout. Discuss necessary design changes with Nitish before expanding the source adapter. Do not begin model tuning or dashboard work until data and leakage gates pass.
 
 The plan is a proposal, not proof that any model improves upon the baseline. Show failures and inconclusive results. Resume usage is a separate approval decision.

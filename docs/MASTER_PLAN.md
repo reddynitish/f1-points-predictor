@@ -112,11 +112,11 @@ Prediction artifact metadata: git commit, config hash, data-manifest hashes, max
 ## 8. Implementation milestones and acceptance gates
 
 ### A. Data adapter and coverage
-- [ ] Create project environment/lockfile and adapters in `data.py`, fixtures in `tests/test_data.py`.
-- [ ] Test duplicate IDs, absent Q3, absent qualifying, retries and cache reuse on synthetic inputs; then implement adapter.
-- [ ] Fetch one historical weekend; inspect normalized entries/results manually before bulk collection.
-- [ ] Generate 2018–2025 coverage manifest, exclusions and hashes; commit code/report, not caches.
-Gate: consistent keys, timestamps and reproducible offline cache load. No model training yet.
+- [x] Create project environment/lockfile and adapters in `data.py`, fixtures in `tests/test_data.py`.
+- [x] Test duplicate IDs, absent Q3, absent qualifying, retries and cache reuse on synthetic inputs; then implement adapter.
+- [x] Fetch one historical weekend; inspect normalized entries/results manually before bulk collection.
+- [x] Generate 2018–2025 coverage manifest, exclusions and hashes; commit code/report, not caches.
+Gate status: keys and offline replay verified; timestamp/roster provenance remains unresolved. See [DATA_AUDIT.md](../reports/DATA_AUDIT.md). All 173 events are audited, but none is cutoff-ready. No model training yet.
 
 ### B. Cutoff-safe dataset
 - [ ] Implement feature specification and tests in `tests/test_leakage.py`, then feature builder.
