@@ -139,3 +139,38 @@ def test_subminute_qualifying_time():
 def test_upstream_tied_ranks_are_preserved_for_audit():
     _, entries, _ = normalize_event(schedule(), [driver('a'), driver('b')], [])
     assert [row['qualifying_rank'] for row in entries] == [1, 1]
+
+
+def sprint_schedule(extra_key=None, sprint_time='10:00:00Z'):
+    source = schedule()
+    source['Sprint'] = {'date': '2024-03-01', 'time': sprint_time}
+    if extra_key:
+        source[extra_key] = {'date': '2024-02-29', 'time': '15:00:00Z'}
+    return source
+
+
+@pytest.mark.parametrize('source, expected, determines', [
+    (schedule(), 'conventional', 'race grid'),
+    (sprint_schedule(), 'sprint_grid_from_qualifying', 'sprint grid'),
+    (sprint_schedule('SprintShootout'), 'sprint_shootout', 'race grid'),
+    (sprint_schedule('SprintQualifying'), 'sprint_qualifying', 'race grid'),
+])
+def test_weekend_format_semantics(source, expected, determines):
+    event, _, _ = normalize_event(source, [], [])
+    assert event['weekend_format'] == expected
+    assert event['qualifying_determines'] == determines
+    assert event['sprint_weekend'] is (expected != 'conventional')
+
+
+def test_sprint_before_qualifying_is_detected_from_schedule():
+    event, _, _ = normalize_event(sprint_schedule('SprintQualifying', '10:00:00Z'), [], [])
+    assert event['sprint_scheduled_before_qualifying'] is True
+    later, _, _ = normalize_event(sprint_schedule('SprintShootout', '18:00:00Z'), [], [])
+    assert later['sprint_scheduled_before_qualifying'] is False
+
+
+def test_sprint_order_unknown_without_times():
+    source = sprint_schedule()
+    del source['Sprint']['time']
+    event, _, _ = normalize_event(source, [], [])
+    assert event['sprint_scheduled_before_qualifying'] is None

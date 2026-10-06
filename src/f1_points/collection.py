@@ -41,7 +41,8 @@ def audit_event(schedule, qualifying, results):
               'missing_qualifying': missing, 'repeated_rank_rows': repeated,
               'missing_rank': sum(row['qualifying_rank'] is None for row in entries),
               'missing_q3': sum(row['q3_seconds'] is None for row in entries),
-              'sprint_weekend': event['sprint_weekend'],
+              'sprint_weekend': event['sprint_weekend'], 'weekend_format': event['weekend_format'],
+              'sprint_scheduled_before_qualifying': event['sprint_scheduled_before_qualifying'],
               'scheduled_qualifying_available': event['qualifying_scheduled_start_utc'] is not None,
               'race_time_available': event['race_start_utc'] is not None,
               'qualifying_end_available': False, 'cutoff_ready': False,
@@ -49,8 +50,12 @@ def audit_event(schedule, qualifying, results):
                               'final published result revision timing not reconstructed']}
     if repeated:
         report['limitations'].append('repeated upstream qualifying ranks require review')
-    if event['sprint_weekend']:
-        report['limitations'].append('sprint qualifying semantics require separate verification')
+    if event['qualifying_determines'] == 'sprint grid':
+        report['limitations'].append('qualifying sets sprint grid; race grid comes from sprint result')
+    if event['sprint_scheduled_before_qualifying']:
+        report['limitations'].append('current-weekend sprint scheduled before qualifying; exclude from v1 features')
+    elif event['sprint_weekend'] and event['sprint_scheduled_before_qualifying'] is None:
+        report['limitations'].append('sprint/qualifying session order unknown')
     if not qualifying:
         report['limitations'].append('qualifying results unavailable')
     if not results:

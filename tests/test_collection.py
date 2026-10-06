@@ -46,3 +46,16 @@ def test_repeated_ranks_are_flagged():
 def test_unlabeled_entries_are_reported():
     report, _ = audit_event(schedule(), [driver('a')], [])
     assert report['missing_labels'] == 1
+
+
+def test_sprint_before_qualifying_limitation():
+    from test_data import sprint_schedule
+    report, _ = audit_event(sprint_schedule('SprintQualifying'), [driver('a')], [])
+    assert report['weekend_format'] == 'sprint_qualifying'
+    assert any('exclude from v1 features' in item for item in report['limitations'])
+
+
+def test_sprint_grid_qualifying_limitation():
+    from test_data import sprint_schedule
+    report, _ = audit_event(sprint_schedule(), [driver('a')], [])
+    assert 'qualifying sets sprint grid; race grid comes from sprint result' in report['limitations']

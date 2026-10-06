@@ -95,16 +95,43 @@ def _timestamp(record):
     return timestamp.astimezone(timezone.utc).isoformat()
 
 
+def weekend_format(schedule):
+    """Classify sprint semantics from upstream session keys, never from results.
+
+    sprint_grid_from_qualifying (2021-22): qualifying sets the sprint grid; sprint result sets race grid.
+    sprint_shootout (2023): qualifying sets race grid; a separate shootout sets the sprint grid.
+    sprint_qualifying (2024+): sprint qualifying sets the sprint grid; qualifying sets race grid.
+    """
+    if 'Sprint' not in schedule:
+        return 'conventional'
+    if 'SprintShootout' in schedule:
+        return 'sprint_shootout'
+    if 'SprintQualifying' in schedule:
+        return 'sprint_qualifying'
+    return 'sprint_grid_from_qualifying'
+
+
+def _before(first, second):
+    return None if first is None or second is None else first < second
+
+
 def normalize_event(schedule, qualifying, results):
     """Use separate sessions; roster union is a disclosed retrospective approximation."""
     qrows, rrows = _rows_by_driver(qualifying), _rows_by_driver(results)
     identifiers = sorted(qrows.keys() | rrows.keys())
     event_id = f"{int(schedule['season'])}-{int(schedule['round']):02d}"
+    fmt = weekend_format(schedule)
+    qualifying_start = _timestamp(schedule.get('Qualifying'))
+    sprint_start = _timestamp(schedule.get('Sprint'))
     event = {'event_id': event_id, 'season': int(schedule['season']), 'round': int(schedule['round']),
              'circuit_id': schedule['Circuit']['circuitId'], 'race_start_utc': _timestamp(schedule),
              'race_start_provenance': 'upstream scheduled time',
-             'qualifying_scheduled_start_utc': _timestamp(schedule.get('Qualifying')),
-             'qualifying_end_utc': None, 'sprint_weekend': 'Sprint' in schedule,
+             'qualifying_scheduled_start_utc': qualifying_start,
+             'qualifying_end_utc': None, 'sprint_weekend': fmt != 'conventional',
+             'weekend_format': fmt,
+             'qualifying_determines': 'sprint grid' if fmt == 'sprint_grid_from_qualifying' else 'race grid',
+             'sprint_scheduled_start_utc': sprint_start,
+             'sprint_scheduled_before_qualifying': _before(sprint_start, qualifying_start),
              'roster_provenance': 'retrospective qualifying/results union'}
     entries, labels = [], []
     for identifier in identifiers:
