@@ -10,3 +10,5 @@ f1_cache/
 *.joblib
 *.parquet
 .DS_Store
+.mypy_cache/
+.ruff_cache/
