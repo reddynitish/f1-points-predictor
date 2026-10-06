@@ -1,16 +1,18 @@
 """Historical snapshots and normalization; no predictive features."""
-from datetime import datetime, timezone
-from email.utils import parsedate_to_datetime
+
 import hashlib
-from importlib.metadata import version
 import json
 import math
-from pathlib import Path
 import time
+from datetime import UTC, datetime
+from email.utils import parsedate_to_datetime
+from importlib.metadata import version
+from pathlib import Path
 
 import requests
 
 BASE_URL = 'https://api.jolpi.ca/ergast/f1/'
+USER_AGENT = 'f1-points-predictor/0.1 educational audit'
 SCHEMA_VERSION = 1
 
 
@@ -39,7 +41,9 @@ class SnapshotClient:
         for attempt in range(3):
             response = None
             try:
-                response = self.fetch(url, timeout=45, headers={'User-Agent': 'f1-points-predictor/0.1 educational audit'})
+                response = self.fetch(
+                    url, timeout=45, headers={'User-Agent': 'f1-points-predictor/0.1 educational audit'}
+                )
                 response.raise_for_status()
                 body = response.content.decode('utf-8')
                 payload = json.loads(body)
@@ -47,17 +51,22 @@ class SnapshotClient:
             except (requests.RequestException, ValueError):
                 if attempt == 2:
                     raise
-                delay = 2 ** attempt
+                delay = 2**attempt
                 retry_after = response.headers.get('Retry-After') if response is not None else None
                 if retry_after:
                     try:
                         delay = max(delay, float(retry_after))
                     except ValueError:
-                        delay = max(delay, (parsedate_to_datetime(retry_after) - datetime.now(timezone.utc)).total_seconds())
+                        delay = max(delay, (parsedate_to_datetime(retry_after) - datetime.now(UTC)).total_seconds())
                 self.sleep(delay)
-        manifest = {'source_url': url, 'fetched_at': datetime.now(timezone.utc).isoformat(),
-                    'sha256': hashlib.sha256(body.encode()).hexdigest(), 'schema_version': SCHEMA_VERSION,
-                    'adapter_version': version('f1-points-predictor'), 'requests_version': version('requests')}
+        manifest = {
+            'source_url': url,
+            'fetched_at': datetime.now(UTC).isoformat(),
+            'sha256': hashlib.sha256(body.encode()).hexdigest(),
+            'schema_version': SCHEMA_VERSION,
+            'adapter_version': version('f1-points-predictor'),
+            'requests_version': version('requests'),
+        }
         self.root.mkdir(parents=True, exist_ok=True)
         temp = location.with_suffix('.tmp')
         temp.write_text(json.dumps({'body': body, 'manifest': manifest}))
@@ -92,7 +101,7 @@ def _timestamp(record):
     timestamp = datetime.fromisoformat(record['date'] + 'T' + record['time'].replace('Z', '+00:00'))
     if timestamp.tzinfo is None:
         raise ValueError('Timestamp must have timezone')
-    return timestamp.astimezone(timezone.utc).isoformat()
+    return timestamp.astimezone(UTC).isoformat()
 
 
 def weekend_format(schedule):
@@ -119,20 +128,26 @@ def normalize_event(schedule, qualifying, results):
     """Use separate sessions; roster union is a disclosed retrospective approximation."""
     qrows, rrows = _rows_by_driver(qualifying), _rows_by_driver(results)
     identifiers = sorted(qrows.keys() | rrows.keys())
-    event_id = f"{int(schedule['season'])}-{int(schedule['round']):02d}"
+    event_id = f'{int(schedule["season"])}-{int(schedule["round"]):02d}'
     fmt = weekend_format(schedule)
     qualifying_start = _timestamp(schedule.get('Qualifying'))
     sprint_start = _timestamp(schedule.get('Sprint'))
-    event = {'event_id': event_id, 'season': int(schedule['season']), 'round': int(schedule['round']),
-             'circuit_id': schedule['Circuit']['circuitId'], 'race_start_utc': _timestamp(schedule),
-             'race_start_provenance': 'upstream scheduled time',
-             'qualifying_scheduled_start_utc': qualifying_start,
-             'qualifying_end_utc': None, 'sprint_weekend': fmt != 'conventional',
-             'weekend_format': fmt,
-             'qualifying_determines': 'sprint grid' if fmt == 'sprint_grid_from_qualifying' else 'race grid',
-             'sprint_scheduled_start_utc': sprint_start,
-             'sprint_scheduled_before_qualifying': _before(sprint_start, qualifying_start),
-             'roster_provenance': 'retrospective qualifying/results union'}
+    event = {
+        'event_id': event_id,
+        'season': int(schedule['season']),
+        'round': int(schedule['round']),
+        'circuit_id': schedule['Circuit']['circuitId'],
+        'race_start_utc': _timestamp(schedule),
+        'race_start_provenance': 'upstream scheduled time',
+        'qualifying_scheduled_start_utc': qualifying_start,
+        'qualifying_end_utc': None,
+        'sprint_weekend': fmt != 'conventional',
+        'weekend_format': fmt,
+        'qualifying_determines': 'sprint grid' if fmt == 'sprint_grid_from_qualifying' else 'race grid',
+        'sprint_scheduled_start_utc': sprint_start,
+        'sprint_scheduled_before_qualifying': _before(sprint_start, qualifying_start),
+        'roster_provenance': 'retrospective qualifying/results union',
+    }
     entries, labels = [], []
     for identifier in identifiers:
         qrow = qrows.get(identifier)
@@ -141,10 +156,14 @@ def normalize_event(schedule, qualifying, results):
         if rank is not None:
             if rank < 1 or rank > len(identifiers):
                 raise ValueError('Impossible qualifying rank')
-        entry = {'event_id': event_id, 'driver_id': identifier,
-                 'constructor_id': source['Constructor']['constructorId'],
-                 'qualifying_rank': rank, 'qualifying_available': qrow is not None,
-                 'constructor_provenance': 'qualifying' if qrow else 'race result fallback'}
+        entry = {
+            'event_id': event_id,
+            'driver_id': identifier,
+            'constructor_id': source['Constructor']['constructorId'],
+            'qualifying_rank': rank,
+            'qualifying_available': qrow is not None,
+            'constructor_provenance': 'qualifying' if qrow else 'race result fallback',
+        }
         for segment in ('Q1', 'Q2', 'Q3'):
             entry[segment.lower() + '_seconds'] = _duration(qrow.get(segment)) if qrow else None
         entries.append(entry)
@@ -154,12 +173,21 @@ def normalize_event(schedule, qualifying, results):
             position = int(row['position'])
             if not math.isfinite(points) or points < 0 or position < 1:
                 raise ValueError('Invalid race label')
-            labels.append({'event_id': event_id, 'driver_id': identifier, 'race_points': points,
-                           'final_position': position, 'result_status': row['status']})
+            labels.append(
+                {
+                    'event_id': event_id,
+                    'driver_id': identifier,
+                    'race_points': points,
+                    'final_position': position,
+                    'result_status': row['status'],
+                }
+            )
     counts = {}
     for entry in entries:
         counts[entry['qualifying_rank']] = counts.get(entry['qualifying_rank'], 0) + 1
     for entry in entries:
         # Flag only; observed post-session reclassifications leave collisions that need a design decision.
-        entry['qualifying_rank_repeated'] = entry['qualifying_rank'] is not None and counts[entry['qualifying_rank']] > 1
+        entry['qualifying_rank_repeated'] = (
+            entry['qualifying_rank'] is not None and counts[entry['qualifying_rank']] > 1
+        )
     return event, entries, labels

@@ -7,6 +7,7 @@ Archives with heartbeat UTC outside the event date (seen for 2018) are reported 
 
     uv run python scripts/probe_session_timing.py --cache /tmp/ff1 2019:1 2024:21
 """
+
 import argparse
 import warnings
 
@@ -29,10 +30,14 @@ def probe(season, round_number):
     status = api.session_status_data(session.api_path)
     anchors = pd.Series([_utc(line[1]['Utc']) - pd.Timedelta(to_timedelta(line[0])) for line in heartbeat])
     scheduled = _utc(session.date)  # FastF1 session dates are naive UTC
-    finalised = [t for t, name in zip(status['Time'], status['Status']) if name == 'Finalised']
+    finalised = [t for t, name in zip(status['Time'], status['Status'], strict=True) if name == 'Finalised']
     usable = abs((anchors.sort_values().iloc[len(anchors) // 2] - scheduled).total_seconds()) < 86400
-    row = {'event': f'{season}-{round_number:02d}', 'fastf1_scheduled_start_utc': scheduled.isoformat(),
-           'anchor_spread': str(anchors.max() - anchors.min()), 'usable_anchor': bool(usable)}
+    row = {
+        'event': f'{season}-{round_number:02d}',
+        'fastf1_scheduled_start_utc': scheduled.isoformat(),
+        'anchor_spread': str(anchors.max() - anchors.min()),
+        'usable_anchor': bool(usable),
+    }
     if finalised and usable:
         row['finalised_earliest_utc'] = (anchors.min() + finalised[0]).isoformat()
         row['finalised_latest_utc'] = (anchors.max() + finalised[0]).isoformat()

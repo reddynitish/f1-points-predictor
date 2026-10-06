@@ -1,7 +1,8 @@
 """Milestone A commands. No training or final-test evaluation."""
+
 import argparse
-from datetime import datetime, timezone
 import json
+from datetime import UTC, datetime
 from pathlib import Path
 
 from .collection import audit_event, fetch_races, session_rows
@@ -25,9 +26,14 @@ def main():
     if args.round is not None and args.round < 1:
         parser.error('Round must be positive')
     client = SnapshotClient(args.cache)
-    report = {'schema_version': 1, 'generated_at': datetime.now(timezone.utc).isoformat(),
-              'study': {'start': args.start, 'end': args.end, 'round': args.round},
-              'events': [], 'failures': [], 'manifests': []}
+    report = {
+        'schema_version': 1,
+        'generated_at': datetime.now(UTC).isoformat(),
+        'study': {'start': args.start, 'end': args.end, 'round': args.round},
+        'events': [],
+        'failures': [],
+        'manifests': [],
+    }
     args.output.mkdir(parents=True, exist_ok=True)
     for year in range(args.start, args.end + 1):
         try:
@@ -53,20 +59,21 @@ def main():
         for race in selected:
             number = int(race['round'])
             try:
-                coverage, normalized = audit_event(race, sessions['qualifying'].get(number, []),
-                                                   sessions['results'].get(number, []))
+                coverage, normalized = audit_event(
+                    race, sessions['qualifying'].get(number, []), sessions['results'].get(number, [])
+                )
                 normalized['manifests'] = [m for m in report['manifests'] if f'/{year}' in m['source_url']]
                 fetched_at = [m['fetched_at'] for m in normalized['manifests'] if '/results.json' in m['source_url']]
                 for label in normalized['labels']:
                     label['fetched_at'] = max(fetched_at) if fetched_at else None
-                (args.output / f"{coverage['event_id']}.json").write_text(json.dumps(normalized, indent=2) + '\n')
+                (args.output / f'{coverage["event_id"]}.json').write_text(json.dumps(normalized, indent=2) + '\n')
                 report['events'].append(coverage)
             except Exception as error:
                 report['failures'].append({'season': year, 'round': number, 'stage': 'normalize', 'error': str(error)})
         print(f'{year}: audited {len(selected)} scheduled events', flush=True)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=2) + '\n')
-    print(f"Report: {args.report}; events={len(report['events'])}; failures={len(report['failures'])}")
+    print(f'Report: {args.report}; events={len(report["events"])}; failures={len(report["failures"])}')
     return 1 if report['failures'] else 0
 
 

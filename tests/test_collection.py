@@ -1,16 +1,24 @@
 import pytest
-from f1_points.collection import fetch_races, audit_event
-from test_data import schedule, driver
+from test_data import driver, schedule
+
+from f1_points.collection import audit_event, fetch_races
 
 
 class Pages:
     def __init__(self):
         self.paths = []
+
     def get(self, path, **kwargs):
         self.paths.append(path)
         offset = 0 if 'offset=0' in path else 1
-        return {'MRData': {'total': '2', 'limit': '1', 'offset': str(offset),
-                          'RaceTable': {'Races': [{'round': str(offset + 1)}]}}}, {'sha256': str(offset)}
+        return {
+            'MRData': {
+                'total': '2',
+                'limit': '1',
+                'offset': str(offset),
+                'RaceTable': {'Races': [{'round': str(offset + 1)}]},
+            }
+        }, {'sha256': str(offset)}
 
 
 def test_pagination():
@@ -33,6 +41,7 @@ def test_truncated_page_is_rejected():
     class Empty:
         def get(self, *args, **kwargs):
             return {'MRData': {'total': '20', 'limit': '100', 'offset': '0', 'RaceTable': {'Races': []}}}, {}
+
     with pytest.raises(ValueError, match='Truncated'):
         fetch_races(Empty(), '2024.json')
 
@@ -50,6 +59,7 @@ def test_unlabeled_entries_are_reported():
 
 def test_sprint_before_qualifying_limitation():
     from test_data import sprint_schedule
+
     report, _ = audit_event(sprint_schedule('SprintQualifying'), [driver('a')], [])
     assert report['weekend_format'] == 'sprint_qualifying'
     assert any('exclude from v1 features' in item for item in report['limitations'])
@@ -57,6 +67,7 @@ def test_sprint_before_qualifying_limitation():
 
 def test_sprint_grid_qualifying_limitation():
     from test_data import sprint_schedule
+
     report, _ = audit_event(sprint_schedule(), [driver('a')], [])
     assert 'qualifying sets sprint grid; race grid comes from sprint result' in report['limitations']
 
