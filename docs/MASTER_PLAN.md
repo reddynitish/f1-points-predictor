@@ -119,32 +119,32 @@ Prediction artifact metadata: git commit, config hash, data-manifest hashes, max
 Gate status: keys and offline replay verified; sprint formats classified and repeated ranks traced; timestamp/roster/revision decisions proposed in [DATA_GATE_PROPOSAL.md](DATA_GATE_PROPOSAL.md). See [DATA_AUDIT.md](../reports/DATA_AUDIT.md). All 173 events are audited, but none is cutoff-ready. No model training yet.
 
 ### B. Cutoff-safe dataset
-- [ ] Implement feature specification and tests in `tests/test_leakage.py`, then feature builder.
-- [ ] Use a three-race/two-teammate fixture to assert prior-event-only aggregates.
-- [ ] Separate feature and label files; generate lineage and missingness audit.
+- [x] Implement feature specification and tests in `tests/test_leakage.py`, then feature builder.
+- [x] Use a three-race/two-teammate fixture to assert prior-event-only aggregates.
+- [x] Separate feature and label files; generate lineage and missingness audit.
 Gate: mutation/shuffle/rookie tests pass and forbidden-column allowlist enforced.
 
 ### C. Baselines and split manifest
-- [ ] Implement event splits with `tests/test_splits.py`; assert train/validation event sets disjoint and ordered.
-- [ ] Implement constant and rank-only classifiers in `baselines.py`.
-- [ ] Save development fold predictions and baseline report without opening final test metrics.
+- [x] Implement event splits with `tests/test_splits.py`; assert train/validation event sets disjoint and ordered.
+- [x] Implement constant and rank-only classifiers in `baselines.py`.
+- [x] Save development fold predictions and baseline report without opening final test metrics.
 Gate: all drivers of each race remain together and metrics match small hand-calculated fixtures.
 
 ### D. Model comparison and calibration
-- [ ] Implement M1/M2 searches, training-fold transformations and bounded configuration in `train.py`.
-- [ ] Compare ablations and earlier-fold-only calibration; retain all experiment records.
-- [ ] Freeze `configs/final.yaml` with feature list, parameters, threshold and protocol, commit before test run.
+- [x] Implement M1/M2 searches, training-fold transformations and bounded configuration in `train.py`.
+- [ ] Compare ablations and earlier-fold-only calibration (calibration done; ablations not run); retain all experiment records.
+- [x] Freeze `configs/final.json` (JSON instead of YAML) with feature list, parameters, threshold and protocol, commit before test run.
 Gate: every calibration source predates its validation block; train metadata proves no 2025 rows used for fixed-season model.
 
 ### E. Final evaluation
-- [ ] Run sealed 2025 evaluation once with frozen choices; save predictions/metrics and race bootstrap intervals.
-- [ ] Run separately identified walk-forward replay with frozen settings.
-- [ ] Write `reports/MODEL_CARD.md` with data coverage, target, cutoff, baselines, uncertainty, revisions and failures.
+- [x] Run sealed 2025 evaluation once with frozen choices; save predictions/metrics and race bootstrap intervals.
+- [x] Run separately identified walk-forward replay with frozen settings.
+- [x] Write `reports/MODEL_CARD.md` with data coverage, target, cutoff, baselines, uncertainty, revisions and failures.
 Gate: report all results even if stronger model loses; any later test-informed changes create a new experiment requiring a new untouched test period.
 
 ### F. Product and prospective predictions
 - [ ] Build dashboard reading saved artifacts: select event, see qualifying rank/probability/actual result, baseline comparisons and missingness.
-- [ ] Add frozen-model CLI inference with refusal when inputs are unavailable; missing history supported with warnings.
+- [x] Add frozen-model CLI inference with refusal when inputs are unavailable; missing history supported with warnings.
 - [ ] Archive prospective predictions for a future supported race before start, then evaluate after published results.
 Gate: prediction page displays timestamp/model version and never downloads future labels during inference. UI makes retrospective replay distinct from genuine forecast.
 

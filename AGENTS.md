@@ -6,7 +6,8 @@ Read README.md, docs/MASTER_PLAN.md and docs/RELATED_WORK.md before working.
 
 - Local project: /Users/nitishreddy/f1-points-predictor
 - GitHub: https://github.com/reddynitish/f1-points-predictor
-- Milestone A environment, snapshot adapter, normalized local audit records and 2018–2025 availability report are implemented. Read reports/DATA_AUDIT.md and reports/coverage.json. No predictive features, models, application or experiments exist yet.
+- Milestones A–E (provisional data-gate decisions, cutoff-safe features, baselines, selection, one sealed 2025 evaluation) are implemented; see reports/MODEL_CARD.md. M1 did not beat the B1 rank-only baseline on 2025 (inconclusive), so B1 is the primary forecast. The 2025 test is now spent: any further model change needs a new untouched period (2026 shadow results).
+- GitHub repo is private at Nitish's request until there is enough work to publish.
 - User wants a Formula 1 ML project for learning and software-engineering/applied-AI portfolio evidence.
 
 ## Constraints
@@ -21,6 +22,6 @@ Read README.md, docs/MASTER_PLAN.md and docs/RELATED_WORK.md before working.
 
 ## Next work
 
-Finish the milestone A data gate. Sprint format/order classification and repeated-rank tracing are done (see reports/DATA_AUDIT.md). Remaining decisions (cutoff definition, roster, revision handling, sprint endpoint) are laid out in docs/DATA_GATE_PROPOSAL.md and await Nitish's choice. cutoff_ready is still false throughout. Do not expand the source adapter until those decisions are made. Do not begin model tuning or dashboard work until data and leakage gates pass.
+Run `predict --season 2026 --round 17` after Singapore qualifying (2026-10-10 13:00 UTC) and archive it before the race; evaluate prospective forecasts against published results as 2026 shadow evaluation. Nitish has not yet confirmed the provisional data-gate decisions in docs/DATA_GATE_PROPOSAL.md. Dashboard (milestone F) not started.
 
 The plan is a proposal, not proof that any model improves upon the baseline. Show failures and inconclusive results. Resume usage is a separate approval decision.

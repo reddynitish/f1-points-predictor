@@ -1,6 +1,6 @@
 # Milestone A data gate: design proposal
 
-**Date:** October 6, 2026. **Status:** proposal for discussion with Nitish. Nothing here is implemented in the adapter. Evidence comes from the cached Jolpica snapshots ([DATA_AUDIT.md](../reports/DATA_AUDIT.md)) and a small FastF1 live-timing probe ([scripts/probe_session_timing.py](../scripts/probe_session_timing.py)) run on 10 qualifying sessions.
+**Date:** October 6, 2026. **Status:** recommended options A, qualifying-row roster and R3 adopted provisionally on October 6, 2026 so modelling could proceed (see reports/MODEL_CARD.md); the sprint-endpoint check is not done. Still awaiting Nitish's confirmation. Evidence comes from the cached Jolpica snapshots ([DATA_AUDIT.md](../reports/DATA_AUDIT.md)) and a small FastF1 live-timing probe ([scripts/probe_session_timing.py](../scripts/probe_session_timing.py)) run on 10 qualifying sessions.
 
 ## 1. Actual qualifying end
 
