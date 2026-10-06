@@ -21,6 +21,6 @@ Read README.md, docs/MASTER_PLAN.md and docs/RELATED_WORK.md before working.
 
 ## Next work
 
-Finish the milestone A data gate: actual qualifying-end timing, independent entry/team provenance, qualifying revisions/repeated ranks and sprint format semantics. The 173-event collection succeeds offline but cutoff_ready is false throughout. Discuss necessary design changes with Nitish before expanding the source adapter. Do not begin model tuning or dashboard work until data and leakage gates pass.
+Finish the milestone A data gate. Sprint format/order classification and repeated-rank tracing are done (see reports/DATA_AUDIT.md). Remaining decisions (cutoff definition, roster, revision handling, sprint endpoint) are laid out in docs/DATA_GATE_PROPOSAL.md and await Nitish's choice. cutoff_ready is still false throughout. Do not expand the source adapter until those decisions are made. Do not begin model tuning or dashboard work until data and leakage gates pass.
 
 The plan is a proposal, not proof that any model improves upon the baseline. Show failures and inconclusive results. Resume usage is a separate approval decision.

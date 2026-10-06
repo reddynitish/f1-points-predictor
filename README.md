@@ -21,4 +21,4 @@ uv run python -m f1_points.cli collect
 uv run python -m f1_points.cli collect --offline --report data/offline-coverage.json
 ```
 
-Python 3.12 is pinned. Downloads and normalized records stay under ignored `data/`; cached downloads support offline replay. Read [the data audit](reports/DATA_AUDIT.md) and [per-event coverage](reports/coverage.json) for observed coverage and unresolved timing, roster and qualifying-rank limitations. No training commands exist yet.
+Python 3.12 is pinned. Downloads and normalized records stay under ignored `data/`; cached downloads support offline replay. Open data-gate decisions are in [the proposal](docs/DATA_GATE_PROPOSAL.md). Read [the data audit](reports/DATA_AUDIT.md) and [per-event coverage](reports/coverage.json) for observed coverage and unresolved timing, roster and qualifying-rank limitations. No training commands exist yet.
