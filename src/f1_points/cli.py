@@ -8,6 +8,7 @@ from pathlib import Path
 
 from .collection import audit_event, fetch_races, session_rows
 from .data import SnapshotClient
+from .experiments import run_sealed_evaluation, run_selection
 from .features import FEATURE_COLUMNS, apply_qualifying_overrides, build_features, build_labels, load_normalized
 
 logger = logging.getLogger('f1_points')
@@ -64,10 +65,29 @@ def main():
     dataset.add_argument('--overrides', type=Path, default=Path('overrides/qualifying.csv'))
     dataset.add_argument('--output', type=Path, default=Path('data/dataset'))
     dataset.add_argument('--report', type=Path, default=Path('reports/dataset.json'))
+    selection = commands.add_parser('select', help='development model selection; never reads the test season')
+    selection.add_argument('--dataset', type=Path, default=Path('data/dataset'))
+    selection.add_argument('--report', type=Path, default=Path('reports/experiments/development.json'))
+    selection.add_argument('--config', type=Path, default=Path('configs/final.json'))
+    sealed = commands.add_parser('evaluate', help='one-time sealed test evaluation with the committed frozen config')
+    sealed.add_argument('--dataset', type=Path, default=Path('data/dataset'))
+    sealed.add_argument('--config', type=Path, default=Path('configs/final.json'))
+    sealed.add_argument('--report', type=Path, default=Path('reports/experiments/test_2025.json'))
+    sealed.add_argument('--predictions', type=Path, default=Path('reports/experiments/test_2025_predictions.csv'))
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s: %(message)s')
     if args.command == 'build-dataset':
         return build_dataset(args)
+    if args.command == 'select':
+        report = run_selection(args.dataset, args.report, args.config)
+        logger.info(
+            'selected=%s calibration=%s report=%s', report['selected'], report['calibration']['selected'], args.report
+        )
+        return 0
+    if args.command == 'evaluate':
+        report = run_sealed_evaluation(args.dataset, args.config, args.report, args.predictions)
+        logger.info('sealed evaluation written to %s', args.report)
+        return 0
     if not 2018 <= args.start <= args.end <= PROSPECTIVE_SEASON:
         parser.error(f'Seasons must be within 2018–{PROSPECTIVE_SEASON}')
     if args.round is not None and args.round < 1:
