@@ -126,3 +126,18 @@ def test_qualifying_row_without_position_retains_missing_rank():
     _, entries, _ = normalize_event(schedule(), [row], [])
     assert entries[0]['qualifying_available'] is True
     assert entries[0]['qualifying_rank'] is None
+
+
+def test_empty_qualifying_time_is_missing():
+    _, entries, _ = normalize_event(schedule(), [driver('a', Q1='')], [])
+    assert entries[0]['q1_seconds'] is None
+
+
+def test_subminute_qualifying_time():
+    _, entries, _ = normalize_event(schedule(), [driver('a', Q1='53.904')], [])
+    assert entries[0]['q1_seconds'] == pytest.approx(53.904)
+
+
+def test_upstream_tied_ranks_are_preserved_for_audit():
+    _, entries, _ = normalize_event(schedule(), [driver('a'), driver('b')], [])
+    assert [row['qualifying_rank'] for row in entries] == [1, 1]

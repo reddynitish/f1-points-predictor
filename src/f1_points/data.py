@@ -77,9 +77,9 @@ def _rows_by_driver(rows):
 
 
 def _duration(value):
-    if value is None:
+    if value is None or value == '':
         return None
-    minutes, seconds = value.split(':')
+    minutes, seconds = value.split(':') if ':' in value else ('0', value)
     result = int(minutes) * 60 + float(seconds)
     if int(minutes) < 0 or not 0 <= float(seconds) < 60 or not math.isfinite(result) or result <= 0:
         raise ValueError('Invalid qualifying duration')
@@ -107,15 +107,13 @@ def normalize_event(schedule, qualifying, results):
              'qualifying_end_utc': None, 'sprint_weekend': 'Sprint' in schedule,
              'roster_provenance': 'retrospective qualifying/results union'}
     entries, labels = [], []
-    ranks = set()
     for identifier in identifiers:
         qrow = qrows.get(identifier)
         source = qrow if qrow is not None else rrows[identifier]
         rank = int(qrow['position']) if qrow and qrow.get('position') is not None else None
         if rank is not None:
-            if rank < 1 or rank > len(identifiers) or rank in ranks:
-                raise ValueError('Impossible or duplicate qualifying rank')
-            ranks.add(rank)
+            if rank < 1 or rank > len(identifiers):
+                raise ValueError('Impossible qualifying rank')
         entry = {'event_id': event_id, 'driver_id': identifier,
                  'constructor_id': source['Constructor']['constructorId'],
                  'qualifying_rank': rank, 'qualifying_available': qrow is not None,

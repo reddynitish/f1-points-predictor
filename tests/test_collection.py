@@ -35,3 +35,9 @@ def test_truncated_page_is_rejected():
             return {'MRData': {'total': '20', 'limit': '100', 'offset': '0', 'RaceTable': {'Races': []}}}, {}
     with pytest.raises(ValueError, match='Truncated'):
         fetch_races(Empty(), '2024.json')
+
+
+def test_repeated_ranks_are_flagged():
+    report, _ = audit_event(schedule(), [driver('a'), driver('b')], [])
+    assert report['repeated_rank_rows'] == 1
+    assert 'repeated upstream qualifying ranks require review' in report['limitations']

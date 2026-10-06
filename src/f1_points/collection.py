@@ -33,9 +33,11 @@ def session_rows(races, key):
 def audit_event(schedule, qualifying, results):
     event, entries, labels = normalize_event(schedule, qualifying, results)
     missing = sum(not row['qualifying_available'] for row in entries)
+    ranks = [row['qualifying_rank'] for row in entries if row['qualifying_rank'] is not None]
+    repeated = len(ranks) - len(set(ranks))
     report = {'event_id': event['event_id'], 'season': event['season'], 'round': event['round'],
               'entries': len(entries), 'qualifying_rows': len(qualifying), 'labels': len(labels),
-              'missing_qualifying': missing,
+              'missing_qualifying': missing, 'repeated_rank_rows': repeated,
               'missing_rank': sum(row['qualifying_rank'] is None for row in entries),
               'missing_q3': sum(row['q3_seconds'] is None for row in entries),
               'sprint_weekend': event['sprint_weekend'],
@@ -44,6 +46,8 @@ def audit_event(schedule, qualifying, results):
               'qualifying_end_available': False, 'cutoff_ready': False,
               'limitations': ['actual qualifying end unavailable', 'retrospective roster union',
                               'final published result revision timing not reconstructed']}
+    if repeated:
+        report['limitations'].append('repeated upstream qualifying ranks require review')
     if event['sprint_weekend']:
         report['limitations'].append('sprint qualifying semantics require separate verification')
     if not qualifying:
