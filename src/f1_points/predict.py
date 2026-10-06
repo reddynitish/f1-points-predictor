@@ -6,9 +6,17 @@ from pathlib import Path
 
 import pandas as pd
 
-from .experiments import config_hash, environment, frozen_candidate, git_commit
-from .features import KEY, apply_qualifying_overrides, build_features, build_labels, load_normalized
-from .modeling import Candidate, fit_predict
+from .experiments import BASELINES, config_hash, environment, frozen_candidate, git_commit
+from .features import (
+    KEY,
+    NUMERIC_FEATURES,
+    add_session_features,
+    apply_qualifying_overrides,
+    build_features,
+    build_labels,
+    load_normalized,
+)
+from .modeling import fit_predict
 
 PRIMARY_RULE = (
     'Sealed 2025 evaluation did not show M1 beating the rank-only baseline (B1); per the pre-registered rule '
@@ -41,12 +49,15 @@ def load_combined(base_dir, live_dir, season):
     )
 
 
-def predict_event(events, entries, labels, event_id, config, *, now=None, overrides=None):
+def predict_event(events, entries, labels, event_id, config, *, now=None, overrides=None, sessions=None):
     now = now or datetime.now(UTC)
     if overrides:
         entries = apply_qualifying_overrides(entries, overrides)
     event = events.set_index('event_id').loc[event_id]
     features = build_features(events, entries, labels)
+    numeric = config.get('numeric_features', NUMERIC_FEATURES)
+    if set(numeric) - set(NUMERIC_FEATURES):
+        features = add_session_features(features, entries, sessions)
     target = features[features['event_id'] == event_id].copy()
     if target.empty or target['qualifying_rank_missing'].all():
         raise QualifyingUnavailable(f'No qualifying classification published for {event_id}; refusing to predict')
@@ -56,8 +67,8 @@ def predict_event(events, entries, labels, event_id, config, *, now=None, overri
     train = earlier.merge(build_labels(entries, labels), on=KEY, how='inner')
     if train.empty:
         raise InsufficientHistory(f'No earlier labeled races before {event_id}')
-    target['p_B1'], _ = fit_predict(Candidate('B1', 'rank_logistic'), train, target)
-    target['p_M1'], _ = fit_predict(frozen_candidate(config), train, target)
+    target['p_B1'], _ = fit_predict(BASELINES[config.get('baseline', 'rank_logistic')], train, target, numeric)
+    target['p_M1'], _ = fit_predict(frozen_candidate(config), train, target, numeric)
 
     has_labels = bool((labels['event_id'] == event_id).any())
     race_start = event.get('race_start_utc')

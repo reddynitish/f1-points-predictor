@@ -10,7 +10,18 @@ from .backtest import run_backtest, summarize, write_outputs
 from .collection import audit_event, fetch_races, session_rows
 from .data import SnapshotClient
 from .experiments import run_sealed_evaluation, run_selection
-from .features import FEATURE_COLUMNS, apply_qualifying_overrides, build_features, build_labels, load_normalized
+from .features import (
+    FEATURE_COLUMNS,
+    GRID_FEATURES,
+    SESSION_FEATURES,
+    V2_PRE_RACE_FEATURES,
+    V2_QUALIFYING_FEATURES,
+    add_session_features,
+    apply_qualifying_overrides,
+    build_features,
+    build_labels,
+    load_normalized,
+)
 from .livetiming import BASE_URL as livetiming_base
 from .livetiming import LiveTimingClient, event_sessions, match_meeting, season_meetings
 from .predict import QualifyingUnavailable, archive, load_combined, predict_event
@@ -18,6 +29,19 @@ from .predict import QualifyingUnavailable, archive, load_combined, predict_even
 logger = logging.getLogger('f1_points')
 # 2018–2025 is the study period; 2026 is prospective history/shadow evaluation, never used for tuning.
 PROSPECTIVE_SEASON = 2026
+V2_EXTRA = SESSION_FEATURES + GRID_FEATURES
+# Pre-registered in docs/PREREGISTRATION_V2.md: v2 selects on 2021-2025 and is tested once on 2026.
+FEATURE_SETS = {
+    'v1': {},
+    'v2': {'numeric': V2_QUALIFYING_FEATURES, 'seasons': (2021, 2022, 2023, 2024, 2025), 'test_season': 2026},
+    'pre-race': {
+        'numeric': V2_PRE_RACE_FEATURES,
+        'seasons': (2021, 2022, 2023, 2024, 2025),
+        'test_season': 2026,
+        'baseline': 'grid_logistic',
+        'cutoff': 'pre_race_grid',
+    },
+}
 
 
 def _fail(report, **entry):
@@ -81,6 +105,8 @@ def build_dataset(args):
     events, entries, labels = load_normalized(args.input)
     entries = apply_qualifying_overrides(entries, args.overrides)
     features = build_features(events, entries, labels)
+    if args.sessions:
+        features = add_session_features(features, entries, args.sessions)
     target = build_labels(entries, labels)
     args.output.mkdir(parents=True, exist_ok=True)
     features.to_parquet(args.output / 'features.parquet', index=False)
@@ -93,7 +119,9 @@ def build_dataset(args):
         'labeled_rows': len(target),
         'events': int(features['event_id'].nunique()),
         'rows_by_season': {str(k): int(v) for k, v in features.groupby('season').size().items()},
-        'missing_by_feature': {c: int(features[c].isna().sum()) for c in FEATURE_COLUMNS},
+        'missing_by_feature': {
+            c: int(features[c].isna().sum()) for c in FEATURE_COLUMNS + (V2_EXTRA if args.sessions else [])
+        },
         'overrides_applied': sum(1 for _ in open(args.overrides)) - 1,
         'lineage': 'history features use labels of strictly earlier events only; see tests/test_leakage.py',
     }
@@ -201,10 +229,12 @@ def main():
     dataset.add_argument('--overrides', type=Path, default=Path('overrides/qualifying.csv'))
     dataset.add_argument('--output', type=Path, default=Path('data/dataset'))
     dataset.add_argument('--report', type=Path, default=Path('reports/dataset.json'))
+    dataset.add_argument('--sessions', type=Path, help='live-timing records; adds v2 session and grid columns')
     selection = commands.add_parser('select', help='development model selection; never reads the test season')
     selection.add_argument('--dataset', type=Path, default=Path('data/dataset'))
     selection.add_argument('--report', type=Path, default=Path('reports/experiments/development.json'))
     selection.add_argument('--config', type=Path, default=Path('configs/final.json'))
+    selection.add_argument('--feature-set', choices=sorted(FEATURE_SETS), default='v1')
     sealed = commands.add_parser('evaluate', help='one-time sealed test evaluation with the committed frozen config')
     sealed.add_argument('--dataset', type=Path, default=Path('data/dataset'))
     sealed.add_argument('--config', type=Path, default=Path('configs/final.json'))
@@ -233,6 +263,7 @@ def main():
     replay.add_argument('--config', type=Path, default=Path('configs/final.json'))
     replay.add_argument('--overrides', type=Path, default=Path('overrides/qualifying.csv'))
     replay.add_argument('--output', type=Path, default=Path('reports/backtest-2026'))
+    replay.add_argument('--sessions', type=Path, default=Path('data/livetiming'))
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s: %(message)s')
     if args.command == 'build-dataset':
@@ -241,7 +272,8 @@ def main():
         return collect_sessions(args)
     if args.command == 'backtest':
         events, entries, labels = load_normalized(args.normalized)
-        frame = run_backtest(events, entries, labels, args.season, json.loads(args.config.read_text()), args.overrides)
+        config = json.loads(args.config.read_text())
+        frame = run_backtest(events, entries, labels, args.season, config, args.overrides, args.sessions)
         summary = summarize(frame, args.season, args.config)
         write_outputs(frame, summary, args.output)
         logger.info('backtest races=%d rows=%d output=%s', summary['races'], summary['rows'], args.output)
@@ -249,7 +281,8 @@ def main():
     if args.command == 'predict':
         return run_predict(args)
     if args.command == 'select':
-        report = run_selection(args.dataset, args.report, args.config)
+        spec = FEATURE_SETS[args.feature_set]
+        report = run_selection(args.dataset, args.report, args.config, **spec)
         logger.info(
             'selected=%s calibration=%s report=%s', report['selected'], report['calibration']['selected'], args.report
         )

@@ -11,7 +11,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from .features import FEATURE_COLUMNS, KEY
+from .features import CATEGORICAL_FEATURES, KEY, NUMERIC_FEATURES
 from .modeling import (
     DEVELOPMENT_VALIDATION_SEASONS,
     SEED,
@@ -30,7 +30,8 @@ from .modeling import (
 )
 
 # Complexity order breaks near-ties (within 0.0005 race-averaged Brier) in favour of simpler models.
-COMPLEXITY = {'prior': 0, 'rank_logistic': 1, 'logistic': 2, 'hgb': 3}
+COMPLEXITY = {'prior': 0, 'rank_logistic': 1, 'grid_logistic': 1, 'logistic': 2, 'hgb': 3}
+BASELINES = {'rank_logistic': Candidate('B1', 'rank_logistic'), 'grid_logistic': Candidate('BG', 'grid_logistic')}
 TIE_TOLERANCE = 0.0005
 
 
@@ -57,24 +58,34 @@ def environment():
     }
 
 
-def development_predictions(rows, candidate):
+def development_predictions(rows, candidate, numeric=NUMERIC_FEATURES, seasons=DEVELOPMENT_VALIDATION_SEASONS):
     """Out-of-fold predictions for each development validation season."""
     blocks = []
-    for train_seasons, validation_season in make_splits():
+    for train_seasons, validation_season in make_splits(seasons):
         train = rows[rows['season'].isin(train_seasons)]
         score = rows[rows['season'] == validation_season].copy()
-        score['p_points'], _ = fit_predict(candidate, train, score)
+        score['p_points'], _ = fit_predict(candidate, train, score, numeric)
         blocks.append(score[[*KEY, 'season', 'scored_points', 'p_points']])
     return pd.concat(blocks, ignore_index=True)
 
 
-def run_selection(dataset_dir, report_path, config_path):
+def run_selection(
+    dataset_dir,
+    report_path,
+    config_path,
+    *,
+    numeric=NUMERIC_FEATURES,
+    seasons=DEVELOPMENT_VALIDATION_SEASONS,
+    test_season=TEST_SEASON,
+    baseline='rank_logistic',
+    cutoff='qualifying_end',
+):
     rows = load_dataset(dataset_dir)
-    rows = rows[rows['season'] < TEST_SEASON]  # the sealed test season never enters selection
+    rows = rows[rows['season'] < test_season]  # the sealed test season never enters selection
     started = time.perf_counter()
     results, oof = [], {}
-    for candidate in candidates():
-        predictions = development_predictions(rows, candidate)
+    for candidate in candidates(BASELINES[baseline]):
+        predictions = development_predictions(rows, candidate, numeric, seasons)
         oof[candidate.label()] = predictions
         per_season = {int(season): race_averaged_brier(block) for season, block in predictions.groupby('season')}
         results.append(
@@ -94,7 +105,7 @@ def run_selection(dataset_dir, report_path, config_path):
 
     chosen_oof = oof[chosen['candidate']]
     calibrated = chronological_calibration(chosen_oof)
-    comparable = calibrated[calibrated['season'] > min(DEVELOPMENT_VALIDATION_SEASONS)]
+    comparable = calibrated[calibrated['season'] > min(seasons)]
     raw_score = race_averaged_brier(comparable, 'p_points')
     calibrated_score = race_averaged_brier(comparable, 'p_calibrated')
     use_calibration = calibrated_score < raw_score - TIE_TOLERANCE
@@ -104,7 +115,9 @@ def run_selection(dataset_dir, report_path, config_path):
         'git_commit': git_commit(),
         'environment': environment(),
         'duration_seconds': round(time.perf_counter() - started, 1),
-        'protocol': 'expanding seasonal blocks; validate 2021-2024; 2025 excluded from all selection inputs',
+        'protocol': f'expanding seasonal blocks; validate {min(seasons)}-{max(seasons)}; '
+        f'{test_season} excluded from all selection inputs',
+        'cutoff': cutoff,
         'validation_rows': len(chosen_oof),
         'validation_events': int(chosen_oof['event_id'].nunique()),
         'candidates': sorted(results, key=lambda r: r['race_brier']),
@@ -126,14 +139,17 @@ def run_selection(dataset_dir, report_path, config_path):
         'frozen_at': report['generated_at'],
         'selected_from_commit': report['git_commit'],
         'model': {'name': chosen['name'], 'family': chosen['family'], 'params': chosen['params']},
-        'feature_columns': FEATURE_COLUMNS,
+        'feature_columns': list(numeric) + CATEGORICAL_FEATURES,
+        'numeric_features': list(numeric),
+        'baseline': baseline,
+        'cutoff': cutoff,
         'calibration': report['calibration']['selected'],
         'threshold': 0.5,
         'seed': SEED,
-        'test_season': TEST_SEASON,
+        'test_season': test_season,
         'protocols': {
-            'fixed_season': f'fit seasons 2018-{TEST_SEASON - 1}; score every {TEST_SEASON} race once',
-            'walk_forward': f'refit before each {TEST_SEASON} race on all earlier races with these frozen settings',
+            'fixed_season': f'fit seasons 2018-{test_season - 1}; score every {test_season} race once',
+            'walk_forward': f'refit before each {test_season} race on all earlier races with these frozen settings',
         },
     }
     Path(config_path).parent.mkdir(parents=True, exist_ok=True)

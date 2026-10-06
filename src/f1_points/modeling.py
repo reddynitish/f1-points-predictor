@@ -21,6 +21,7 @@ FIRST_SEASON = 2018
 TEST_SEASON = 2025
 LOG_LOSS_EPS = 1e-15
 RANK_FEATURES = ['qualifying_rank', 'qualifying_rank_missing']
+GRID_BASELINE_FEATURES = ['grid_position', 'grid_pitlane']
 
 
 def make_splits(seasons=DEVELOPMENT_VALIDATION_SEASONS):
@@ -42,9 +43,9 @@ class Candidate:
         return self.name + ('' if not self.params else ' ' + ','.join(f'{k}={v}' for k, v in self.params.items()))
 
 
-def candidates():
+def candidates(baseline=None):
     """Bounded search fixed in docs/MASTER_PLAN.md section 4; not extended after seeing results."""
-    found = [Candidate('B0', 'prior'), Candidate('B1', 'rank_logistic')]
+    found = [Candidate('B0', 'prior'), baseline or Candidate('B1', 'rank_logistic')]
     found += [Candidate('M1', 'logistic', {'C': c}) for c in (0.1, 1.0, 10.0)]
     found += [
         Candidate('M2', 'hgb', {'learning_rate': lr, 'max_leaf_nodes': leaves, 'l2_regularization': l2})
@@ -55,13 +56,13 @@ def candidates():
     return found
 
 
-def _preprocess(scale):
-    numeric = [('impute', SimpleImputer(strategy='median', add_indicator=True))]
+def _preprocess(scale, numeric):
+    steps = [('impute', SimpleImputer(strategy='median', add_indicator=True))]
     if scale:
-        numeric.append(('scale', StandardScaler()))
+        steps.append(('scale', StandardScaler()))
     return ColumnTransformer(
         [
-            ('numeric', Pipeline(numeric), NUMERIC_FEATURES),
+            ('numeric', Pipeline(steps), numeric),
             (
                 'categorical',
                 Pipeline(
@@ -76,28 +77,32 @@ def _preprocess(scale):
     )
 
 
-def build_pipeline(candidate):
+def build_pipeline(candidate, numeric=NUMERIC_FEATURES):
     """Every transformer is fitted inside the training fold only."""
     if candidate.family == 'prior':
         return DummyClassifier(strategy='prior')
-    if candidate.family == 'rank_logistic':
-        rank = ColumnTransformer([('rank', SimpleImputer(strategy='median', add_indicator=True), RANK_FEATURES)])
-        return Pipeline([('features', rank), ('model', LogisticRegression(max_iter=1000))])
+    if candidate.family in ('rank_logistic', 'grid_logistic'):
+        columns = RANK_FEATURES if candidate.family == 'rank_logistic' else GRID_BASELINE_FEATURES
+        single = ColumnTransformer([('single', SimpleImputer(strategy='median', add_indicator=True), columns)])
+        return Pipeline([('features', single), ('model', LogisticRegression(max_iter=1000))])
     if candidate.family == 'logistic':
         return Pipeline(
-            [('features', _preprocess(scale=True)), ('model', LogisticRegression(max_iter=2000, **candidate.params))]
+            [
+                ('features', _preprocess(True, numeric)),
+                ('model', LogisticRegression(max_iter=2000, **candidate.params)),
+            ]
         )
     if candidate.family == 'hgb':
         model = HistGradientBoostingClassifier(
             max_iter=200, early_stopping=False, random_state=SEED, **candidate.params
         )
-        return Pipeline([('features', _preprocess(scale=False)), ('model', model)])
+        return Pipeline([('features', _preprocess(False, numeric)), ('model', model)])
     raise ValueError(f'Unknown model family: {candidate.family}')
 
 
-def fit_predict(candidate, train, score):
+def fit_predict(candidate, train, score, numeric=NUMERIC_FEATURES):
     """Fit on train rows (features + scored_points) and return P(points) for score rows."""
-    model = build_pipeline(candidate)
+    model = build_pipeline(candidate, numeric)
     model.fit(train, train['scored_points'])
     return model.predict_proba(score)[:, 1], model
 

@@ -29,7 +29,7 @@ def top10_hits(frame, column):
     )
 
 
-def run_backtest(events, entries, labels, season, config, overrides=None):
+def run_backtest(events, entries, labels, season, config, overrides=None, sessions=None):
     if overrides:
         entries = apply_qualifying_overrides(entries, overrides)
     rounds = sorted(int(r) for r in events.loc[events['season'] == season, 'round'])
@@ -40,7 +40,7 @@ def run_backtest(events, entries, labels, season, config, overrides=None):
         if event_id not in scored:
             continue  # race not run yet
         try:
-            predictions, metadata = predict_event(events, entries, labels, event_id, config)
+            predictions, metadata = predict_event(events, entries, labels, event_id, config, sessions=sessions)
         except InsufficientHistory:
             continue  # nothing earlier to learn from (only possible for the first race in the data)
         predictions['round'] = round_number
