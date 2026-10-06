@@ -63,3 +63,21 @@ The bins have only 16–59 drivers each, so differences of about 10 points are w
 - 2026 is the first season of new regulations and has two new team identities. Training history from 2018–2025 carries over across that break.
 - The model sees qualifying rank, not the final grid; penalties are applied later.
 - This replay was produced in October 2026. Live forecasts begin with round 17 (Singapore), archived in `predictions/` before the race.
+
+
+## v2 test: practice, qualifying gap, weather and grid (pre-registered)
+
+Configs were frozen in commit `0617671` before this test ([v2](../configs/v2.json), [pre-race](../configs/pre-race.json)). The protocol is in [PREREGISTRATION_V2.md](../docs/PREREGISTRATION_V2.md), including Amendment 1. Same 16 races and the same walk-forward refits.
+
+| Model (2026, 347 driver predictions) | Race-averaged Brier | Log loss | ROC-AUC | Top-10 hits / race | Model − baseline, 95% bootstrap |
+|---|---:|---:|---:|---:|---|
+| B1 qualifying rank only (baseline at qualifying end) | 0.158 | 0.482 | 0.846 | 7.6 | — |
+| v2 M2: + practice pace, qualifying gap, qualifying weather | 0.163 | 0.498 | 0.840 | 7.4 | [-0.0040, +0.0175] |
+| BG grid position only (baseline at pre-race cutoff) | 0.167 | 0.509 | 0.826 | 7.4 | — |
+| Pre-race M2: v2 + starting grid | 0.166 | 0.506 | 0.835 | 7.3 | [-0.0153, +0.0148] |
+
+**Result: neither model beats its baseline.** v2 is numerically worse than qualifying rank alone; its interval includes zero but leans positive (worse). The pre-race model ties the grid-only baseline. Descriptively, and outside the pre-registered comparisons, grid-only (0.167) did worse than qualifying-only (0.158) on these races.
+
+Caveats: practice and weather features are missing for all of 2022 (upstream 403) and for 16 of 2026's rows where a session page was absent. Sixteen races give wide intervals.
+
+Conclusion: across the sealed 2025 test and the 2026 backtest, qualifying position captures nearly all the predictable signal available to these models. Live forecasts keep B1 as the primary forecast.

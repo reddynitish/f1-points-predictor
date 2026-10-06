@@ -51,3 +51,10 @@ C=0.1 is the edge of the pre-set grid, and the grid wasn't extended after seeing
 - Qualifying rank comes from the retrieved final classification, so later penalties are reflected only through the override file.
 - Grid penalties, weather, practice pace and sprint results are excluded by design.
 - There are no betting, strategy or causal claims.
+
+## Update, October 6, 2026: 2026 backtest and v2
+
+- **Frozen v1 on 2026 (walk-forward, 16 races):** B1 0.158, M1 0.161; 7.6 of 10 top-10 picks correct per race.
+- **v2 (practice, qualifying gap, qualifying weather; M2):** 0.164 on the same races.
+- **Pre-race (v2 plus starting grid; M2):** 0.166 vs grid-only 0.167.
+- No richer model beat its baseline. See [BACKTEST_2026.md](BACKTEST_2026.md). The live automation uses B1 as primary and M1 for comparison.

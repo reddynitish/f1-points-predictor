@@ -1,0 +1,297 @@
+{
+  "framing": "Retrospective walk-forward backtest run after the season was played. For each race the models were refit on earlier races only and given only information available at qualifying end. These are not forecasts that were published before each race.",
+  "generated_at": "2026-10-06T15:05:31.855091+00:00",
+  "git_commit": "0617671b5cd05175ecdfedfd2b3876d64ee6259e",
+  "config_sha256": "67339455696a9db14283d4c96a3b455352fb56cfd9650fecff1782b61c2af917",
+  "environment": {
+    "python": "3.12.13",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "scikit_learn": "1.9.1",
+    "pandas": "2.3.3",
+    "seed": 42
+  },
+  "season": 2026,
+  "races": 16,
+  "rows": 347,
+  "metrics": {
+    "B0": {
+      "race_brier": 0.24832199640575994,
+      "driver_brier": 0.2482798560456682,
+      "log_loss": 0.689702069325255,
+      "roc_auc": 0.506389669476783,
+      "pr_auc": 0.4609107463793251,
+      "precision": 0.48717948717948717,
+      "recall": 0.11949685534591195,
+      "f1": 0.1919191919191919,
+      "rows": 347,
+      "events": 16,
+      "threshold": 0.5,
+      "log_loss_eps": 1e-15
+    },
+    "B1": {
+      "race_brier": 0.16672323149194235,
+      "driver_brier": 0.1667757571156565,
+      "log_loss": 0.5093791731942122,
+      "roc_auc": 0.825772782015255,
+      "pr_auc": 0.7645376930670876,
+      "precision": 0.7375,
+      "recall": 0.7421383647798742,
+      "f1": 0.7398119122257052,
+      "rows": 347,
+      "events": 16,
+      "threshold": 0.5,
+      "log_loss_eps": 1e-15
+    },
+    "M1": {
+      "race_brier": 0.16611587438493586,
+      "driver_brier": 0.1661809938080927,
+      "log_loss": 0.5064438368846373,
+      "roc_auc": 0.8350562023283822,
+      "pr_auc": 0.760730366073651,
+      "precision": 0.7289156626506024,
+      "recall": 0.7610062893081762,
+      "f1": 0.7446153846153846,
+      "rows": 347,
+      "events": 16,
+      "threshold": 0.5,
+      "log_loss_eps": 1e-15
+    }
+  },
+  "bootstrap_M1_vs_B1": {
+    "resamples": 1000,
+    "seed": 42,
+    "intervals": {
+      "p_M1": [
+        0.13444620822224737,
+        0.20193868248698993
+      ],
+      "p_B1": [
+        0.14135605157516876,
+        0.19408836570951388
+      ]
+    },
+    "difference_vs_p_B1": {
+      "p_M1": [
+        -0.015285803071605231,
+        0.014811113534907177
+      ]
+    }
+  },
+  "top10_hits_mean": {
+    "B1": 7.375,
+    "M1": 7.3125
+  },
+  "confident_B1": {
+    "threshold": 0.8,
+    "predictions": 69,
+    "scored": 54
+  },
+  "reliability_B1": [
+    {
+      "bin": "(-0.001, 0.1]",
+      "count": 43.0,
+      "mean_predicted": 0.06741249973326707,
+      "observed_rate": 0.06976744186046512
+    },
+    {
+      "bin": "(0.1, 0.2]",
+      "count": 61.0,
+      "mean_predicted": 0.14658727928834778,
+      "observed_rate": 0.11475409836065574
+    },
+    {
+      "bin": "(0.2, 0.3]",
+      "count": 35.0,
+      "mean_predicted": 0.2614454236514291,
+      "observed_rate": 0.34285714285714286
+    },
+    {
+      "bin": "(0.3, 0.4]",
+      "count": 16.0,
+      "mean_predicted": 0.3465043605117474,
+      "observed_rate": 0.3125
+    },
+    {
+      "bin": "(0.4, 0.5]",
+      "count": 32.0,
+      "mean_predicted": 0.436562594683062,
+      "observed_rate": 0.4375
+    },
+    {
+      "bin": "(0.5, 0.6]",
+      "count": 32.0,
+      "mean_predicted": 0.5615104659121581,
+      "observed_rate": 0.53125
+    },
+    {
+      "bin": "(0.6, 0.7]",
+      "count": 16.0,
+      "mean_predicted": 0.6517133980907014,
+      "observed_rate": 0.6875
+    },
+    {
+      "bin": "(0.7, 0.8]",
+      "count": 43.0,
+      "mean_predicted": 0.7486072472851864,
+      "observed_rate": 0.8372093023255814
+    },
+    {
+      "bin": "(0.8, 0.9]",
+      "count": 53.0,
+      "mean_predicted": 0.8604692799718332,
+      "observed_rate": 0.7547169811320755
+    },
+    {
+      "bin": "(0.9, 1.0]",
+      "count": 16.0,
+      "mean_predicted": 0.9162131301541707,
+      "observed_rate": 0.875
+    }
+  ],
+  "per_race": [
+    {
+      "event_id": "2026-01",
+      "round": 1,
+      "drivers": 19,
+      "brier_B1": 0.197,
+      "brier_M1": 0.2052,
+      "top10_hits_B1": 7,
+      "top10_hits_M1": 7
+    },
+    {
+      "event_id": "2026-02",
+      "round": 2,
+      "drivers": 22,
+      "brier_B1": 0.1913,
+      "brier_M1": 0.2566,
+      "top10_hits_B1": 7,
+      "top10_hits_M1": 6
+    },
+    {
+      "event_id": "2026-03",
+      "round": 3,
+      "drivers": 22,
+      "brier_B1": 0.1241,
+      "brier_M1": 0.1111,
+      "top10_hits_B1": 7,
+      "top10_hits_M1": 8
+    },
+    {
+      "event_id": "2026-04",
+      "round": 4,
+      "drivers": 22,
+      "brier_B1": 0.1171,
+      "brier_M1": 0.1379,
+      "top10_hits_B1": 8,
+      "top10_hits_M1": 7
+    },
+    {
+      "event_id": "2026-05",
+      "round": 5,
+      "drivers": 22,
+      "brier_B1": 0.2578,
+      "brier_M1": 0.2701,
+      "top10_hits_B1": 6,
+      "top10_hits_M1": 6
+    },
+    {
+      "event_id": "2026-06",
+      "round": 6,
+      "drivers": 22,
+      "brier_B1": 0.2689,
+      "brier_M1": 0.305,
+      "top10_hits_B1": 6,
+      "top10_hits_M1": 5
+    },
+    {
+      "event_id": "2026-07",
+      "round": 7,
+      "drivers": 22,
+      "brier_B1": 0.1492,
+      "brier_M1": 0.1567,
+      "top10_hits_B1": 7,
+      "top10_hits_M1": 7
+    },
+    {
+      "event_id": "2026-08",
+      "round": 8,
+      "drivers": 22,
+      "brier_B1": 0.069,
+      "brier_M1": 0.0545,
+      "top10_hits_B1": 10,
+      "top10_hits_M1": 9
+    },
+    {
+      "event_id": "2026-09",
+      "round": 9,
+      "drivers": 22,
+      "brier_B1": 0.2014,
+      "brier_M1": 0.1769,
+      "top10_hits_B1": 7,
+      "top10_hits_M1": 7
+    },
+    {
+      "event_id": "2026-10",
+      "round": 10,
+      "drivers": 22,
+      "brier_B1": 0.1697,
+      "brier_M1": 0.11,
+      "top10_hits_B1": 7,
+      "top10_hits_M1": 8
+    },
+    {
+      "event_id": "2026-11",
+      "round": 11,
+      "drivers": 22,
+      "brier_B1": 0.1053,
+      "brier_M1": 0.1207,
+      "top10_hits_B1": 9,
+      "top10_hits_M1": 8
+    },
+    {
+      "event_id": "2026-12",
+      "round": 12,
+      "drivers": 22,
+      "brier_B1": 0.1491,
+      "brier_M1": 0.1782,
+      "top10_hits_B1": 7,
+      "top10_hits_M1": 7
+    },
+    {
+      "event_id": "2026-13",
+      "round": 13,
+      "drivers": 22,
+      "brier_B1": 0.1643,
+      "brier_M1": 0.1093,
+      "top10_hits_B1": 8,
+      "top10_hits_M1": 9
+    },
+    {
+      "event_id": "2026-14",
+      "round": 14,
+      "drivers": 20,
+      "brier_B1": 0.1122,
+      "brier_M1": 0.0962,
+      "top10_hits_B1": 9,
+      "top10_hits_M1": 9
+    },
+    {
+      "event_id": "2026-15",
+      "round": 15,
+      "drivers": 22,
+      "brier_B1": 0.2403,
+      "brier_M1": 0.243,
+      "top10_hits_B1": 6,
+      "top10_hits_M1": 6
+    },
+    {
+      "event_id": "2026-16",
+      "round": 16,
+      "drivers": 22,
+      "brier_B1": 0.1509,
+      "brier_M1": 0.1266,
+      "top10_hits_B1": 7,
+      "top10_hits_M1": 8
+    }
+  ]
+}

@@ -17,7 +17,7 @@ It's built like a production ML system. The data is cached and audited, a test s
 | Correct points scorers among the model's top-10 picks | **7.6 / 10 per race** (best: 10/10, worst: 6/10) |
 | Drivers given an 80%+ chance who actually scored | **64 of 80 (80%)** |
 | Error vs. knowing nothing (race-averaged Brier score) | **0.158 vs 0.248, 37% lower** |
-| Did driver/team form beat qualifying position alone? | **No.** 0.161 vs 0.158, within noise; the same in the sealed 2025 test |
+| Did driver/team form, practice, weather or grid beat qualifying position alone? | **No.** Every richer model tied or lost (details below) |
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/img/backtest-hits-dark.svg">
@@ -87,10 +87,11 @@ A [scheduled GitHub Action](.github/workflows/live.yml) runs every two hours fro
 2. After the race, it scores every saved forecast against the published results and updates the scorecard above.
 3. Saved forecasts are never overwritten. A forecast is only counted as live if it was made before the race started.
 
-## In progress
+## What didn't work (and why that's useful)
 
-- **v2 features** ([pre-registered](docs/PREREGISTRATION_V2.md)): qualifying lap-time gap, practice pace from sessions held before qualifying, and weather observed during qualifying. A separate "just before the race" model also uses the official starting grid. They'll be tested once on 2026 and reported whether they help or not.
-- **Dashboard**: a local page showing each race's predictions next to what actually happened.
+The [pre-registered v2 test](reports/BACKTEST_2026.md#v2-test-practice-qualifying-gap-weather-and-grid-pre-registered) added practice pace, qualifying lap-time gap, qualifying weather and, for a separate pre-race model, the official starting grid, using gradient boosting. On 2026, **neither beat its simple baseline**: 0.164 vs 0.158 for qualifying-only, and 0.166 vs 0.167 for grid-only. Qualifying position already captures nearly everything these signals know, so the live forecast stays simple.
+
+Next ideas: driver-specific race-pace estimates from long practice runs, tyre-strategy priors, and a joint model that respects the ten-points-places constraint.
 
 ## Project map
 

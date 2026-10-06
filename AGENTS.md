@@ -7,7 +7,7 @@ Read README.md, docs/MASTER_PLAN.md and docs/RELATED_WORK.md before working.
 - Local project: /Users/nitishreddy/f1-points-predictor
 - GitHub: https://github.com/reddynitish/f1-points-predictor
 - Milestones A–E (provisional data-gate decisions, cutoff-safe features, baselines, selection, one sealed 2025 evaluation) are implemented; see reports/MODEL_CARD.md. M1 did not beat the B1 rank-only baseline on 2025 (inconclusive), so B1 is the primary forecast. The 2025 test is now spent: any further model change needs a new untouched period (2026 shadow results).
-- GitHub repo is private at Nitish's request until there is enough work to publish.
+- GitHub repo was made public by Nitish on 2026-10-06.
 - User wants a Formula 1 ML project for learning and software-engineering/applied-AI portfolio evidence.
 
 ## Constraints
@@ -22,6 +22,6 @@ Read README.md, docs/MASTER_PLAN.md and docs/RELATED_WORK.md before working.
 
 ## Next work
 
-Run `predict --season 2026 --round 17` after Singapore qualifying (2026-10-10 13:00 UTC) and archive it before the race; evaluate prospective forecasts against published results as 2026 shadow evaluation. Nitish has not yet confirmed the provisional data-gate decisions in docs/DATA_GATE_PROPOSAL.md. Dashboard (milestone F) not started.
+Live forecasting is automated by .github/workflows/live.yml (forecast after qualifying, score after race, README scorecard). The v1 2026 backtest and pre-registered v2/pre-race tests are done; neither richer model beat its baseline (reports/BACKTEST_2026.md). The 2026 rounds 1-16 are now spent as a test period; further model changes need rounds 17+ as untouched data. Nitish has not yet confirmed the provisional data-gate decisions in docs/DATA_GATE_PROPOSAL.md. Dashboard (milestone F) not started.
 
 The plan is a proposal, not proof that any model improves upon the baseline. Show failures and inconclusive results. Resume usage is a separate approval decision.
