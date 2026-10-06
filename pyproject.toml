@@ -10,10 +10,31 @@ requires-python = ">=3.12,<3.13"
 dependencies = ["requests>=2.32,<3", "fastf1>=3.6,<4", "pandas>=2.2,<3", "pyarrow>=18,<24"]
 
 [dependency-groups]
-dev = ["pytest>=8,<10"]
+dev = [
+    "mypy>=1.11",
+    "pandas-stubs>=3.0.5.260914",
+    "pytest>=8,<10",
+    "ruff>=0.6",
+    "types-requests>=2.33.0.20261006",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/f1_points"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src"]
+warn_unused_ignores = true
