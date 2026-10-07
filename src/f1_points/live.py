@@ -11,14 +11,14 @@ from .backtest import top10_hits
 from .features import KEY
 from .predict import QualifyingUnavailable, archive, predict_event
 
-# Wait this long after the scheduled qualifying start so a sprint-qualifying result can never be mistaken for it.
+# Scheduling buffer only; a delay or reschedule still requires a published qualifying classification.
 QUALIFYING_SETTLE = timedelta(hours=1)
 CONFIDENT = 0.8
 README_START, README_END = '<!-- live-scorecard:start -->', '<!-- live-scorecard:end -->'
 
 
 def should_forecast(event, has_labels, has_archive, now):
-    """Forecast only once qualifying has surely finished, before the race starts, and only once per event."""
+    """Scheduling gate; published qualifying is checked separately by the predictor."""
     if has_labels or has_archive or not event.get('race_start_utc'):
         return False
     race_start = datetime.fromisoformat(event['race_start_utc'])
@@ -52,9 +52,12 @@ def score_archives(archive_dir, labels):
     races = []
     for path in sorted(Path(archive_dir).glob('*-prospective.json')):
         record = json.loads(path.read_text())
-        frame = pd.DataFrame(record['predictions']).merge(outcome, on=KEY, how='inner')
-        if frame.empty:
-            continue  # race not run or results not published yet
+        if not valid_prospective(record):
+            continue
+        predictions = pd.DataFrame(record['predictions'])
+        frame = predictions.merge(outcome, on=KEY, how='left', validate='one_to_one')
+        if frame.empty or frame['scored_points'].isna().any():
+            continue  # Wait for every archived driver's result; never score a favorable partial subset.
         confident = frame[frame['p_B1'] >= CONFIDENT]
         races.append(
             {
@@ -72,6 +75,81 @@ def score_archives(archive_dir, labels):
             }
         )
     return races
+
+
+def valid_prospective(record):
+    """A filename alone cannot establish that a forecast preceded the scheduled race start."""
+    try:
+        created = datetime.fromisoformat(record['created_at'])
+        start = datetime.fromisoformat(record['race_start_utc'])
+        qualifying = datetime.fromisoformat(record['qualifying_scheduled_start_utc'])
+        return (
+            record['mode'] == 'prospective'
+            and created.tzinfo is not None
+            and start.tzinfo is not None
+            and qualifying.tzinfo is not None
+            and qualifying + QUALIFYING_SETTLE <= created < start
+        )
+    except (KeyError, TypeError, ValueError):
+        return False
+
+
+def operational_health(events, entries, labels, archive_dir, season, now, first_round=None):
+    """Observed collection/forecast state, not a promise that a schedule will execute."""
+    first_round = first_round if first_round is not None else (17 if season == 2026 else 1)
+    rows = []
+    for event in (
+        events[(events['season'] == season) & (events['round'] >= first_round)].sort_values('round').to_dict('records')
+    ):
+        event_id = event['event_id']
+        q = entries[(entries['event_id'] == event_id) & entries['qualifying_available']]
+        outcome = set(labels.loc[labels['event_id'] == event_id, 'driver_id'])
+        path = Path(archive_dir) / f'{event_id}-prospective.json'
+        warnings = []
+        state = 'waiting_for_qualifying'
+        archived_count = 0
+        if path.exists():
+            record = json.loads(path.read_text())
+            drivers = {p['driver_id'] for p in record['predictions']}
+            archived_count = len(drivers)
+            if not valid_prospective(record):
+                state = 'invalid_archive'
+            elif drivers and drivers <= outcome:
+                state = 'scored'
+            else:
+                state = 'partial_results' if drivers & outcome else 'forecast_saved'
+                warnings = list(record.get('warnings', []))
+        elif event.get('race_start_utc') and now >= datetime.fromisoformat(event['race_start_utc']):
+            state = 'missed_forecast'
+        elif should_forecast(event, bool(outcome), False, now):
+            state = 'qualifying_unavailable' if q.empty else 'forecast_due'
+        rows.append(
+            {
+                'event_id': event_id,
+                'state': state,
+                'qualifying_drivers': len(q),
+                'archived_drivers': archived_count,
+                'result_drivers': len(outcome),
+                'warnings': warnings,
+            }
+        )
+    return {'events': rows, 'first_round': first_round}
+
+
+def write_health(directory, payload):
+    """Public status changes only when meaningful state changes; full per-run status stays in workflow artifacts."""
+    directory = Path(directory)
+    directory.mkdir(parents=True, exist_ok=True)
+    path = directory / 'health.json'
+    previous = json.loads(path.read_text()) if path.exists() else {}
+    transient = {'checked_at', 'last_success_at', 'source_fetched_at', 'duration_seconds'}
+
+    def stable(p):
+        return {k: v for k, v in p.items() if k not in transient}
+
+    if stable(previous) != stable(payload):
+        path.write_text(json.dumps(payload, indent=2) + '\n')
+    return path
 
 
 def scorecard_markdown(races):

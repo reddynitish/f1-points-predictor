@@ -49,3 +49,32 @@ def test_readme_section_is_replaced_between_markers(tmp_path):
     (tmp_path / 'bad.md').write_text('no markers')
     with pytest.raises(ValueError):
         update_readme(tmp_path / 'bad.md', 'x')
+
+
+def test_partial_results_wait_for_every_archived_driver(tmp_path):
+    events, entries, labels = fixture()
+    pending = labels[labels['event_id'] != '2024-03']
+    forecast_due(events, entries, pending, CONFIG, tmp_path, CONFIG_PATH, 2024, datetime(2024, 3, 9, 18, tzinfo=UTC))
+    partial = labels.drop(labels[labels['event_id'] == '2024-03'].index[-1])
+    assert score_archives(tmp_path, partial) == []
+
+
+def test_post_start_archive_cannot_count_as_live(tmp_path):
+    events, entries, labels = fixture()
+    pending = labels[labels['event_id'] != '2024-03']
+    path = forecast_due(
+        events, entries, pending, CONFIG, tmp_path, CONFIG_PATH, 2024, datetime(2024, 3, 9, 18, tzinfo=UTC)
+    )[0]
+    record = json.loads(path.read_text())
+    record['created_at'] = record['race_start_utc']
+    path.write_text(json.dumps(record))
+    assert score_archives(tmp_path, labels) == []
+
+
+def test_health_exposes_missing_forecast_and_partial_results(tmp_path):
+    from f1_points.live import operational_health
+
+    events, entries, labels = fixture()
+    health = operational_health(events, entries, labels, tmp_path, 2024, datetime(2024, 3, 11, tzinfo=UTC))
+    assert health['events'][-1]['state'] == 'missed_forecast'
+    assert health['events'][-1]['qualifying_drivers'] == 4

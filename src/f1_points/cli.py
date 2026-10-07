@@ -1,8 +1,9 @@
-"""Milestone A commands. No training or final-test evaluation."""
+"""Data collection, frozen experiments, retrospective replay and live forecasting commands."""
 
 import argparse
 import json
 import logging
+import time
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -22,7 +23,15 @@ from .features import (
     build_labels,
     load_normalized,
 )
-from .live import forecast_due, score_archives, scorecard_markdown, update_readme, write_scorecard
+from .live import (
+    forecast_due,
+    operational_health,
+    score_archives,
+    scorecard_markdown,
+    update_readme,
+    write_health,
+    write_scorecard,
+)
 from .livetiming import BASE_URL as livetiming_base
 from .livetiming import LiveTimingClient, event_sessions, match_meeting, season_meetings
 from .predict import QualifyingUnavailable, archive, load_combined, predict_event
@@ -216,12 +225,16 @@ def run_predict(args):
 
 def run_live(args):
     now = datetime.now(UTC)
+    started = time.perf_counter()
     run_dir = args.live_root / now.strftime('%Y%m%dT%H%M%SZ')
     report = collect(
         SnapshotClient(run_dir / 'snapshots'), args.season, args.season, None, False, run_dir / 'normalized'
     )
     if report['failures']:
         logger.error('season collection failed: %s', report['failures'])
+        health = {'checked_at': now.isoformat(), 'status': 'collection_failed', 'failures': report['failures']}
+        write_health(args.scorecard, health)
+        (run_dir / 'health.json').write_text(json.dumps(health, indent=2) + '\n')
         return 1
     events, entries, labels = load_combined(args.base, run_dir / 'normalized', args.season)
     config = json.loads(args.config.read_text())
@@ -232,6 +245,17 @@ def run_live(args):
     races = score_archives(args.archive, labels)
     write_scorecard(races, args.scorecard, now.isoformat())
     changed = update_readme(args.readme, scorecard_markdown(races))
+    health = {
+        'checked_at': now.isoformat(),
+        'last_success_at': datetime.now(UTC).isoformat(),
+        'duration_seconds': round(time.perf_counter() - started, 3),
+        'status': 'ok',
+        'source_fetched_at': max((m['fetched_at'] for m in report['manifests']), default=None),
+        'failures': [],
+        **operational_health(events, entries, labels, args.archive, args.season, now),
+    }
+    write_health(args.scorecard, health)
+    (run_dir / 'health.json').write_text(json.dumps(health, indent=2) + '\n')
     logger.info('scored races=%d readme_changed=%s', len(races), changed)
     return 0
 
