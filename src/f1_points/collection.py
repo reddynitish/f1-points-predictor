@@ -8,14 +8,28 @@ from .data import normalize_event
 def fetch_races(client, endpoint, *, offline=False):
     offset = 0
     races, manifests = [], []
+    expected_total = None
+    session_key = {
+        'qualifying.json': 'QualifyingResults',
+        'results.json': 'Results',
+        'sprint.json': 'SprintResults',
+    }.get(endpoint.rsplit('/', 1)[-1])
     while True:
         payload, manifest = client.get(f'{endpoint}?limit=100&offset={offset}', offline=offline)
         data = payload['MRData']
         page = data['RaceTable']['Races']
         total, limit = int(data['total']), int(data['limit'])
-        if int(data['offset']) != offset or limit <= 0:
+        if (
+            int(data['offset']) != offset
+            or limit <= 0
+            or total < 0
+            or (expected_total is not None and total != expected_total)
+        ):
             raise ValueError('Invalid pagination metadata')
-        if offset < total and not page:
+        expected_total = total
+        # Session totals count driver records, not the race objects wrapping them.
+        count = sum(len(race.get(session_key, [])) for race in page) if session_key else len(page)
+        if count != min(limit, max(0, total - offset)):
             raise ValueError('Truncated source page')
         races.extend(page)
         manifests.append(manifest)

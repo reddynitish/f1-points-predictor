@@ -76,3 +76,54 @@ def test_repeated_rank_detail_names_drivers_and_gap():
     report, _ = audit_event(schedule(), [driver('a'), driver('b')], [])
     assert report['repeated_rank_drivers'] == ['a', 'b']
     assert report['unused_ranks'] == [2]
+
+
+@pytest.mark.parametrize(
+    'endpoint,key',
+    [
+        ('2024/qualifying.json', 'QualifyingResults'),
+        ('2024/results.json', 'Results'),
+        ('2024/sprint.json', 'SprintResults'),
+    ],
+)
+def test_nonempty_truncated_session_page_is_rejected(endpoint, key):
+    class Truncated:
+        def get(self, *args, **kwargs):
+            return {
+                'MRData': {
+                    'total': '20',
+                    'limit': '100',
+                    'offset': '0',
+                    'RaceTable': {'Races': [{'round': '1', key: [driver('a')]}]},
+                }
+            }, {}
+
+    with pytest.raises(ValueError, match='Truncated'):
+        fetch_races(Truncated(), endpoint)
+
+
+def test_session_pagination_counts_driver_rows_not_races():
+    class Complete:
+        def get(self, *args, **kwargs):
+            return {
+                'MRData': {
+                    'total': '2',
+                    'limit': '100',
+                    'offset': '0',
+                    'RaceTable': {'Races': [{'round': '1', 'QualifyingResults': [driver('a'), driver('b')]}]},
+                }
+            }, {}
+
+    assert len(fetch_races(Complete(), '2024/qualifying.json')[0]) == 1
+
+
+def test_changing_total_between_pages_is_rejected():
+    class Changed(Pages):
+        def get(self, path, **kwargs):
+            payload, manifest = super().get(path, **kwargs)
+            if 'offset=1' in path:
+                payload['MRData']['total'] = '1'
+            return payload, manifest
+
+    with pytest.raises(ValueError, match='pagination'):
+        fetch_races(Changed(), '2024.json')
