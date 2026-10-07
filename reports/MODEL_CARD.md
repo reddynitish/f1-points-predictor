@@ -8,7 +8,7 @@ For each driver with a qualifying classification, estimate P(race points > 0) us
 
 ## Data
 
-Jolpica (Ergast-compatible) results and qualifying data for 2018–2025, with 2026 rounds 1–16 used only as history for live forecasts. That's 3802 qualifying rows across 189 events; one qualifying row has no race label and is dropped, never set to zero. See [DATA_AUDIT.md](DATA_AUDIT.md), [dataset.json](dataset.json) and [coverage-2026.json](coverage-2026.json).
+Jolpica (Ergast-compatible) results and qualifying data for 2018–2025, with 2026 rounds 1–16 subsequently used for separately reported retrospective evaluation and as history for live forecasts. That's 3802 qualifying rows across 189 events; one qualifying row has no race label and is dropped, never set to zero. See [DATA_AUDIT.md](DATA_AUDIT.md), [dataset.json](dataset.json) and [coverage-2026.json](coverage-2026.json).
 
 Provisional data-gate decisions, the recommended options in [DATA_GATE_PROPOSAL.md](../docs/DATA_GATE_PROPOSAL.md), adopted October 6, 2026:
 - **Cutoff:** the window from scheduled qualifying start to race start. All history comes from earlier events, and a guard rejects any history that doesn't precede the cutoff.
@@ -36,9 +36,11 @@ C=0.1 is the edge of the pre-set grid, and the grid wasn't extended after seeing
 | Protocol | Selected (M1) | B1 | B0 | M1 − B1, 95% event bootstrap |
 |---|---:|---:|---:|---|
 | Fixed season (fit 2018–2024) | 0.1654 | 0.1657 | 0.2500 | [−0.0081, +0.0076] |
-| Walk-forward (refit before each race) | 0.1651 | 0.1657 | — | [−0.0087, +0.0073] |
+| Walk-forward M1 vs fixed-season B1 | 0.1651 | 0.1657 | — | [−0.0087, +0.0073] |
 
-24 races, 478 rows. **No improvement over the qualifying-rank baseline is demonstrated.** Driver history, team history and circuit features didn't add measurable out-of-sample value beyond qualifying position. Following the rule written before the test, **B1 is the primary live forecast** and M1 is reported alongside it. The worst 2025 races by Brier were 2025-15, 2025-22, 2025-02, 2025-12 and 2025-11. Full results: [test_2025.json](experiments/test_2025.json).
+The second row refits only M1 before each race; its B1 comparator remains fitted through 2024. It is an asymmetric diagnostic, not evidence from a matched walk-forward comparison. The fixed-season row is the matched comparison. Original saved artifacts are preserved; no 2025 rerun was performed to repair this reporting limitation.
+
+24 races, 478 rows. **No improvement over the qualifying-rank baseline is demonstrated.** These results did not establish additional out-of-sample value from driver history, team history or circuit features. Following the rule written before the test, **B1 is the primary live forecast** and M1 is reported alongside it. The worst 2025 races by Brier were 2025-15, 2025-22, 2025-02, 2025-12 and 2025-11. Full results: [test_2025.json](experiments/test_2025.json).
 
 ## Live use
 

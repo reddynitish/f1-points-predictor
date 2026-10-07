@@ -1,23 +1,23 @@
 # 2026 backtest: points probability from qualifying
 
-> Retrospective walk-forward backtest run after the season was played. For each race the models were refit on earlier races only and given only information available at qualifying end. These are not forecasts that were published before each race.
+> Retrospective walk-forward backtest run after rounds 1–16 were completed. Both models were refit on earlier races only. Qualifying inputs use retrieved final classifications with a scheduled-session interval cutoff; exact publication/revision times at qualifying end are not reconstructed. These are not forecasts that were published before each race.
 
 Generated 2026-10-06 from commit `ce2e8f7` with the frozen config (`configs/final.json`, sha256 `90bb838dfa71`). Protocol pre-registered in [PREREGISTRATION_V2.md](../docs/PREREGISTRATION_V2.md) before any comparison. Per-driver predictions: [backtest-2026/predictions.csv](backtest-2026/predictions.csv). Raw numbers: [backtest-2026/summary.json](backtest-2026/summary.json).
 
 ## Headline (16 races, 347 driver predictions, rounds 1–16)
 
-| | B0 no information | B1 qualifying rank (primary) | M1 full v1 model |
+| | B0 uniform ten-place prior | B1 qualifying rank (primary) | M1 full v1 model |
 |---|---:|---:|---:|
 | Race-averaged Brier (lower is better) | 0.248 | **0.158** | 0.161 |
 | Log loss | 0.690 | 0.482 | 0.496 |
 | ROC-AUC | 0.506 | 0.846 | 0.844 |
 | Correct points scorers among top-10 picks, mean per race | — | 7.6 / 10 | 7.6 / 10 |
 
-- B1 cuts Brier error by about 37% relative to no information.
-- M1 minus B1, 95% event-bootstrap interval: [-0.0010, +0.0094]. This includes zero, so M1 is **not** better than the qualifying baseline in 2026, consistent with the 2025 sealed test. Driver/team form features remain unproven.
+- B1 cuts Brier error by about 37% relative to the uniform ten-place prior. This replay assigns 10/N to each scored covered driver (N is the post-merge covered roster), not the training prevalence used for B0 in the original development/2025 study. Coverage changes the denominator; the comparison does not represent every possible no-information baseline.
+- M1 minus B1, 95% event-bootstrap interval: [-0.0010, +0.0094]. This includes zero, so M1 has **not demonstrated improvement** than the qualifying baseline in 2026, consistent with the 2025 sealed test. Driver/team form features remain unproven.
 - When B1 gave a driver at least 80%, the driver scored 64 of 80 times (80%).
 - Best race: 2026-08 (Brier 0.066, 10/10 picks correct). Worst race: 2026-06 (Brier 0.272, 6/10).
-- B1's top 10 is simply the qualifying top 10, so its top-10 hit rate equals the rule "qualifying top ten scores points". The probabilities add calibrated confidence on top of that ranking.
+- B1's top 10 is simply the qualifying top 10, so its top-10 hit rate equals the rule "qualifying top ten scores points". The probabilities express estimated confidence on top of that ranking.
 
 ## Per race
 
@@ -76,7 +76,7 @@ Configs were frozen in commit `0617671` before this test ([v2](../configs/v2.jso
 | BG grid position only (baseline at pre-race cutoff) | 0.167 | 0.509 | 0.826 | 7.4 | — |
 | Pre-race M2: v2 + starting grid | 0.166 | 0.506 | 0.835 | 7.3 | [-0.0153, +0.0148] |
 
-**Result: neither model beats its baseline.** v2 is numerically worse than qualifying rank alone; its interval includes zero but leans positive (worse). The pre-race model ties the grid-only baseline. Descriptively, and outside the pre-registered comparisons, grid-only (0.167) did worse than qualifying-only (0.158) on these races.
+**Result: neither model demonstrates improvement over its baseline.** v2 is numerically worse than qualifying rank alone; its interval includes zero but leans positive (worse). The pre-race model ties the grid-only baseline. Descriptively, and outside the pre-registered comparisons, grid-only (0.167) did worse than qualifying-only (0.158) on these races.
 
 Caveats: practice and weather features are missing for all of 2022 (upstream 403) and for 16 of 2026's rows where a session page was absent. Sixteen races give wide intervals.
 
