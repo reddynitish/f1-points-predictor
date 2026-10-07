@@ -132,7 +132,7 @@ Gate: all drivers of each race remain together and metrics match small hand-calc
 
 ### D. Model comparison and calibration
 - [x] Implement M1/M2 searches, training-fold transformations and bounded configuration in `train.py`.
-- [ ] Compare ablations and earlier-fold-only calibration (calibration done; ablations not run); retain all experiment records.
+- [x] Compare earlier-fold-only calibration; post-hoc development-only ablations now recorded in reports/ERROR_ANALYSIS.md (diagnostic, not original selection evidence).
 - [x] Freeze `configs/final.json` (JSON instead of YAML) with feature list, parameters, threshold and protocol, commit before test run.
 Gate: every calibration source predates its validation block; train metadata proves no 2025 rows used for fixed-season model.
 
@@ -143,7 +143,7 @@ Gate: every calibration source predates its validation block; train metadata pro
 Gate: report all results even if stronger model loses; any later test-informed changes create a new experiment requiring a new untouched test period.
 
 ### F. Product and prospective predictions
-- [ ] Build dashboard reading saved artifacts: select event, see qualifying rank/probability/actual result, baseline comparisons and missingness.
+- [x] Build dashboard reading saved artifacts: select event, see qualifying rank/probability/actual result, baseline comparisons and missingness.
 - [x] Add frozen-model CLI inference with refusal when inputs are unavailable; missing history supported with warnings.
 - [ ] Archive prospective predictions for a future supported race before start, then evaluate after published results.
 Gate: prediction page displays timestamp/model version and never downloads future labels during inference. UI makes retrospective replay distinct from genuine forecast.

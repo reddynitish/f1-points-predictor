@@ -20,7 +20,14 @@ def error_analysis(frame):
     )
     frame['error_B1'] = (frame['p_B1'] - frame['scored_points']) ** 2
     segments = {}
-    for column in ('qualifying_band', 'constructor_id', 'rookie', 'qualifying_rank_missing', 'sprint_weekend'):
+    for column in (
+        'qualifying_band',
+        'constructor_id',
+        'circuit_id',
+        'rookie',
+        'qualifying_rank_missing',
+        'sprint_weekend',
+    ):
         if column not in frame:
             continue
         groups = []
@@ -133,7 +140,7 @@ def main():
         development = rows[rows['season'].between(2018, 2024)].sort_values(KEY)
         ablations['development_rows_sha256'] = hashlib.sha256(development.to_csv(index=False).encode()).hexdigest()
         (args.output / 'ablations.json').write_text(json.dumps(ablations, indent=2) + '\n')
-        available = [*KEY, 'rookie', 'qualifying_rank_missing', 'sprint_weekend']
+        available = [*KEY, 'circuit_id', 'rookie', 'qualifying_rank_missing', 'sprint_weekend']
         available = [c for c in available if c in features]
         frame = frame.merge(features[available], on=KEY, how='left', validate='one_to_one')
     result = error_analysis(frame)

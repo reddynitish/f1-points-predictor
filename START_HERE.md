@@ -6,6 +6,6 @@ Open this folder as a local Codex project:
 
 Paste this prompt:
 
-> Read AGENTS.md, README.md, docs/MASTER_PLAN.md and docs/RELATED_WORK.md. This is my Formula 1 ML project. The repo contains planning documents only. Help me review the design, then implement milestone A: local environment, cached data adapter, one historical weekend audit and a coverage report. Use free local tools, do not call paid APIs, and do not train or claim results until the data and leakage gates are satisfied. Explain the ML/data decisions as we go.
+> Read AGENTS.md, README.md, docs/MASTER_PLAN.md, docs/RELATED_WORK.md and docs/CASE_STUDY.md. This is my Formula 1 forecasting project. Baselines and richer models are implemented; richer models did not demonstrate improvement. Keep B1 primary. Preserve frozen configs and spent 2025/2026 rounds 1–16 evaluations. The static dashboard, offline demo and live health checks are implemented. Verify current workflow/forecast state before claiming prospective success; future model changes need a new untouched period. Use free local tools and explain decisions accurately.
 
 GitHub: https://github.com/reddynitish/f1-points-predictor

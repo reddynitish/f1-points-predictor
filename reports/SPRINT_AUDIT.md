@@ -16,6 +16,8 @@ All 24 comparisons have shared drivers. On every checked 2023–2025 sprint week
 
 Sprint starting grid is only a proxy for sprint qualifying: penalties, disqualifications and non-starters may change it. The 2021-19 Hamilton/Verstappen discrepancy illustrates that limitation. Current-weekend sprint results remain forbidden as model features.
 
+Independent spot check: Formula 1's [2024 China qualifying classification](https://www.formula1.com/en/results/2024/races/1233/china/qualifying) lists Verstappen first; the FIA's [sprint qualifying report](https://www.fia.com/news/f1-norris-takes-top-spot-sprint-qualifying-china-ahead-hamilton-and-alonso) records Norris first. This agrees with the endpoint comparison for 2024-05.
+
 Reproduce without network after the initial fetch:
 
 ```sh

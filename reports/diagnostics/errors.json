@@ -164,6 +164,152 @@
         "driver_brier_B1": 0.12229512000000002
       }
     ],
+    "circuit_id": [
+      {
+        "group": "albert_park",
+        "rows": 19,
+        "events": 1,
+        "points_rate": 0.47368421052631576,
+        "mean_probability": 0.5221157894736842,
+        "race_brier_B1": 0.1978526947368421,
+        "driver_brier_B1": 0.1978526947368421
+      },
+      {
+        "group": "baku",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4585227272727273,
+        "race_brier_B1": 0.22624351318181815,
+        "driver_brier_B1": 0.2262435131818182
+      },
+      {
+        "group": "catalunya",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.45883636363636365,
+        "race_brier_B1": 0.14913937363636365,
+        "driver_brier_B1": 0.14913937363636365
+      },
+      {
+        "group": "hungaroring",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4587090909090909,
+        "race_brier_B1": 0.09711305636363637,
+        "driver_brier_B1": 0.09711305636363637
+      },
+      {
+        "group": "madring",
+        "rows": 20,
+        "events": 1,
+        "points_rate": 0.5,
+        "mean_probability": 0.4991999999999999,
+        "race_brier_B1": 0.110097272,
+        "driver_brier_B1": 0.11009727200000001
+      },
+      {
+        "group": "miami",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4587454545454546,
+        "race_brier_B1": 0.11623142545454544,
+        "driver_brier_B1": 0.11623142545454547
+      },
+      {
+        "group": "monaco",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4587636363636363,
+        "race_brier_B1": 0.27151300636363634,
+        "driver_brier_B1": 0.27151300636363646
+      },
+      {
+        "group": "monza",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.45859545454545453,
+        "race_brier_B1": 0.1289391177272727,
+        "driver_brier_B1": 0.1289391177272727
+      },
+      {
+        "group": "red_bull_ring",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4588136363636364,
+        "race_brier_B1": 0.06632695227272728,
+        "driver_brier_B1": 0.06632695227272728
+      },
+      {
+        "group": "sepang",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.45854545454545453,
+        "race_brier_B1": 0.1321407109090909,
+        "driver_brier_B1": 0.13214071090909094
+      },
+      {
+        "group": "shanghai",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4588090909090909,
+        "race_brier_B1": 0.19278352818181818,
+        "driver_brier_B1": 0.1927835281818182
+      },
+      {
+        "group": "silverstone",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.45872727272727265,
+        "race_brier_B1": 0.18702644,
+        "driver_brier_B1": 0.18702644
+      },
+      {
+        "group": "spa",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4587409090909091,
+        "race_brier_B1": 0.11203458772727273,
+        "driver_brier_B1": 0.11203458772727273
+      },
+      {
+        "group": "suzuka",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4588045454545455,
+        "race_brier_B1": 0.12358261681818182,
+        "driver_brier_B1": 0.12358261681818182
+      },
+      {
+        "group": "villeneuve",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4586909090909091,
+        "race_brier_B1": 0.26049743181818186,
+        "driver_brier_B1": 0.2604974318181818
+      },
+      {
+        "group": "zandvoort",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4585545454545455,
+        "race_brier_B1": 0.14905745727272726,
+        "driver_brier_B1": 0.14905745727272726
+      }
+    ],
     "rookie": [
       {
         "group": "0",
