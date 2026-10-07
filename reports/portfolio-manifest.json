@@ -1,0 +1,17 @@
+{
+  "scope": "Integrity of reviewed frozen configs and historical evaluation artifacts; not proof of authorship.",
+  "files": {
+    "configs/final.json": "90bb838dfa711728858c6eb584b1e942581a3b9b0616df834bb25ce55fb6a01d",
+    "configs/v2.json": "23c58b9989a7f7cf03ab78f21e8c04aaf2bad64ea8b9aac1906b6f23c1d094a7",
+    "configs/pre-race.json": "67339455696a9db14283d4c96a3b455352fb56cfd9650fecff1782b61c2af917",
+    "reports/backtest-2026/predictions.csv": "08e48f362c4beab146b022fafcdbd8ca3805ee1228d786697accd3538d011b52",
+    "reports/backtest-2026/summary.json": "e5da1ecb94767a26e1169b6ae3957d6f8e9c6314f48bf155fd34029cfa84754a",
+    "reports/backtest-2026-v2/predictions.csv": "97033fb274fb9fe169cc520624cbf9691741ffa0c1f5971d83c7098a7f3e2215",
+    "reports/backtest-2026-v2/summary.json": "f8aeab84ae4ed732d65e1932ac19ee87da41e97babc06ea872f97241b72b1155",
+    "reports/backtest-2026-pre-race/predictions.csv": "2b93e386b5531712cc7db862134d6373dc07232553c0211c5cef17ac8ed903cc",
+    "reports/backtest-2026-pre-race/summary.json": "c20cdbc823ca141728630f5c984d18efbd451a0ddc916aee45476b776472ac73",
+    "reports/sprint-audit.json": "1cc512745796c391d15164b2296ce5277877877a8077011640a1eb222b33a189",
+    "reports/diagnostics/errors.json": "56dad46a8c18236b9485c66965e05e3f0eefa3f8d1e966ea2f980781c07b7c83",
+    "reports/diagnostics/ablations.json": "8a21260550c1f8ef0543f331e9ef7ac3c0f6889e6c19032ca6de22cd2c84d31f"
+  }
+}

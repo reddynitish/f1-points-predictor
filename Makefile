@@ -1,4 +1,4 @@
-.PHONY: install format lint typecheck test check collect-offline clean
+.PHONY: install format lint typecheck test check collect-offline clean dashboard demo verify-portfolio
 
 install:
 	uv sync --locked
@@ -19,6 +19,16 @@ test:
 
 # What CI runs. Fails on formatting drift instead of rewriting files.
 check: lint typecheck test
+
+# Offline commands: committed artifacts or a small invented fixture only.
+dashboard:
+	uv run python -m f1_points.dashboard
+
+demo:
+	uv run python -m f1_points.portfolio demo
+
+verify-portfolio:
+	uv run python -m f1_points.portfolio verify
 
 # Replays the cached snapshots; never downloads. Needs a prior online collect.
 collect-offline:

@@ -1,0 +1,50 @@
+name: Publish dashboard
+
+on:
+  push:
+    branches: [main]
+    paths: ['src/**', 'web/**', 'reports/**', 'predictions/**', 'configs/**', 'uv.lock', '.github/workflows/dashboard.yml']
+  workflow_run:
+    workflows: ['Live forecasts']
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: dashboard-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+          enable-cache: true
+      - name: Install locked environment
+        run: make install
+      - name: Verify frozen artifacts
+        run: make verify-portfolio
+      - name: Export saved forecasts
+        run: make dashboard
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs/dashboard
+      - name: Deploy dashboard
+        id: deployment
+        uses: actions/deploy-pages@v4

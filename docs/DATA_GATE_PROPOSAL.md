@@ -1,6 +1,6 @@
 # Milestone A data gate: design proposal
 
-**Date:** October 6, 2026. **Status:** recommended options A, qualifying-row roster and R3 adopted provisionally on October 6, 2026 so modelling could proceed (see reports/MODEL_CARD.md); the sprint-endpoint check is not done. Still awaiting Nitish's confirmation. Evidence comes from the cached Jolpica snapshots ([DATA_AUDIT.md](../reports/DATA_AUDIT.md)) and a small FastF1 live-timing probe ([scripts/probe_session_timing.py](../scripts/probe_session_timing.py)) run on 10 qualifying sessions.
+**Date:** October 6, 2026. **Status:** recommended options A, qualifying-row roster and R3 adopted provisionally on October 6, 2026 so modelling could proceed (see reports/MODEL_CARD.md); The October 7 portfolio-improvement authorization continues the recommended implementation defaults; it is not a claim that Nitish separately selected each alternative. The sprint-endpoint comparison is now recorded in [SPRINT_AUDIT.md](../reports/SPRINT_AUDIT.md). Evidence comes from the cached Jolpica snapshots ([DATA_AUDIT.md](../reports/DATA_AUDIT.md)) and a small FastF1 live-timing probe ([scripts/probe_session_timing.py](../scripts/probe_session_timing.py)) run on 10 qualifying sessions.
 
 ## 1. Actual qualifying end
 
@@ -47,19 +47,21 @@ All five repeated-rank events coincide with a post-session disqualification or a
 |---|---|---|
 | R1. Keep upstream rank, flag | as published | collisions break the "rank is a permutation" assumption; small |
 | R2. Post-decision classification | disqualified drivers moved to the back, others re-ranked | reflects the official order, but disqualifications can be decided hours after the flag, so this is arguably post-cutoff |
-| R3. Disqualified rank missing | `qualifying_rank = null` plus a `qualifying_disqualified` flag for the 4 DSQ rows; the deleted-lap case keeps its rank | honest about cutoff ambiguity; the rank-missing path already exists |
+| R3. Disqualified rank missing | `qualifying_rank = null` plus a `qualifying_disqualified` flag for the 5 DSQ rows; the deleted-lap case keeps its rank | honest about cutoff ambiguity; the rank-missing path already exists |
 
-**Recommendation: R3**, with the affected rows listed in a committed, sourced override file (`data_overrides/qualifying.csv`: event_id, driver_id, kind, source URL). Hand overrides are auditable and small (5 rows). Inferring disqualifications automatically from a ranking gap would be fragile.
+**Recommendation: R3**, with the affected rows listed in a committed, sourced override file (`overrides/qualifying.csv`: event_id, driver_id, kind, source URL). Hand overrides are auditable and small (5 rows). Inferring disqualifications automatically from a ranking gap would be fragile.
 
 ## 4. Sprint semantics
 
 Implemented: `weekend_format`, `qualifying_determines` and `sprint_scheduled_before_qualifying` from schedule keys. Still open: confirming that the qualifying endpoint never returns sprint-qualifying or shootout results. That check needs either Jolpica `sprint.json` (its `grid` column approximates sprint-qualifying order) or live-timing sessions. **Recommendation:** one Jolpica `sprint.json` fetch per season (2021–2025). Same cache and adapter, no new dependency. Then assert the two orders differ for at least the events where public sources report different pole-sitters.
 
-## Decisions needed
+## Implemented policy and remaining limitations
 
-1. Cutoff definition: A (interval, recommended), B (bounded observed end) or C.
-2. Roster: qualifying-row roster with race-only rows excluded (recommended), or add the `DriverList` source.
-3. Revisions: R1, R2 or R3 (recommended) with a sourced override file.
-4. Approve one extra Jolpica endpoint (`sprint.json`, 5 seasons) for the sprint check.
+1. Cutoff: A (interval) remains the implemented default; exact observed-end reconstruction is unavailable.
+2. Roster: qualifying-row-only remains the implemented default; race-only drivers are excluded and counted.
+3. Revisions: sourced rank-missing overrides remain the implemented default; they do not establish exact flag-time ranks.
+4. Sprint: the five-season endpoint comparison is complete, with 24 events recorded in the audit report.
 
-Once these are decided, the adapter changes are small and testable, and `cutoff_ready` can be computed instead of hard-coded `false`.
+Original coverage files retain their historical `cutoff_ready=false` audit state. They are not silently rewritten to claim exact timestamp readiness. The feature builder enforces the disclosed interval/history contract instead.
+
+October 7 implementation update: A, qualifying-row roster and R3 remain the implemented policies. The five-season sprint comparison is complete (24 events); see the audit report. Exact qualifying-end timestamps and historical revision-time reconstruction remain unavailable. This update does not re-open any spent evaluation period.

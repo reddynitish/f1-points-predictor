@@ -58,3 +58,10 @@ https://github.com/manasscodes/f1-race-intelligence had only README and gitignor
 - https://www.youtube.com/watch?v=eWJBRvveJBo — Bayesian-network podium project presentation; metadata inspected, code/evaluation not audited.
 - https://www.youtube.com/watch?v=3CC4N4z3GJc — StatQuest gradient-boost regression concepts.
 - https://www.youtube.com/watch?v=TiQEElXyY2w — Tom Shaw race replay project; presentation inspiration, not ML training.
+
+## Portfolio engineering references (October 7, 2026)
+
+- [Made With ML: testing](https://madewithml.com/courses/mlops/testing/) and [monitoring](https://madewithml.com/courses/mlops/monitoring/): code/data/model checks and operational state. Guidance only; no external implementation copied.
+- [GitHub Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages): official configure/upload/deploy action contracts; only the standalone export is published.
+- [scikit-learn ColumnTransformer](https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html): explicit feature-group selection for post-hoc development ablations.
+- Reddit portfolio discussions informed presentation priorities, not model methodology or hiring guarantees: [usable deliverables](https://www.reddit.com/r/datascience/comments/1ck3qwp/actual_product_vs_portfolio_of_demos/), [showcase narrative](https://www.reddit.com/r/datascience/comments/15j4r69/how_to_best_showcase_personal_data_project/) and [engineering/failure analysis](https://www.reddit.com/r/learnmachinelearning/comments/1vd19nz/what_ml_projects_actually_get_you_hired_in_2026/).

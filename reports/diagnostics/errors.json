@@ -1,0 +1,577 @@
+{
+  "scope": "Descriptive post-hoc analysis of spent 2026 rounds 1\u201316; no model selection or causal claims.",
+  "precision": "Committed prediction CSV probabilities are rounded to four decimals.",
+  "rows": 347,
+  "events": 16,
+  "race_brier_B1": 0.15753619902900717,
+  "uncertainty": {
+    "resamples": 1000,
+    "seed": 42,
+    "intervals": {
+      "p_B1": [
+        0.13153686596066838,
+        0.18646200394660584
+      ],
+      "p_M1": [
+        0.1328915392045118,
+        0.1934266360077415
+      ]
+    },
+    "difference_vs_p_B1": {
+      "p_M1": [
+        -0.0010490607022652513,
+        0.009437818444677037
+      ]
+    }
+  },
+  "segments": {
+    "qualifying_band": [
+      {
+        "group": "01\u201305",
+        "rows": 80,
+        "events": 16,
+        "points_rate": 0.8,
+        "mean_probability": 0.8722975,
+        "race_brier_B1": 0.1614526465,
+        "driver_brier_B1": 0.1614526465
+      },
+      {
+        "group": "06\u201310",
+        "rows": 80,
+        "events": 16,
+        "points_rate": 0.7125,
+        "mean_probability": 0.65333375,
+        "race_brier_B1": 0.199448595125,
+        "driver_brier_B1": 0.19944859512499996
+      },
+      {
+        "group": "11\u201315",
+        "rows": 80,
+        "events": 16,
+        "points_rate": 0.3625,
+        "mean_probability": 0.34492874999999995,
+        "race_brier_B1": 0.223404117625,
+        "driver_brier_B1": 0.22340411762499998
+      },
+      {
+        "group": "16+",
+        "rows": 107,
+        "events": 16,
+        "points_rate": 0.08411214953271028,
+        "mean_probability": 0.10785327102803738,
+        "race_brier_B1": 0.07135191978125,
+        "driver_brier_B1": 0.07378094102803738
+      }
+    ],
+    "constructor_id": [
+      {
+        "group": "alpine",
+        "rows": 32,
+        "events": 16,
+        "points_rate": 0.53125,
+        "mean_probability": 0.43885937500000005,
+        "race_brier_B1": 0.2423785309375,
+        "driver_brier_B1": 0.2423785309375
+      },
+      {
+        "group": "aston_martin",
+        "rows": 30,
+        "events": 16,
+        "points_rate": 0.1,
+        "mean_probability": 0.09703333333333332,
+        "race_brier_B1": 0.0729290296875,
+        "driver_brier_B1": 0.07653926333333334
+      },
+      {
+        "group": "audi",
+        "rows": 32,
+        "events": 16,
+        "points_rate": 0.1875,
+        "mean_probability": 0.383409375,
+        "race_brier_B1": 0.1734184078125,
+        "driver_brier_B1": 0.1734184078125
+      },
+      {
+        "group": "cadillac",
+        "rows": 32,
+        "events": 16,
+        "points_rate": 0.0,
+        "mean_probability": 0.07773125,
+        "race_brier_B1": 0.006534248124999999,
+        "driver_brier_B1": 0.006534248125
+      },
+      {
+        "group": "ferrari",
+        "rows": 32,
+        "events": 16,
+        "points_rate": 0.875,
+        "mean_probability": 0.82365625,
+        "race_brier_B1": 0.104385458125,
+        "driver_brier_B1": 0.104385458125
+      },
+      {
+        "group": "haas",
+        "rows": 31,
+        "events": 16,
+        "points_rate": 0.22580645161290322,
+        "mean_probability": 0.24881290322580643,
+        "race_brier_B1": 0.14457435437500002,
+        "driver_brier_B1": 0.14551777999999996
+      },
+      {
+        "group": "mclaren",
+        "rows": 32,
+        "events": 16,
+        "points_rate": 0.6875,
+        "mean_probability": 0.791828125,
+        "race_brier_B1": 0.2332850221875,
+        "driver_brier_B1": 0.2332850221875
+      },
+      {
+        "group": "mercedes",
+        "rows": 32,
+        "events": 16,
+        "points_rate": 0.8125,
+        "mean_probability": 0.8466437499999999,
+        "race_brier_B1": 0.167171670625,
+        "driver_brier_B1": 0.167171670625
+      },
+      {
+        "group": "rb",
+        "rows": 32,
+        "events": 16,
+        "points_rate": 0.65625,
+        "mean_probability": 0.445021875,
+        "race_brier_B1": 0.2823317190625,
+        "driver_brier_B1": 0.2823317190625
+      },
+      {
+        "group": "red_bull",
+        "rows": 31,
+        "events": 16,
+        "points_rate": 0.7419354838709677,
+        "mean_probability": 0.7124483870967742,
+        "race_brier_B1": 0.190914581875,
+        "driver_brier_B1": 0.17214354225806452
+      },
+      {
+        "group": "williams",
+        "rows": 31,
+        "events": 16,
+        "points_rate": 0.1935483870967742,
+        "mean_probability": 0.21439354838709676,
+        "race_brier_B1": 0.12016701750000003,
+        "driver_brier_B1": 0.12229512000000002
+      }
+    ],
+    "circuit_id": [
+      {
+        "group": "albert_park",
+        "rows": 19,
+        "events": 1,
+        "points_rate": 0.47368421052631576,
+        "mean_probability": 0.5221157894736842,
+        "race_brier_B1": 0.1978526947368421,
+        "driver_brier_B1": 0.1978526947368421
+      },
+      {
+        "group": "baku",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4585227272727273,
+        "race_brier_B1": 0.22624351318181815,
+        "driver_brier_B1": 0.2262435131818182
+      },
+      {
+        "group": "catalunya",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.45883636363636365,
+        "race_brier_B1": 0.14913937363636365,
+        "driver_brier_B1": 0.14913937363636365
+      },
+      {
+        "group": "hungaroring",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4587090909090909,
+        "race_brier_B1": 0.09711305636363637,
+        "driver_brier_B1": 0.09711305636363637
+      },
+      {
+        "group": "madring",
+        "rows": 20,
+        "events": 1,
+        "points_rate": 0.5,
+        "mean_probability": 0.4991999999999999,
+        "race_brier_B1": 0.110097272,
+        "driver_brier_B1": 0.11009727200000001
+      },
+      {
+        "group": "miami",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4587454545454546,
+        "race_brier_B1": 0.11623142545454544,
+        "driver_brier_B1": 0.11623142545454547
+      },
+      {
+        "group": "monaco",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4587636363636363,
+        "race_brier_B1": 0.27151300636363634,
+        "driver_brier_B1": 0.27151300636363646
+      },
+      {
+        "group": "monza",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.45859545454545453,
+        "race_brier_B1": 0.1289391177272727,
+        "driver_brier_B1": 0.1289391177272727
+      },
+      {
+        "group": "red_bull_ring",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4588136363636364,
+        "race_brier_B1": 0.06632695227272728,
+        "driver_brier_B1": 0.06632695227272728
+      },
+      {
+        "group": "sepang",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.45854545454545453,
+        "race_brier_B1": 0.1321407109090909,
+        "driver_brier_B1": 0.13214071090909094
+      },
+      {
+        "group": "shanghai",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4588090909090909,
+        "race_brier_B1": 0.19278352818181818,
+        "driver_brier_B1": 0.1927835281818182
+      },
+      {
+        "group": "silverstone",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.45872727272727265,
+        "race_brier_B1": 0.18702644,
+        "driver_brier_B1": 0.18702644
+      },
+      {
+        "group": "spa",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4587409090909091,
+        "race_brier_B1": 0.11203458772727273,
+        "driver_brier_B1": 0.11203458772727273
+      },
+      {
+        "group": "suzuka",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4588045454545455,
+        "race_brier_B1": 0.12358261681818182,
+        "driver_brier_B1": 0.12358261681818182
+      },
+      {
+        "group": "villeneuve",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4586909090909091,
+        "race_brier_B1": 0.26049743181818186,
+        "driver_brier_B1": 0.2604974318181818
+      },
+      {
+        "group": "zandvoort",
+        "rows": 22,
+        "events": 1,
+        "points_rate": 0.45454545454545453,
+        "mean_probability": 0.4585545454545455,
+        "race_brier_B1": 0.14905745727272726,
+        "driver_brier_B1": 0.14905745727272726
+      }
+    ],
+    "rookie": [
+      {
+        "group": "0",
+        "rows": 346,
+        "events": 16,
+        "points_rate": 0.45664739884393063,
+        "mean_probability": 0.4641257225433526,
+        "race_brier_B1": 0.15766094533017677,
+        "driver_brier_B1": 0.15744816089595376
+      },
+      {
+        "group": "1",
+        "rows": 1,
+        "events": 1,
+        "points_rate": 1.0,
+        "mean_probability": 0.5976,
+        "race_brier_B1": 0.16192575999999997,
+        "driver_brier_B1": 0.16192575999999997
+      }
+    ],
+    "qualifying_rank_missing": [
+      {
+        "group": "0",
+        "rows": 347,
+        "events": 16,
+        "points_rate": 0.45821325648414984,
+        "mean_probability": 0.4645103746397694,
+        "race_brier_B1": 0.15753619902900717,
+        "driver_brier_B1": 0.15746106463976944
+      }
+    ]
+  },
+  "worst_races": [
+    {
+      "event_id": "2026-06",
+      "rows": 22,
+      "brier_B1": 0.27151300636363634
+    },
+    {
+      "event_id": "2026-05",
+      "rows": 22,
+      "brier_B1": 0.26049743181818186
+    },
+    {
+      "event_id": "2026-15",
+      "rows": 22,
+      "brier_B1": 0.22624351318181815
+    },
+    {
+      "event_id": "2026-01",
+      "rows": 19,
+      "brier_B1": 0.1978526947368421
+    },
+    {
+      "event_id": "2026-02",
+      "rows": 22,
+      "brier_B1": 0.19278352818181818
+    }
+  ],
+  "confident_misses": [
+    {
+      "event_id": "2026-05",
+      "driver_id": "russell",
+      "qualifying_rank": 1.0,
+      "p_B1": 0.9251,
+      "p_M1": 0.9491,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-09",
+      "driver_id": "antonelli",
+      "qualifying_rank": 1.0,
+      "p_B1": 0.9237,
+      "p_M1": 0.9408,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-06",
+      "driver_id": "max_verstappen",
+      "qualifying_rank": 2.0,
+      "p_B1": 0.9033,
+      "p_M1": 0.8942,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-01",
+      "driver_id": "hadjar",
+      "qualifying_rank": 3.0,
+      "p_B1": 0.8791,
+      "p_M1": 0.8184,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-05",
+      "driver_id": "norris",
+      "qualifying_rank": 3.0,
+      "p_B1": 0.8791,
+      "p_M1": 0.8993,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-15",
+      "driver_id": "piastri",
+      "qualifying_rank": 3.0,
+      "p_B1": 0.8789,
+      "p_M1": 0.8917,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-07",
+      "driver_id": "antonelli",
+      "qualifying_rank": 3.0,
+      "p_B1": 0.8761,
+      "p_M1": 0.9318,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-05",
+      "driver_id": "piastri",
+      "qualifying_rank": 4.0,
+      "p_B1": 0.848,
+      "p_M1": 0.8854,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-14",
+      "driver_id": "hamilton",
+      "qualifying_rank": 4.0,
+      "p_B1": 0.8471,
+      "p_M1": 0.8848,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-13",
+      "driver_id": "leclerc",
+      "qualifying_rank": 4.0,
+      "p_B1": 0.8469,
+      "p_M1": 0.8933,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-06",
+      "driver_id": "leclerc",
+      "qualifying_rank": 4.0,
+      "p_B1": 0.8466,
+      "p_M1": 0.8992,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-10",
+      "driver_id": "russell",
+      "qualifying_rank": 4.0,
+      "p_B1": 0.8456,
+      "p_M1": 0.8657,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-01",
+      "driver_id": "piastri",
+      "qualifying_rank": 5.0,
+      "p_B1": 0.8106,
+      "p_M1": 0.838,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-15",
+      "driver_id": "norris",
+      "qualifying_rank": 5.0,
+      "p_B1": 0.8103,
+      "p_M1": 0.8828,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-02",
+      "driver_id": "piastri",
+      "qualifying_rank": 5.0,
+      "p_B1": 0.8101,
+      "p_M1": 0.8352,
+      "scored_points": 0
+    },
+    {
+      "event_id": "2026-11",
+      "driver_id": "piastri",
+      "qualifying_rank": 5.0,
+      "p_B1": 0.8088,
+      "p_M1": 0.8461,
+      "scored_points": 0
+    }
+  ],
+  "low_probability_scorers": [
+    {
+      "event_id": "2026-06",
+      "driver_id": "alonso",
+      "qualifying_rank": 21.0,
+      "p_B1": 0.059,
+      "p_M1": 0.1057,
+      "scored_points": 1
+    },
+    {
+      "event_id": "2026-09",
+      "driver_id": "colapinto",
+      "qualifying_rank": 19.0,
+      "p_B1": 0.0964,
+      "p_M1": 0.2101,
+      "scored_points": 1
+    },
+    {
+      "event_id": "2026-12",
+      "driver_id": "alonso",
+      "qualifying_rank": 18.0,
+      "p_B1": 0.1212,
+      "p_M1": 0.1038,
+      "scored_points": 1
+    },
+    {
+      "event_id": "2026-02",
+      "driver_id": "sainz",
+      "qualifying_rank": 17.0,
+      "p_B1": 0.1517,
+      "p_M1": 0.1502,
+      "scored_points": 1
+    },
+    {
+      "event_id": "2026-13",
+      "driver_id": "tsunoda",
+      "qualifying_rank": 17.0,
+      "p_B1": 0.1519,
+      "p_M1": 0.2188,
+      "scored_points": 1
+    },
+    {
+      "event_id": "2026-06",
+      "driver_id": "ocon",
+      "qualifying_rank": 17.0,
+      "p_B1": 0.1525,
+      "p_M1": 0.1583,
+      "scored_points": 1
+    },
+    {
+      "event_id": "2026-15",
+      "driver_id": "antonelli",
+      "qualifying_rank": 16.0,
+      "p_B1": 0.1882,
+      "p_M1": 0.5642,
+      "scored_points": 1
+    },
+    {
+      "event_id": "2026-05",
+      "driver_id": "bearman",
+      "qualifying_rank": 16.0,
+      "p_B1": 0.1883,
+      "p_M1": 0.2183,
+      "scored_points": 1
+    },
+    {
+      "event_id": "2026-16",
+      "driver_id": "arvid_lindblad",
+      "qualifying_rank": 16.0,
+      "p_B1": 0.189,
+      "p_M1": 0.2473,
+      "scored_points": 1
+    }
+  ],
+  "predictions_sha256": "08e48f362c4beab146b022fafcdbd8ca3805ee1228d786697accd3538d011b52"
+}

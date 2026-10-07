@@ -6,7 +6,11 @@
 
 **After Saturday qualifying, this project estimates each driver's chance of scoring points in Sunday's Grand Prix.** For example: *Verstappen 92%, Bottas 6%.*
 
-It's built like a production ML system. The data is cached and audited, a test suite checks for leakage, models are compared against honest baselines on races they've never seen, and every live forecast is saved before the race starts.
+It's a production-style educational ML system. The data is cached and audited, a test suite checks for leakage, models are compared against honest baselines on races they've never seen, and every live forecast is saved before the race starts.
+
+**[Explore the dashboard](https://reddynitish.github.io/f1-points-predictor/)** · [Engineering case study](docs/CASE_STUDY.md) · [Error analysis](reports/ERROR_ANALYSIS.md)
+
+![Dashboard preview](docs/img/dashboard-desktop.jpg)
 
 ## Results at a glance
 
@@ -72,6 +76,9 @@ flowchart LR
 ```sh
 make install                       # locked Python 3.12 environment via uv
 make check                         # format, lint, type-check and the test suite (same as CI)
+make verify-portfolio              # verify frozen hashes and saved metric agreement, offline
+make demo                          # invented fixture; outputs under /tmp/f1-points-demo
+make dashboard                     # standalone docs/dashboard/index.html; no runtime APIs
 
 uv run python -m f1_points.cli collect --start 2018 --end 2026   # download and audit data
 uv run python -m f1_points.cli build-dataset                     # leakage-safe features
@@ -79,19 +86,23 @@ uv run python -m f1_points.cli backtest --season 2026            # replay this s
 uv run python -m f1_points.cli predict --season 2026 --round 17  # after qualifying
 ```
 
+The demo, dashboard and verification commands work from a clean checkout after dependencies are installed. The collection/backtest commands require historical downloads. See the [case study](docs/CASE_STUDY.md) for measured demo runtime and memory scope.
+
 ## Live forecasts
 
 A [scheduled GitHub Action](.github/workflows/live.yml) runs every two hours from Friday to Monday (UTC):
 
-1. Once at least an hour has passed since the scheduled qualifying start, and qualifying results are published, it saves a forecast to `predictions/<race>-prospective.json` and commits it. The git timestamp proves it came before the race.
+1. Once at least an hour has passed since the scheduled qualifying start, and qualifying results are published, it saves a forecast to `predictions/<race>-prospective.json` and commits it. The archive’s first Git commit records local pre-start commitment; it does not independently prove remote publication time.
 2. After the race, it scores every saved forecast against the published results and updates the scorecard above.
-3. Saved forecasts are never overwritten. A forecast is only counted as live if it was made before the race started.
+3. Saved forecasts are never overwritten. A forecast is only counted as live if its timezone-aware completion timestamp and the first commit of its unchanged archive precede scheduled race start, and every archived driver has an outcome. Partial results wait.
+
+Operational status records collection failures, missed forecasts and partial outcomes. Full per-run diagnostics are retained as workflow artifacts for 30 days; the public snapshot changes only when meaningful state changes. See the [runbook](docs/LIVE_RUNBOOK.md).
 
 ## What didn't work (and why that's useful)
 
-The [pre-registered v2 test](reports/BACKTEST_2026.md#v2-test-practice-qualifying-gap-weather-and-grid-pre-registered) added practice pace, qualifying lap-time gap, qualifying weather and, for a separate pre-race model, the official starting grid, using gradient boosting. On 2026, **neither beat its simple baseline**: 0.164 vs 0.158 for qualifying-only, and 0.166 vs 0.167 for grid-only. Qualifying position already captures nearly everything these signals know, so the live forecast stays simple.
+The [pre-registered v2 test](reports/BACKTEST_2026.md#v2-test-practice-qualifying-gap-weather-and-grid-pre-registered) added practice pace, qualifying lap-time gap, qualifying weather and, for a separate pre-race model, the official starting grid, using gradient boosting. On 2026, **neither beat its simple baseline**: 0.163 vs 0.158 for qualifying-only, and 0.166 vs 0.167 for grid-only. These experiments did not demonstrate additional value beyond qualifying position; the live forecast stays simple.
 
-Next ideas: driver-specific race-pace estimates from long practice runs, tyre-strategy priors, and a joint model that respects the ten-points-places constraint.
+Next ideas: driver-specific race-pace estimates from long practice runs, tyre-strategy priors, and joint outcome modelling that allows unusual points awards. These are research hypotheses, not promised improvements.
 
 ## Project map
 
@@ -108,3 +119,7 @@ Next ideas: driver-specific race-pace estimates from long practice runs, tyre-st
 Data comes from the [Jolpica F1 API](https://github.com/jolpica/jolpica-f1) and F1's unofficial live-timing archive, accessed with [FastF1](https://github.com/theOehrly/Fast-F1) for schedule paths. Raw data is cached locally and never committed. Everything runs locally on a CPU, with no paid APIs.
 
 This is an independent educational project, not affiliated with Formula 1, the FIA, teams or drivers. The probabilities are not certainties, and nothing here is betting advice.
+
+## Development and attribution
+
+Developed with AI coding assistance, including Codex. The [case study](docs/CASE_STUDY.md#authorship-and-assistance) documents assistance and reviewable decisions; [related work](docs/RELATED_WORK.md) records sources. No external project’s metrics are claimed as ours.
