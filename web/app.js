@@ -14,6 +14,7 @@ function fillEvents(){
   const ids = live ? liveArchives.map(a => a.event_id) : [...new Set(data.replays.v1.predictions.map(p => p.event_id))];
   $('event').innerHTML = ids.map(id => `<option value="${esc(id)}">R${Number(id.split('-')[1])} · ${esc(pretty(catalog.get(id)?.circuit_id || id))}</option>`).join('');
   $('event').disabled = !ids.length;
+  if(!ids.length) $('selection-status').textContent='No archived live forecasts are available.';
   $('empty').hidden = !!ids.length; $('event-view').hidden = !ids.length;
   if(ids.length){$('event').value=ids[ids.length-1];renderEvent();}
 }
@@ -25,6 +26,8 @@ function renderEvent(){
   const outcomes = new Map((liveScore?.outcomes || []).map(r => [r.driver_id,r.scored_points]));
   const rows = live ? archive.predictions.map(r => ({...r,scored_points:outcomes.get(r.driver_id)})) : data.replays.v1.predictions.filter(p => p.event_id===id);
   const model = $('model').value, other = model === 'p_B1' ? 'p_M1' : 'p_B1';
+  $('other-model-heading').textContent=other==='p_M1'?'M1 comparison':'B1 primary';
+  $('selection-status').textContent=`${id}, ${model==='p_B1'?'B1 qualifying rank':'M1 driver and team history'}, ${rows.length} drivers, ${live?'prospective forecast':'retrospective replay'}.`;
   const score = live ? data.scorecard.races.find(r => r.event_id===id) : summary.per_race.find(r => r.event_id===id);
   const outcomeKnown = rows.every(r => r.scored_points===0 || r.scored_points===1);
   $('mode').textContent=live?'Prospective forecast':'Retrospective replay';
@@ -43,6 +46,14 @@ function renderEvent(){
   const cutoff=archive?.cutoff||'Interval: scheduled qualifying start to race start';
   const info = [['Mode', live?'Prospective forecast':'Retrospective replay'],['Primary model','B1 · qualifying-rank logistic'],['Generated',utc(archive?.created_at || summary.generated_at)],['Scheduled qualifying',utc(archive?.qualifying_scheduled_start_utc || event.qualifying_scheduled_start_utc)],['Scheduled race',utc(archive?.race_start_utc || event.race_start_utc)],['Cutoff policy',cutoff],['Archive committed',utc(archive?.archive_committed_at)],['Source commit',metadata.git_commit],['Config SHA-256',metadata.config_sha256]];
   $('provenance').innerHTML=`<dl>${info.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>${archive?.warnings?.length?`<ul>${archive.warnings.map(w=>`<li>${esc(w)}</li>`).join('')}</ul>`:'<p>Qualifying-row roster only; drivers absent from the qualifying endpoint are excluded. Historical classification revisions remain a limitation.</p>'}`;
+  const manifests=archive?.source_inventory?.manifests || data.source_manifests || [];
+  const sourceLinks=manifests.map(m=>{
+    const url=/^https:\/\//.test(m.source_url)?`<a href="${esc(m.source_url)}">${esc(m.source_url)}</a>`:esc(m.source_url);
+    return `<li>${url}<br>Retrieved ${esc(utc(m.fetched_at))}<br><code>${esc(m.sha256)}</code></li>`;
+  }).join('');
+  const commit=/^[0-9a-f]{40}$/.test(metadata.git_commit || '')?`<a href="${repo}/commit/${metadata.git_commit}">Inspect source commit ↗</a>`:'';
+  const inputHashes=archive?.input_fingerprints?`<pre>${esc(JSON.stringify(archive.input_fingerprints,null,2))}</pre>`:'';
+  $('provenance').innerHTML+=`${commit}<details><summary>Source retrieval and input identities</summary><p>Retrieved input hashes identify snapshots; they do not prove historical publication timing or enable full reproduction without the raw cache. Replay sources cover the collected season.</p><ul class="source-list">${sourceLinks}</ul>${inputHashes}<p>Dashboard input-file hashes:</p><pre>${esc(JSON.stringify(data.source_hashes,null,2))}</pre></details>`;
 }
 function renderEvaluation(){
   const v2=data.replays.v2.summary, pre=data.replays.pre_race.summary;

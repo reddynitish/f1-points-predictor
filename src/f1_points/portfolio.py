@@ -17,6 +17,19 @@ from .modeling import race_averaged_brier
 from .predict import predict_event
 
 CONFIGS = {'v1': 'final.json', 'v2': 'v2.json', 'pre_race': 'pre-race.json'}
+PINNED_REPORTS = (
+    'reports/experiments/development.json',
+    'reports/experiments/development-v2.json',
+    'reports/experiments/development-pre-race.json',
+    'reports/experiments/test_2025.json',
+    'reports/experiments/test_2025_predictions.csv',
+    'reports/coverage.json',
+    'reports/coverage-2026.json',
+    'reports/dataset.json',
+    'reports/dataset-v2.json',
+    'reports/session-coverage.json',
+    'reports/event-catalog.json',
+)
 
 
 def sha256(path):
@@ -26,6 +39,7 @@ def sha256(path):
 def write_manifest(root):
     root = Path(root)
     paths = [root / 'configs' / name for name in CONFIGS.values()]
+    paths += [root / path for path in PINNED_REPORTS]
     for directory in REPLAY_PATHS.values():
         paths += [root / 'reports' / directory / name for name in ('predictions.csv', 'summary.json')]
     paths += [
@@ -50,6 +64,7 @@ def verify_artifacts(root):
     root = Path(root)
     manifest = json.loads((root / 'reports/portfolio-manifest.json').read_text())
     required = {
+        *PINNED_REPORTS,
         *(f'configs/{name}' for name in CONFIGS.values()),
         *(
             f'reports/{directory}/{name}'
@@ -88,7 +103,8 @@ def verify_artifacts(root):
         'files': len(manifest['files']),
         'comparisons': checked,
         'brier_tolerance': 0.0001,
-        'note': 'Metrics recomputed from rounded saved predictions; no model fitting or new test evaluation.',
+        'note': '2025/development/source reports are hash-pinned only; 2026 Brier is recomputed from saved '
+        'predictions. No model fitting or new test evaluation. Hashes establish identity, not source authenticity.',
     }
 
 

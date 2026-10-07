@@ -1,5 +1,6 @@
 """Frozen-model prediction for one event at the qualifying cutoff, with refusal and archiving."""
 
+import hashlib
 import json
 from datetime import UTC, datetime
 from pathlib import Path
@@ -30,6 +31,34 @@ class InsufficientHistory(RuntimeError):
 
 class QualifyingUnavailable(RuntimeError):
     """Raised instead of guessing when the target event has no usable qualifying classification."""
+
+
+def source_inventory(base_dir, live_dir, season):
+    """Retain input identities, not raw rows or a promise of source availability."""
+    manifests, normalized = {}, {}
+    for prefix, directory in [('history', base_dir), ('target_season', live_dir)]:
+        if directory is None:
+            continue
+        for path in sorted(Path(directory).glob('*.json')):
+            record = json.loads(path.read_text())
+            year = int(record['event']['season'])
+            if not (year < season if prefix == 'history' else year == season):
+                continue
+            normalized[f'{prefix}/{path.name}'] = hashlib.sha256(path.read_bytes()).hexdigest()
+            for manifest in record.get('manifests', []):
+                manifests[(manifest['source_url'], manifest['sha256'])] = manifest
+    return {
+        'manifests': [manifests[key] for key in sorted(manifests)],
+        'normalized_sha256': normalized,
+        'scope': 'Collected input-file identities; actual fitted rows are separately fingerprinted. '
+        'Raw snapshots are not retained publicly; these hashes do not enable full reproduction alone.',
+    }
+
+
+def row_fingerprint(frame):
+    """Canonical keyed model rows, float JSON precision 15; insensitive to input order."""
+    payload = frame.sort_values(KEY)[sorted(frame.columns)].to_json(orient='records', double_precision=15)
+    return hashlib.sha256(payload.encode()).hexdigest()
 
 
 def load_combined(base_dir, live_dir, season):
@@ -104,6 +133,20 @@ def predict_event(events, entries, labels, event_id, config, *, now=None, overri
         'training_rows': len(train),
         'training_last_event': last_train,
         'feature_columns': config['feature_columns'],
+        'input_fingerprints': {
+            'training_sha256': row_fingerprint(train[[*KEY, *config['feature_columns'], 'scored_points']]),
+            'target_sha256': row_fingerprint(target[[*KEY, *config['feature_columns']]]),
+            'overrides_sha256': hashlib.sha256(Path(overrides).read_bytes()).hexdigest() if overrides else None,
+            'scope': 'Actual training features/labels and target features; target outcomes excluded. '
+            'Canonical sorted JSON with float precision 15; identity evidence, not independent replication.',
+        },
+        'coverage': {
+            'input_roster_rows': int((entries['event_id'] == event_id).sum()),
+            'predicted_drivers': len(target),
+            'excluded_without_qualifying_row': int((entries['event_id'] == event_id).sum()) - len(target),
+            'rank_missing_drivers': int(target['qualifying_rank_missing'].sum()),
+            'policy': 'Qualifying-row roster only; no independent full entered-roster completeness claim.',
+        },
         'warnings': warnings,
         'note': 'Qualifying rank is not the final starting grid. Probabilities are independent per driver and '
         'need not sum to ten.',

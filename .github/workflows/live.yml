@@ -34,7 +34,11 @@ jobs:
           path: data/snapshots
           key: jolpica-2018-2025-v1
       - name: Build 2018-2025 history
+        id: history
         run: uv run python -m f1_points.cli collect --start 2018 --end 2025 --report data/history-coverage.json
+      - name: Record historical bootstrap failure
+        if: failure() && steps.history.outcome == 'failure'
+        run: uv run python -m f1_points.cli live-failure --stage history_bootstrap --report data/history-coverage.json
       - name: Forecast and score
         run: uv run python -m f1_points.cli live
       - name: Commit new forecasts and scores
@@ -57,6 +61,7 @@ jobs:
           name: live-run-${{ github.run_id }}
           path: |
             data/live/*/health.json
+            data/history-coverage.json
             reports/live-2026/health.json
           retention-days: 30
           if-no-files-found: warn

@@ -23,3 +23,13 @@ The `Publish dashboard` workflow deploys only the standalone HTML export through
 No automatic model retraining or rollback threshold is introduced. A few bad races are not sufficient evidence for a new model. Operational data failures should halt publication; predictive degradation needs prospective aggregate evidence and a new untouched evaluation period.
 
 Forecast completion is checked after fitting, immediately before archiving. Slow runs crossing scheduled race start do not create a live forecast. Scoring and dashboard export use full Git history to validate the first unchanged archive commit. Git commit time is local-history evidence, not an independently trusted timestamp of remote receipt; the site claims timely archiving/commit, not independently verified public receipt. An unverified archive remains visible as an operational issue and cannot count as live.
+
+## Council hardening, October 7
+
+Collection validates advertised row counts on every page (driver rows for qualifying/results/sprint endpoints), not just empty pages. A nonempty truncated page or changing pagination total fails collection instead of freezing an incomplete forecast. This does not establish a complete entered roster: qualifying-only coverage remains the policy.
+
+New archives include canonical fingerprints of actual training features/labels and target features, the override-file hash, qualifying coverage counts, and a deduplicated source manifest inventory (URL, retrieval time, payload hash and adapter/schema versions). Raw snapshots remain local; these identities support audits, not full reconstruction without retained source data. Older archives are not backfilled with invented metadata.
+
+If the historical bootstrap step fails before `live` runs, the workflow calls `live-failure --stage history_bootstrap` to replace public health with the failed stage and available coverage errors. Historical coverage reports are retained with health artifacts for 30 days. Environment setup failures or a cancelled/timed-out runner can still prevent this reporting step; inspect the workflow run itself.
+
+Health is collected before the workflow commits a new archive. `unverified_archive_commit` can therefore remain until the next successful run observes that commit; it is not itself proof of a late forecast. Never edit a forecast to repair its provenance.

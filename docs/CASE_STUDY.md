@@ -47,3 +47,11 @@ After qualifying, the live workflow should commit a forecast before the race, re
 This project was developed with AI coding assistance, including Codex-assisted implementation, tests, documentation and portfolio UI. Data libraries and methodological references are attributed in `docs/RELATED_WORK.md`; no external predictor's code or reported performance is presented as this project's own. The repository demonstrates inspectable engineering work, but a commit history alone does not establish unaided authorship or personal understanding.
 
 For interviews, review the actual code and be prepared to explain the leakage mutation test, whole-event split, probability calibration, baseline decision and partial-result scoring fix. Describe your own contribution and learning accurately; this document does not invent them. Resume wording remains a separate review decision.
+
+## Council review, October 7
+
+Three independent agent reviewers examined ML methodology, engineering, and product/hiring presentation, then challenged each other's findings. The [review record](../reports/COUNCIL_REVIEW_2026-10-07.md) preserves disagreements and verified fixes. These reviewers use the same model family and are not independent human validators.
+
+The review corrected an asymmetric comparison label: the original 2025 walk-forward diagnostic refits M1 against a fixed-season B1. It also distinguished 2026's uniform ten-place heuristic (10 divided by covered drivers) from the original prevalence B0. Original configurations and evaluation outputs remain unchanged; no spent test was rerun.
+
+Integrity coverage now pins development, sealed-2025 and source coverage artifacts as well as the 2026 comparisons. Live input identities and workflow-stage failure reporting improve auditability; neither hashes nor Git dates establish independent source authenticity or historical publication timing.

@@ -58,6 +58,16 @@ def load_dashboard_data(root):
         archive['predictions'] = records(frame)
         archives.append(archive)
         hashes[str(path.relative_to(root))] = hashlib.sha256(path.read_bytes()).hexdigest()
+    for name in (
+        'event-catalog.json',
+        'live-2026/scorecard.json',
+        'live-2026/health.json',
+        'diagnostics/errors.json',
+        'coverage-2026.json',
+    ):
+        path = reports / name
+        if path.exists():
+            hashes[str(path.relative_to(root))] = hashlib.sha256(path.read_bytes()).hexdigest()
     return {
         'schema_version': 1,
         'replays': replays,
@@ -66,6 +76,7 @@ def load_dashboard_data(root):
         'scorecard': read_json(reports / 'live-2026/scorecard.json', {'races': []}),
         'health': read_json(reports / 'live-2026/health.json'),
         'diagnostics': read_json(reports / 'diagnostics/errors.json'),
+        'source_manifests': read_json(reports / 'coverage-2026.json', {}).get('manifests', []),
         'source_hashes': hashes,
         'built_at': max(
             [r['summary']['generated_at'] for r in replays.values()]

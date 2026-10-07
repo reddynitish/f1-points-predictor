@@ -6,22 +6,22 @@
 
 **After Saturday qualifying, this project estimates each driver's chance of scoring points in Sunday's Grand Prix.** For example: *Verstappen 92%, Bottas 6%.*
 
-It's a production-style educational ML system. The data is cached and audited, a test suite checks for leakage, models are compared against honest baselines on races they've never seen, and every live forecast is saved before the race starts.
+It's a production-style educational ML system. The data is cached and audited, a test suite checks for leakage, models are compared against baselines on races they did not train on, and automation is configured to archive future live forecasts before race start.
 
-**[Explore the dashboard](https://reddynitish.github.io/f1-points-predictor/)** · [Engineering case study](docs/CASE_STUDY.md) · [Error analysis](reports/ERROR_ANALYSIS.md)
+**[Explore the dashboard](https://reddynitish.github.io/f1-points-predictor/)** · [Engineering case study](docs/CASE_STUDY.md) · [Error analysis](reports/ERROR_ANALYSIS.md) · [Council review](reports/COUNCIL_REVIEW_2026-10-07.md)
 
 ![Dashboard preview](docs/img/dashboard-desktop.jpg)
 
 ## Results at a glance
 
-2026 season, rounds 1–16, from a **walk-forward backtest**. Each race was predicted using only information available when qualifying ended, with the model refit on earlier races only.
+2026 season, rounds 1–16, from a **walk-forward backtest**. Both models were refit on earlier races only. Qualifying inputs use retrieved classifications with a scheduled-session interval cutoff; exact historical publication and revision times are not reconstructed. This is a retrospective approximation of the intended qualifying-end forecast.
 
 | | |
 |---|---|
 | Correct points scorers among the model's top-10 picks | **7.6 / 10 per race** (best: 10/10, worst: 6/10) |
 | Drivers given an 80%+ chance who actually scored | **64 of 80 (80%)** |
-| Error vs. knowing nothing (race-averaged Brier score) | **0.158 vs 0.248, 37% lower** |
-| Did driver/team form, practice, weather or grid beat qualifying position alone? | **No.** Every richer model tied or lost (details below) |
+| Error vs. a uniform ten-place prior (race-averaged Brier score) | **0.158 vs 0.248, 37% lower** |
+| Did driver/team form, practice, weather or grid beat qualifying position alone? | **No improvement demonstrated.** Differences were inconclusive (details below) |
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/img/backtest-hits-dark.svg">
@@ -30,8 +30,10 @@ It's a production-style educational ML system. The data is cached and audited, a
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/img/calibration-dark.svg">
-  <img alt="Calibration chart: predicted chance of points closely tracks how often drivers actually scored" src="docs/img/calibration-light.svg" width="360">
+  <img alt="Calibration chart: predicted chance of points versus observed scoring rate; small dependent samples limit conclusions" src="docs/img/calibration-light.svg" width="360">
 </picture>
+
+> The 2026 uniform prior assigns 10/N to every scored covered driver, rather than estimating training prevalence; N changes with coverage. The 37% comparison is specific to this prior.
 
 > These numbers come from a retrospective backtest run in October 2026, not from forecasts published before each race. Live, archived forecasts will start with the 2026 Singapore Grand Prix (round 17). Full write-up: [2026 backtest](reports/BACKTEST_2026.md) · [model card](reports/MODEL_CARD.md).
 
@@ -50,7 +52,7 @@ flowchart LR
     A[Jolpica F1 results<br/>2018–2026] --> C[Hash-checked<br/>snapshot cache]
     B[F1 live-timing archive<br/>practice laps, weather] --> C
     C --> D[Normalize and audit<br/>coverage report]
-    D --> E[Features built only from<br/>races BEFORE the target]
+    D --> E[Target qualifying + history<br/>from BEFORE the target]
     E --> F[Chronological model<br/>selection 2021–2024]
     F --> G[Frozen config<br/>committed to git]
     G --> H[Sealed 2025 test<br/>run once]
@@ -58,10 +60,10 @@ flowchart LR
     G --> J[Live forecast<br/>after qualifying]
 ```
 
-1. **Collect.** Every race result and qualifying session since 2018 comes from free public sources. Every download is stored with its source URL, retrieval time and SHA-256 hash, so the whole dataset can be rebuilt offline.
-2. **Build features without cheating.** For each driver it uses qualifying position, form over their last 5 races, their team's form over its last 5 races, and the track. A feature for a race only ever uses races that happened *before* it, and tests prove that changing a race's result can't change that race's inputs.
+1. **Collect.** Every race result and qualifying session since 2018 comes from free public sources. Every download is stored with its source URL, retrieval time and SHA-256 hash, so downloaded inputs can be replayed offline while the local cache is retained. Raw snapshots are absent from a clean clone.
+2. **Build features without cheating.** The primary B1 forecast uses qualifying rank only. The M1 comparison adds driver form over 5 prior appearances, team form over 5 whole prior events, and track identity. Historical features use earlier races; mutation tests check that changing target outcomes leaves target features unchanged.
 3. **Pick a model fairly.** Baselines (a constant guess, and qualifying position alone) are compared with logistic regression and gradient boosting on whole seasons the model never trained on. The winner is frozen and committed *before* the test season is opened.
-4. **Test once, report honestly.** The 2025 season was scored once. The fuller model didn't beat the qualifying-only baseline, so the baseline is the primary forecast. That finding is the result, not something hidden.
+4. **Test once, report honestly.** The 2025 season was scored once. The fuller model didn't beat the qualifying-only baseline, so the baseline is the primary forecast. The separate 2025 walk-forward diagnostic refits M1 but compares it against fixed-season B1; it is not a matched walk-forward comparison.
 
 ### Guardrails against leakage
 
