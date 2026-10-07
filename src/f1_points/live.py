@@ -2,7 +2,8 @@
 
 import json
 import re
-from datetime import datetime, timedelta
+import subprocess
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 import pandas as pd
@@ -27,7 +28,7 @@ def should_forecast(event, has_labels, has_archive, now):
     return settled and now < race_start
 
 
-def forecast_due(events, entries, labels, config, archive_dir, config_path, season, now, overrides=None):
+def forecast_due(events, entries, labels, config, archive_dir, config_path, season, now, overrides=None, *, clock=None):
     """Archive a prospective forecast for every due event; returns written paths."""
     written = []
     labeled = set(labels['event_id'])
@@ -41,18 +42,47 @@ def forecast_due(events, entries, labels, config, archive_dir, config_path, seas
             )
         except QualifyingUnavailable:
             continue  # qualifying not published yet; the next scheduled run will retry
-        if metadata['mode'] == 'prospective':
+        completed_at = clock() if clock else datetime.now(UTC)
+        if metadata['mode'] == 'prospective' and completed_at < datetime.fromisoformat(event['race_start_utc']):
+            metadata['created_at'] = completed_at.isoformat()
             written.append(archive(predictions, metadata, config_path, archive_dir))
     return written
 
 
-def score_archives(archive_dir, labels):
+def archive_commit_time(path):
+    """First commit adding this exact archive. Git time proves a local commit, not independent remote receipt."""
+    path = Path(path).resolve()
+    try:
+        root = subprocess.check_output(
+            ['git', '-C', str(path.parent), 'rev-parse', '--show-toplevel'], stderr=subprocess.DEVNULL, text=True
+        ).strip()
+        relative = str(path.relative_to(root))
+        commits = subprocess.check_output(
+            ['git', '-C', root, 'log', '--diff-filter=A', '--format=%H %cI', '--', relative],
+            stderr=subprocess.DEVNULL,
+            text=True,
+        ).splitlines()
+        if not commits:
+            return None
+        commit, stamp = commits[-1].split(' ', 1)
+        original = subprocess.check_output(
+            ['git', '-C', root, 'show', f'{commit}:{relative}'], stderr=subprocess.DEVNULL
+        )
+        return datetime.fromisoformat(stamp).isoformat() if original == path.read_bytes() else None
+    except (subprocess.CalledProcessError, ValueError, OSError):
+        return None
+
+
+def score_archives(archive_dir, labels, *, publication_lookup=archive_commit_time):
     """Grade every prospective forecast whose race result is published. Recomputed from scratch each run."""
     outcome = labels.assign(scored_points=(labels['race_points'] > 0).astype(int))[[*KEY, 'scored_points']]
     races = []
     for path in sorted(Path(archive_dir).glob('*-prospective.json')):
         record = json.loads(path.read_text())
         if not valid_prospective(record):
+            continue
+        committed_at = publication_lookup(path)
+        if not pre_start_commit(record, committed_at):
             continue
         predictions = pd.DataFrame(record['predictions'])
         frame = predictions.merge(outcome, on=KEY, how='left', validate='one_to_one')
@@ -64,6 +94,7 @@ def score_archives(archive_dir, labels):
                 'event_id': record['event_id'],
                 'circuit_id': record['circuit_id'],
                 'forecast_created_at': record['created_at'],
+                'archive_committed_at': committed_at,
                 'git_commit': record.get('git_commit'),
                 'drivers': len(frame),
                 'brier_B1': float(((frame['p_B1'] - frame['scored_points']) ** 2).mean()),
@@ -76,6 +107,16 @@ def score_archives(archive_dir, labels):
             }
         )
     return races
+
+
+def pre_start_commit(record, stamp):
+    if not stamp or not valid_prospective(record):
+        return False
+    committed = datetime.fromisoformat(stamp)
+    # Git commit dates have second precision; forecast completion records may have microseconds.
+    return committed.tzinfo is not None and datetime.fromisoformat(record['created_at']).replace(
+        microsecond=0
+    ) <= committed < datetime.fromisoformat(record['race_start_utc'])
 
 
 def valid_prospective(record):
@@ -115,6 +156,8 @@ def operational_health(events, entries, labels, archive_dir, season, now, first_
             archived_count = len(drivers)
             if not valid_prospective(record):
                 state = 'invalid_archive'
+            elif not pre_start_commit(record, archive_commit_time(path)):
+                state = 'unverified_archive_commit'
             elif drivers and drivers <= outcome:
                 state = 'scored'
             else:

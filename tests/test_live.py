@@ -5,7 +5,21 @@ from pathlib import Path
 import pytest
 from test_leakage import fixture
 
-from f1_points.live import forecast_due, score_archives, scorecard_markdown, should_forecast, update_readme
+from f1_points.live import forecast_due as real_forecast_due
+from f1_points.live import score_archives as real_score_archives
+from f1_points.live import scorecard_markdown, should_forecast, update_readme
+
+
+# Synthetic events run under a simulated clock; no real publication claim is made by these unit tests.
+def forecast_due(*args, **kwargs):
+    kwargs.setdefault('clock', lambda: args[7])
+    return real_forecast_due(*args, **kwargs)
+
+
+def score_archives(*args, **kwargs):
+    kwargs.setdefault('publication_lookup', lambda _: '2024-03-09T18:01:00+00:00')
+    return real_score_archives(*args, **kwargs)
+
 
 CONFIG_PATH = Path(__file__).parents[1] / 'configs' / 'final.json'
 CONFIG = json.loads(CONFIG_PATH.read_text())
@@ -96,3 +110,62 @@ def test_live_pipeline_error_is_recorded_and_returns_failure(tmp_path, monkeypat
     health = json.loads((args.scorecard / 'health.json').read_text())
     assert health['status'] == 'pipeline_failed'
     assert health['failures'][0]['error'] == 'upstream schema changed'
+
+
+def test_fit_crossing_race_start_never_archives_as_live(tmp_path):
+    events, entries, labels = fixture()
+    pending = labels[labels['event_id'] != '2024-03']
+    started = datetime(2024, 3, 10, 14, 59, tzinfo=UTC)
+    finished = datetime(2024, 3, 10, 15, 1, tzinfo=UTC)
+    written = forecast_due(
+        events, entries, pending, CONFIG, tmp_path, CONFIG_PATH, 2024, started, clock=lambda: finished
+    )
+    assert written == []
+    assert not list(tmp_path.glob('*.json'))
+
+
+def test_archive_needs_a_pre_start_commit_to_enter_live_scorecard(tmp_path):
+    events, entries, labels = fixture()
+    pending = labels[labels['event_id'] != '2024-03']
+    now = datetime(2024, 3, 9, 18, tzinfo=UTC)
+    forecast_due(events, entries, pending, CONFIG, tmp_path, CONFIG_PATH, 2024, now)
+    assert score_archives(tmp_path, labels, publication_lookup=lambda _: None) == []
+    assert score_archives(tmp_path, labels, publication_lookup=lambda _: EVENT['race_start_utc']) == []
+
+
+def test_first_commit_evidence_requires_unchanged_content(tmp_path):
+    import os
+    import subprocess
+
+    from f1_points.live import archive_commit_time
+
+    subprocess.run(['git', 'init', str(tmp_path)], check=True, capture_output=True)
+    path = tmp_path / 'forecast.json'
+    path.write_text('{"invented": true}\n')
+    subprocess.run(['git', '-C', str(tmp_path), 'add', 'forecast.json'], check=True)
+    subprocess.run(
+        [
+            'git',
+            '-C',
+            str(tmp_path),
+            '-c',
+            'user.name=Fixture',
+            '-c',
+            'user.email=fixture@example.invalid',
+            '-c',
+            'commit.gpgsign=false',
+            'commit',
+            '-m',
+            'synthetic test archive',
+        ],
+        env={
+            **os.environ,
+            'GIT_AUTHOR_DATE': '2024-03-09T18:01:00+00:00',
+            'GIT_COMMITTER_DATE': '2024-03-09T18:01:00+00:00',
+        },
+        check=True,
+        capture_output=True,
+    )
+    assert archive_commit_time(path) == '2024-03-09T18:01:00+00:00'
+    path.write_text('{"invented": false}\n')
+    assert archive_commit_time(path) is None

@@ -92,9 +92,9 @@ The demo, dashboard and verification commands work from a clean checkout after d
 
 A [scheduled GitHub Action](.github/workflows/live.yml) runs every two hours from Friday to Monday (UTC):
 
-1. Once at least an hour has passed since the scheduled qualifying start, and qualifying results are published, it saves a forecast to `predictions/<race>-prospective.json` and commits it. The git timestamp proves it came before the race.
+1. Once at least an hour has passed since the scheduled qualifying start, and qualifying results are published, it saves a forecast to `predictions/<race>-prospective.json` and commits it. The archive’s first Git commit records local pre-start commitment; it does not independently prove remote publication time.
 2. After the race, it scores every saved forecast against the published results and updates the scorecard above.
-3. Saved forecasts are never overwritten. A forecast is only counted as live if its timezone-aware creation timestamp precedes scheduled race start and every archived driver has an outcome. Partial results wait.
+3. Saved forecasts are never overwritten. A forecast is only counted as live if its timezone-aware completion timestamp and the first commit of its unchanged archive precede scheduled race start, and every archived driver has an outcome. Partial results wait.
 
 Operational status records collection failures, missed forecasts and partial outcomes. Full per-run diagnostics are retained as workflow artifacts for 30 days; the public snapshot changes only when meaningful state changes. See the [runbook](docs/LIVE_RUNBOOK.md).
 

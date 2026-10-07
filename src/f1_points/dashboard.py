@@ -8,7 +8,7 @@ from pathlib import Path
 import pandas as pd
 
 from .features import KEY
-from .live import valid_prospective
+from .live import archive_commit_time, pre_start_commit, valid_prospective
 
 REPLAY_PATHS = {'v1': 'backtest-2026', 'v2': 'backtest-2026-v2', 'pre_race': 'backtest-2026-pre-race'}
 
@@ -53,6 +53,8 @@ def load_dashboard_data(root):
         validate_predictions(frame, outcomes=False)
         if archive['mode'] == 'prospective' and not valid_prospective(archive):
             raise ValueError(f'Invalid prospective timestamp: {path.name}')
+        archive['archive_committed_at'] = archive_commit_time(path)
+        archive['pre_start_commit_verified'] = pre_start_commit(archive, archive['archive_committed_at'])
         archive['predictions'] = records(frame)
         archives.append(archive)
         hashes[str(path.relative_to(root))] = hashlib.sha256(path.read_bytes()).hexdigest()

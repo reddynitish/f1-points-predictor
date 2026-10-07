@@ -5,7 +5,7 @@ The workflow runs every two hours Friday–Monday UTC. GitHub scheduled runs can
 1. Fetch the target season into a new immutable cache and audit it. Collection failures return nonzero and create a health report.
 2. Once the scheduled qualifying-start buffer has elapsed, require an available qualifying classification and a future scheduled race start. A buffer does not prove that a rescheduled session has ended.
 3. Archive each forecast once. Future runs never replace it. Qualifying-row-only coverage is displayed; exact independent roster completeness is not claimed.
-4. Join outcomes to every archived driver. Partial results are a waiting state. Only validated prospective timestamps and complete archived-driver outcomes enter the scorecard.
+4. Join outcomes to every archived driver. Partial results are a waiting state. Only validated completion timestamps, an unchanged archive first committed before scheduled race start, and complete archived-driver outcomes enter the scorecard.
 5. Persist public health on meaningful state changes. Save the complete per-run health file as a 30-day workflow artifact. `checked_at` in the public file is the last recorded state-change check, not a continuously refreshed heartbeat.
 
 ## Investigate a problem
@@ -21,3 +21,5 @@ The workflow runs every two hours Friday–Monday UTC. GitHub scheduled runs can
 The `Publish dashboard` workflow deploys only the standalone HTML export through GitHub Pages. It runs on main changes and after the live workflow completes, including a failed live run so a persisted failure state can be shown. It verifies the historical artifact manifest before publishing and uploads no raw caches. GitHub Pages must be configured for Actions; no paid hosting or billing changes are required for this public repository.
 
 No automatic model retraining or rollback threshold is introduced. A few bad races are not sufficient evidence for a new model. Operational data failures should halt publication; predictive degradation needs prospective aggregate evidence and a new untouched evaluation period.
+
+Forecast completion is checked after fitting, immediately before archiving. Slow runs crossing scheduled race start do not create a live forecast. Scoring and dashboard export use full Git history to validate the first unchanged archive commit. Git commit time is local-history evidence, not an independently trusted timestamp of remote receipt; the site claims timely archiving/commit, not independently verified public receipt. An unverified archive remains visible as an operational issue and cannot count as live.

@@ -50,7 +50,7 @@ def load_combined(base_dir, live_dir, season):
 
 
 def predict_event(events, entries, labels, event_id, config, *, now=None, overrides=None, sessions=None):
-    now = now or datetime.now(UTC)
+    simulated_now = now
     if overrides:
         entries = apply_qualifying_overrides(entries, overrides)
     event = events.set_index('event_id').loc[event_id]
@@ -69,6 +69,9 @@ def predict_event(events, entries, labels, event_id, config, *, now=None, overri
         raise InsufficientHistory(f'No earlier labeled races before {event_id}')
     target['p_B1'], _ = fit_predict(BASELINES[config.get('baseline', 'rank_logistic')], train, target, numeric)
     target['p_M1'], _ = fit_predict(frozen_candidate(config), train, target, numeric)
+
+    # Runtime forecasts record completed fitting, not the start of collection/training.
+    now = simulated_now or datetime.now(UTC)
 
     has_labels = bool((labels['event_id'] == event_id).any())
     race_start = event.get('race_start_utc')

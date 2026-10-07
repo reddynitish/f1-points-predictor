@@ -35,3 +35,11 @@ def test_demo_is_deterministic_offline_and_separate_from_real_forecasts(tmp_path
     saved = json.loads((tmp_path / 'one/predictions.json').read_text())
     assert len(saved['predictions']) == 4
     assert saved['synthetic'] is True
+
+
+def test_verification_and_demo_work_when_resource_is_unavailable(tmp_path, monkeypatch):
+    import sys
+
+    monkeypatch.setitem(sys.modules, 'resource', None)
+    assert verify_artifacts(ROOT)['status'] == 'verified'
+    assert run_demo(ROOT, tmp_path)['process_peak_rss_mib'] is None

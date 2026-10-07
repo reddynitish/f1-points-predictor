@@ -4,7 +4,6 @@ import argparse
 import hashlib
 import json
 import platform
-import resource
 import sys
 import time
 from datetime import UTC, datetime
@@ -110,12 +109,17 @@ def run_demo(root, output):
     )
     validate_predictions(predictions, outcomes=False)
     prediction_json = predictions.round(8).to_json(orient='records')
+    try:
+        import resource
+
+        peak_rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / (1024**2 if sys.platform == 'darwin' else 1024)
+    except ImportError:
+        peak_rss = None
     measured = {
         'synthetic': True,
         'scope': 'Feature construction and two frozen-model CPU fits on invented fixture; not a production benchmark.',
         'duration_seconds': round(time.perf_counter() - started, 6),
-        'process_peak_rss_mib': resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-        / (1024**2 if sys.platform == 'darwin' else 1024),
+        'process_peak_rss_mib': peak_rss,
         'memory_scope': 'Process lifetime maximum RSS, including Python/library imports; not incremental model memory.',
         'python': platform.python_version(),
         'platform': platform.platform(),

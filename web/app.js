@@ -7,7 +7,7 @@ const percent = p => `${(100 * p).toFixed(1)}%`;
 const repo = 'https://github.com/reddynitish/f1-points-predictor';
 const catalog = new Map(data.catalog.events.map(e => [e.event_id,e]));
 const summary = data.replays.v1.summary;
-const liveArchives = data.archives.filter(a => a.mode === 'prospective');
+const liveArchives = data.archives.filter(a => a.mode === 'prospective' && a.pre_start_commit_verified);
 const utc = value => value ? `${value.replace('T',' ').slice(0,16)} UTC` : 'Unavailable';
 function fillEvents(){
   const live = $('source').value === 'live';
@@ -41,7 +41,7 @@ function renderEvent(){
   }).join('');
   const metadata=archive||summary;
   const cutoff=archive?.cutoff||'Interval: scheduled qualifying start to race start';
-  const info = [['Mode', live?'Prospective forecast':'Retrospective replay'],['Primary model','B1 · qualifying-rank logistic'],['Generated',utc(archive?.created_at || summary.generated_at)],['Scheduled qualifying',utc(archive?.qualifying_scheduled_start_utc || event.qualifying_scheduled_start_utc)],['Scheduled race',utc(archive?.race_start_utc || event.race_start_utc)],['Cutoff policy',cutoff],['Source commit',metadata.git_commit],['Config SHA-256',metadata.config_sha256]];
+  const info = [['Mode', live?'Prospective forecast':'Retrospective replay'],['Primary model','B1 · qualifying-rank logistic'],['Generated',utc(archive?.created_at || summary.generated_at)],['Scheduled qualifying',utc(archive?.qualifying_scheduled_start_utc || event.qualifying_scheduled_start_utc)],['Scheduled race',utc(archive?.race_start_utc || event.race_start_utc)],['Cutoff policy',cutoff],['Archive committed',utc(archive?.archive_committed_at)],['Source commit',metadata.git_commit],['Config SHA-256',metadata.config_sha256]];
   $('provenance').innerHTML=`<dl>${info.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>${archive?.warnings?.length?`<ul>${archive.warnings.map(w=>`<li>${esc(w)}</li>`).join('')}</ul>`:'<p>Qualifying-row roster only; drivers absent from the qualifying endpoint are excluded. Historical classification revisions remain a limitation.</p>'}`;
 }
 function renderEvaluation(){
@@ -56,7 +56,7 @@ function renderEvaluation(){
   $('failure-copy').textContent=errors?`${errors.confident_misses.length} drivers given at least an 80% chance did not score. ${errors.low_probability_scorers.length} drivers given at most 20% did. Saved prediction errors show what happened; they do not prove why.`:'See the saved backtest for individual forecast errors.';
 }
 function renderHealth(){
-  if(liveArchives.length){$('live-title').textContent=`${liveArchives.length} live forecast${liveArchives.length===1?'':'s'} archived`;$('live-copy').textContent=`${data.scorecard.races.length} scored races. Published before scheduled race start; results are kept separate from replays.`;}
+  if(liveArchives.length){$('live-title').textContent=`${liveArchives.length} live forecast${liveArchives.length===1?'':'s'} archived`;$('live-copy').textContent=`${data.scorecard.races.length} scored races. Committed before scheduled race start; results are kept separate from replays.`;}
   const h=data.health;
   if(!h){$('health').innerHTML='<p>No operational health snapshot has been published yet.</p><p class="small muted">Scheduled automation is configured. Successful live operation will be demonstrated by actual forecast archives and workflow diagnostics.</p>';return;}
   const age=(Date.now()-Date.parse(h.checked_at))/3600000;
