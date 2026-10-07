@@ -8,7 +8,7 @@
 
 It's a production-style educational ML system. The data is cached and audited, a test suite checks for leakage, models are compared against baselines on races they did not train on, and automation is configured to archive future live forecasts before race start.
 
-**[Explore the dashboard](https://reddynitish.github.io/f1-points-predictor/)** · [Engineering case study](docs/CASE_STUDY.md) · [Error analysis](reports/ERROR_ANALYSIS.md)
+**[Explore the dashboard](https://reddynitish.github.io/f1-points-predictor/)** · [Engineering case study](docs/CASE_STUDY.md) · [Error analysis](reports/ERROR_ANALYSIS.md) · [Council review](reports/COUNCIL_REVIEW_2026-10-07.md)
 
 ![Dashboard preview](docs/img/dashboard-desktop.jpg)
 
