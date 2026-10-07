@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -23,3 +24,8 @@ jobs:
       # Tests use synthetic fixtures only; no upstream data is downloaded in CI.
       - name: Lint, type-check and test
         run: make check
+      - name: Verify saved artifacts and offline demo
+        run: |
+          make verify-portfolio
+          make demo
+          make dashboard
