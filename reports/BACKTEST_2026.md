@@ -55,7 +55,7 @@ Generated 2026-10-06 from commit `ce2e8f7` with the frozen config (`configs/fina
 | (0.8, 0.9] | 48 | 0.84 | 0.73 |
 | (0.9, 1.0] | 32 | 0.91 | 0.91 |
 
-The bins have only 16–59 drivers each, so differences of about 10 points are within noise.
+The bins have only 16–59 drivers each and observations within a race are dependent. These descriptive gaps do not establish calibration quality; event-level uncertainty is needed.
 
 ## Limits
 
@@ -80,4 +80,4 @@ Configs were frozen in commit `0617671` before this test ([v2](../configs/v2.jso
 
 Caveats: practice and weather features are missing for all of 2022 (upstream 403) and for 16 of 2026's rows where a session page was absent. Sixteen races give wide intervals.
 
-Conclusion: across the sealed 2025 test and the 2026 backtest, qualifying position captures nearly all the predictable signal available to these models. Live forecasts keep B1 as the primary forecast.
+Conclusion: across the sealed 2025 test and the 2026 backtest, the richer models did not demonstrate incremental value beyond qualifying position. Live forecasts keep B1 as the primary forecast.

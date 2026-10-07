@@ -89,9 +89,9 @@ A [scheduled GitHub Action](.github/workflows/live.yml) runs every two hours fro
 
 ## What didn't work (and why that's useful)
 
-The [pre-registered v2 test](reports/BACKTEST_2026.md#v2-test-practice-qualifying-gap-weather-and-grid-pre-registered) added practice pace, qualifying lap-time gap, qualifying weather and, for a separate pre-race model, the official starting grid, using gradient boosting. On 2026, **neither beat its simple baseline**: 0.164 vs 0.158 for qualifying-only, and 0.166 vs 0.167 for grid-only. Qualifying position already captures nearly everything these signals know, so the live forecast stays simple.
+The [pre-registered v2 test](reports/BACKTEST_2026.md#v2-test-practice-qualifying-gap-weather-and-grid-pre-registered) added practice pace, qualifying lap-time gap, qualifying weather and, for a separate pre-race model, the official starting grid, using gradient boosting. On 2026, **neither beat its simple baseline**: 0.163 vs 0.158 for qualifying-only, and 0.166 vs 0.167 for grid-only. These experiments did not demonstrate additional value beyond qualifying position; the live forecast stays simple.
 
-Next ideas: driver-specific race-pace estimates from long practice runs, tyre-strategy priors, and a joint model that respects the ten-points-places constraint.
+Next ideas: driver-specific race-pace estimates from long practice runs, tyre-strategy priors, and joint outcome modelling that allows unusual points awards. These are research hypotheses, not promised improvements.
 
 ## Project map
 

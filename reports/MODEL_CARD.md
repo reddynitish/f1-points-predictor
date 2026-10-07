@@ -14,7 +14,7 @@ Provisional data-gate decisions, the recommended options in [DATA_GATE_PROPOSAL.
 - **Cutoff:** the window from scheduled qualifying start to race start. All history comes from earlier events, and a guard rejects any history that doesn't precede the cutoff.
 - **Roster:** drivers with a qualifying row. Four race-only rows are excluded from 2018–2025 and five from 2026.
 - **Revisions:** five qualifying disqualifications are set to rank-missing through the sourced [overrides/qualifying.csv](../overrides/qualifying.csv). Bearman 2025-07, a deleted lap rather than a disqualification, keeps the upstream rank.
-- **Sprint:** current-weekend sprint results are never used. The qualifying endpoint hasn't been independently checked against sprint-qualifying results.
+- **Sprint:** current-weekend sprint results are never used. The [sprint endpoint audit](SPRINT_AUDIT.md) compares 24 sprint weekends; all 2023–2025 race-qualifying orders differ from sprint grids. Grid penalties limit this proxy.
 
 ## Features
 
@@ -55,6 +55,6 @@ C=0.1 is the edge of the pre-set grid, and the grid wasn't extended after seeing
 ## Update, October 6, 2026: 2026 backtest and v2
 
 - **Frozen v1 on 2026 (walk-forward, 16 races):** B1 0.158, M1 0.161; 7.6 of 10 top-10 picks correct per race.
-- **v2 (practice, qualifying gap, qualifying weather; M2):** 0.164 on the same races.
+- **v2 (practice, qualifying gap, qualifying weather; M2):** 0.163 on the same races.
 - **Pre-race (v2 plus starting grid; M2):** 0.166 vs grid-only 0.167.
 - No richer model beat its baseline. See [BACKTEST_2026.md](BACKTEST_2026.md). The live automation uses B1 as primary and M1 for comparison.

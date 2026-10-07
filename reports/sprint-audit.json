@@ -1,0 +1,489 @@
+{
+  "generated_at": "2026-10-07T14:31:55.873302+00:00",
+  "scope": "2021\u20132025 sprint events; sprint grid is a proxy, not an exact sprint-qualifying classification",
+  "comparisons": [
+    {
+      "event_id": "2021-10",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 0,
+      "qualifying_pole": "hamilton",
+      "sprint_grid_pole": "hamilton",
+      "interpretation": "qualifying sets sprint grid; penalties may change ranks"
+    },
+    {
+      "event_id": "2021-14",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 0,
+      "qualifying_pole": "bottas",
+      "sprint_grid_pole": "bottas",
+      "interpretation": "qualifying sets sprint grid; penalties may change ranks"
+    },
+    {
+      "event_id": "2021-19",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 20,
+      "qualifying_pole": "hamilton",
+      "sprint_grid_pole": "max_verstappen",
+      "interpretation": "qualifying sets sprint grid; penalties may change ranks"
+    },
+    {
+      "event_id": "2022-04",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 1,
+      "qualifying_pole": "max_verstappen",
+      "sprint_grid_pole": "max_verstappen",
+      "interpretation": "qualifying sets sprint grid; penalties may change ranks"
+    },
+    {
+      "event_id": "2022-11",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 0,
+      "qualifying_pole": "max_verstappen",
+      "sprint_grid_pole": "max_verstappen",
+      "interpretation": "qualifying sets sprint grid; penalties may change ranks"
+    },
+    {
+      "event_id": "2022-21",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 0,
+      "qualifying_pole": "kevin_magnussen",
+      "sprint_grid_pole": "kevin_magnussen",
+      "interpretation": "qualifying sets sprint grid; penalties may change ranks"
+    },
+    {
+      "event_id": "2023-04",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 18,
+      "qualifying_pole": "leclerc",
+      "sprint_grid_pole": "leclerc",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2023-09",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 19,
+      "qualifying_pole": "max_verstappen",
+      "sprint_grid_pole": "max_verstappen",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2023-12",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 18,
+      "qualifying_pole": "max_verstappen",
+      "sprint_grid_pole": "max_verstappen",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2023-17",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 19,
+      "qualifying_pole": "max_verstappen",
+      "sprint_grid_pole": "piastri",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2023-18",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 17,
+      "qualifying_pole": "leclerc",
+      "sprint_grid_pole": "max_verstappen",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2023-20",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 17,
+      "qualifying_pole": "max_verstappen",
+      "sprint_grid_pole": "norris",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2024-05",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 17,
+      "qualifying_pole": "max_verstappen",
+      "sprint_grid_pole": "norris",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2024-06",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 16,
+      "qualifying_pole": "max_verstappen",
+      "sprint_grid_pole": "max_verstappen",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2024-11",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 16,
+      "qualifying_pole": "max_verstappen",
+      "sprint_grid_pole": "max_verstappen",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2024-19",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 18,
+      "qualifying_pole": "norris",
+      "sprint_grid_pole": "max_verstappen",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2024-21",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 18,
+      "qualifying_pole": "norris",
+      "sprint_grid_pole": "piastri",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2024-23",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 17,
+      "qualifying_pole": "max_verstappen",
+      "sprint_grid_pole": "norris",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2025-02",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 20,
+      "qualifying_pole": "piastri",
+      "sprint_grid_pole": "hamilton",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2025-06",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 19,
+      "qualifying_pole": "max_verstappen",
+      "sprint_grid_pole": "antonelli",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2025-13",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 19,
+      "qualifying_pole": "norris",
+      "sprint_grid_pole": "piastri",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2025-19",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 18,
+      "qualifying_pole": "max_verstappen",
+      "sprint_grid_pole": "max_verstappen",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2025-21",
+      "status": "compared",
+      "common_drivers": 19,
+      "different_ranks": 14,
+      "qualifying_pole": "norris",
+      "sprint_grid_pole": "norris",
+      "interpretation": "separate qualifying sessions"
+    },
+    {
+      "event_id": "2025-23",
+      "status": "compared",
+      "common_drivers": 20,
+      "different_ranks": 17,
+      "qualifying_pole": "piastri",
+      "sprint_grid_pole": "piastri",
+      "interpretation": "separate qualifying sessions"
+    }
+  ],
+  "manifests": [
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2021/qualifying.json?limit=100&offset=0",
+      "fetched_at": "2026-10-07T14:30:57.499404+00:00",
+      "sha256": "5fb5434bfd230a4cd4728cd652dfa214d1ac4985bdd1f900294c29a8e66a52da",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2021/qualifying.json?limit=100&offset=100",
+      "fetched_at": "2026-10-07T14:30:59.421058+00:00",
+      "sha256": "c34716d41138d138394483c3177020586d3b4672d4389aa7d3a974aeb44d013b",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2021/qualifying.json?limit=100&offset=200",
+      "fetched_at": "2026-10-07T14:31:01.818728+00:00",
+      "sha256": "9a53e382fdd80910e92c6543b477940a7841009497114e020cd60ad165c73d20",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2021/qualifying.json?limit=100&offset=300",
+      "fetched_at": "2026-10-07T14:31:03.570792+00:00",
+      "sha256": "8389405cc018ccc22021d588d0e7fd2ba3611acc481ae88df9e7aa2480b9e073",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2021/qualifying.json?limit=100&offset=400",
+      "fetched_at": "2026-10-07T14:31:05.340621+00:00",
+      "sha256": "5b948a707dbcbf3d0bea7d99c2b96078726e14db8b2f04d49431e2ffca466a08",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2021/sprint.json?limit=100&offset=0",
+      "fetched_at": "2026-10-07T14:31:07.452591+00:00",
+      "sha256": "aa20c9d71594b8e15857477eada26ee65f6bf41100a78ba580a975ad51f6eb88",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2022/qualifying.json?limit=100&offset=0",
+      "fetched_at": "2026-10-07T14:31:09.220004+00:00",
+      "sha256": "6abeb0a47bc607b17a47389bfafaa6f2b6fad871b316d67705bb6aa9140c0c9e",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2022/qualifying.json?limit=100&offset=100",
+      "fetched_at": "2026-10-07T14:31:11.086005+00:00",
+      "sha256": "ab2cd1e757c17665a9c564607498738f43104cca2f3913a1dbf58d70e00b9c3e",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2022/qualifying.json?limit=100&offset=200",
+      "fetched_at": "2026-10-07T14:31:12.937100+00:00",
+      "sha256": "60fe88c873f67b3643275d9d05e75a1db88bf4b3e89926e8ab436328edbf918c",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2022/qualifying.json?limit=100&offset=300",
+      "fetched_at": "2026-10-07T14:31:14.879885+00:00",
+      "sha256": "9f659df38c68f53f0f55d3a63dfe166ff5db1377dfec7293b0171735ac2c06b7",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2022/qualifying.json?limit=100&offset=400",
+      "fetched_at": "2026-10-07T14:31:16.493810+00:00",
+      "sha256": "28420a6816cdb152e66778d5a739c13302f3fbcd49f09055f5def9f7fd804292",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2022/sprint.json?limit=100&offset=0",
+      "fetched_at": "2026-10-07T14:31:18.132436+00:00",
+      "sha256": "e4ac08f01e7060007c0c33cbd0b30c297b63b4fce48b2378d0e5b3a040fb7ade",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2023/qualifying.json?limit=100&offset=0",
+      "fetched_at": "2026-10-07T14:31:19.879149+00:00",
+      "sha256": "4c44c30e5bfd86726ca31bf8ca9e2ce61f4a08055a6132830d5e9a18401a18cc",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2023/qualifying.json?limit=100&offset=100",
+      "fetched_at": "2026-10-07T14:31:21.689106+00:00",
+      "sha256": "87729e03342de360c73b0bb4f591d95e8270e68d83bc09bab24f61fd0c13a208",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2023/qualifying.json?limit=100&offset=200",
+      "fetched_at": "2026-10-07T14:31:23.412940+00:00",
+      "sha256": "8050f3a5a9aa4fcd643e9334de035b02686617da7937a319ddbde8aa401c99b6",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2023/qualifying.json?limit=100&offset=300",
+      "fetched_at": "2026-10-07T14:31:25.538245+00:00",
+      "sha256": "a859400558e32099d266bd523a7686b1fba07b6a554e66b2d3d2a9d8b25c2a59",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2023/qualifying.json?limit=100&offset=400",
+      "fetched_at": "2026-10-07T14:31:27.142378+00:00",
+      "sha256": "d5417dc2a94e02dd9cb019cc1c413690e3131281c2282a88a2e20609fd697d6f",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2023/sprint.json?limit=100&offset=0",
+      "fetched_at": "2026-10-07T14:31:28.806600+00:00",
+      "sha256": "0604c88228bf31b8049086043088072329ec34feeeffc6b298f6fa34987b6098",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2023/sprint.json?limit=100&offset=100",
+      "fetched_at": "2026-10-07T14:31:30.427762+00:00",
+      "sha256": "721fa937ca504357e61cf7bc9eebfa9be1800ffa770f7a90e8a2674cf47dc7cf",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2024/qualifying.json?limit=100&offset=0",
+      "fetched_at": "2026-10-07T14:31:32.189948+00:00",
+      "sha256": "81b8016418761e01a1249444a02f0e9bab24cc65a790a33d48ce3117b635e959",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2024/qualifying.json?limit=100&offset=100",
+      "fetched_at": "2026-10-07T14:31:33.912263+00:00",
+      "sha256": "61ef1040b43750be187a784858e6a72bf3fc6a12cdf73d8b6086b421fdddc23e",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2024/qualifying.json?limit=100&offset=200",
+      "fetched_at": "2026-10-07T14:31:35.654059+00:00",
+      "sha256": "0f1d4a55af8bb3dc049937c89488bd605cde478dba3e9d08acf45885c55c4872",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2024/qualifying.json?limit=100&offset=300",
+      "fetched_at": "2026-10-07T14:31:37.497627+00:00",
+      "sha256": "2b9903be9809bdb2f176a375813e405920032cf4dfd9d0a56f8d8f7d8427ffdf",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2024/qualifying.json?limit=100&offset=400",
+      "fetched_at": "2026-10-07T14:31:39.311589+00:00",
+      "sha256": "922a3566d252c5d0c004bc0a3aeaba2fa17972546f25eca4687d3f8f3abfce45",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2024/sprint.json?limit=100&offset=0",
+      "fetched_at": "2026-10-07T14:31:40.973723+00:00",
+      "sha256": "02e4893c6224be890bc4578a98dc9fc97b07447769b3c8c350c56f94078e5745",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2024/sprint.json?limit=100&offset=100",
+      "fetched_at": "2026-10-07T14:31:42.513809+00:00",
+      "sha256": "9f36cfd7c54bf7b4ab818390106021c43e32282a98c24ae5b258a920b3088496",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2025/qualifying.json?limit=100&offset=0",
+      "fetched_at": "2026-10-07T14:31:44.254402+00:00",
+      "sha256": "5ab3fa7c153e8b52d8f89d8b5ec0e469324c51d24f56db7553d8d272a766b53a",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2025/qualifying.json?limit=100&offset=100",
+      "fetched_at": "2026-10-07T14:31:46.000455+00:00",
+      "sha256": "dba2e412dcdb95aae3589f86bf26a477074379fa7813a0116e7194cda897727e",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2025/qualifying.json?limit=100&offset=200",
+      "fetched_at": "2026-10-07T14:31:48.073974+00:00",
+      "sha256": "be4432770905fae706037aeb454c9c45d703adb41f7e1906d7f5a33f9137f51d",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2025/qualifying.json?limit=100&offset=300",
+      "fetched_at": "2026-10-07T14:31:49.885768+00:00",
+      "sha256": "425fbc78ad4d8f217c72f7f8c71cec216cba32e68a0711538c794eedce6c1ee3",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2025/qualifying.json?limit=100&offset=400",
+      "fetched_at": "2026-10-07T14:31:51.577964+00:00",
+      "sha256": "32bed7a1e0d9e445d5b5e9fd6b08eb6c2cab7d84466c8eebcd9b575fcfd17686",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2025/sprint.json?limit=100&offset=0",
+      "fetched_at": "2026-10-07T14:31:53.267612+00:00",
+      "sha256": "4f64e45080a4ce696e2c18472c1cb472b6df280da9a5ed24aa5ea03b44621ab5",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    },
+    {
+      "source_url": "https://api.jolpi.ca/ergast/f1/2025/sprint.json?limit=100&offset=100",
+      "fetched_at": "2026-10-07T14:31:54.862491+00:00",
+      "sha256": "4e018d97ad3ca3fa12d20b77d914145e145eddbdfa9f095ae70ca32b58eff4ce",
+      "schema_version": 1,
+      "adapter_version": "0.1.0",
+      "requests_version": "2.34.2"
+    }
+  ],
+  "limitation": "Different orders establish distinct endpoints on those events, not exact cutoff-time availability."
+}

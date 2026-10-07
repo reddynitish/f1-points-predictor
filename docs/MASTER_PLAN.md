@@ -116,7 +116,7 @@ Prediction artifact metadata: git commit, config hash, data-manifest hashes, max
 - [x] Test duplicate IDs, absent Q3, absent qualifying, retries and cache reuse on synthetic inputs; then implement adapter.
 - [x] Fetch one historical weekend; inspect normalized entries/results manually before bulk collection.
 - [x] Generate 2018–2025 coverage manifest, exclusions and hashes; commit code/report, not caches.
-Gate status: keys and offline replay verified; sprint formats classified and repeated ranks traced; timestamp/roster/revision decisions proposed in [DATA_GATE_PROPOSAL.md](DATA_GATE_PROPOSAL.md). See [DATA_AUDIT.md](../reports/DATA_AUDIT.md). All 173 events are audited, but none is cutoff-ready. No model training yet.
+Gate status: keys and offline replay verified; sprint formats classified and repeated ranks traced; timestamp/roster/revision decisions proposed in [DATA_GATE_PROPOSAL.md](DATA_GATE_PROPOSAL.md). See [DATA_AUDIT.md](../reports/DATA_AUDIT.md). Historical audit records preserve the original gate state. Modelling subsequently used the disclosed interval-cutoff policy; see reports/MODEL_CARD.md and docs/DATA_GATE_PROPOSAL.md.
 
 ### B. Cutoff-safe dataset
 - [x] Implement feature specification and tests in `tests/test_leakage.py`, then feature builder.
@@ -148,7 +148,7 @@ Gate: report all results even if stronger model loses; any later test-informed c
 - [ ] Archive prospective predictions for a future supported race before start, then evaluate after published results.
 Gate: prediction page displays timestamp/model version and never downloads future labels during inference. UI makes retrospective replay distinct from genuine forecast.
 
-Planned commands after implementation: `python -m f1_points.cli collect`, `build-dataset`, `backtest`, `train`, `evaluate`, `predict --season YEAR --round ROUND`; `pytest`; `streamlit run app.py`. These do not exist yet. Each milestone ends with tested code, a report and a focused commit.
+Planned commands after implementation: `python -m f1_points.cli collect`, `build-dataset`, `backtest`, `train`, `evaluate`, `predict --season YEAR --round ROUND`; `pytest`; `streamlit run app.py`. These are implemented CLI commands except `train` (use `select`) and the originally proposed Streamlit app (replaced by a static artifact dashboard). Each milestone ends with tested code, a report and a focused commit.
 
 ## 9. Risks and practical decisions
 
