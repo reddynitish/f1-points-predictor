@@ -38,3 +38,33 @@ def test_seasons_beyond_prospective_rejected(monkeypatch):
     monkeypatch.setattr('sys.argv', ['f1_points', 'collect', '--start', '2027', '--end', '2027'])
     with pytest.raises(SystemExit):
         cli.main()
+
+
+def test_history_stage_failure_replaces_stale_health_and_keeps_last_success(tmp_path, monkeypatch):
+    public = tmp_path / 'public'
+    public.mkdir()
+    (public / 'health.json').write_text(json.dumps({'status': 'ok', 'last_success_at': '2026-10-01T00:00:00+00:00'}))
+    report = tmp_path / 'history.json'
+    report.write_text(json.dumps({'failures': [{'stage': 'schedule', 'error': 'HTTP 503'}]}))
+    monkeypatch.setattr(
+        'sys.argv',
+        [
+            'f1_points',
+            'live-failure',
+            '--stage',
+            'history_bootstrap',
+            '--report',
+            str(report),
+            '--scorecard',
+            str(public),
+            '--live-root',
+            str(tmp_path / 'runs'),
+        ],
+    )
+    assert cli.main() == 0
+    health = json.loads((public / 'health.json').read_text())
+    assert health['status'] == 'pipeline_failed'
+    assert health['failed_stage'] == 'history_bootstrap'
+    assert health['failures'][0]['error'] == 'HTTP 503'
+    assert health['last_success_at'] == '2026-10-01T00:00:00+00:00'
+    assert list((tmp_path / 'runs').glob('*/health.json'))

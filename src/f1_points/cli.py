@@ -34,7 +34,7 @@ from .live import (
 )
 from .livetiming import BASE_URL as livetiming_base
 from .livetiming import LiveTimingClient, event_sessions, match_meeting, season_meetings
-from .predict import QualifyingUnavailable, archive, load_combined, predict_event
+from .predict import QualifyingUnavailable, archive, load_combined, predict_event, source_inventory
 
 logger = logging.getLogger('f1_points')
 # 2018–2025 is the study period; 2026 is prospective history/shadow evaluation, never used for tuning.
@@ -213,6 +213,7 @@ def run_predict(args):
     except QualifyingUnavailable as error:
         logger.error('%s', error)
         return 2
+    metadata['source_inventory'] = source_inventory(args.base, live, args.season)
     path = archive(predictions, metadata, args.config, args.archive)
     print(f'{event_id} {metadata["circuit_id"]} [{metadata["mode"]}] trained through {metadata["training_last_event"]}')
     print(predictions.to_string(index=False, float_format=lambda v: f'{v:.3f}'))
@@ -257,7 +258,16 @@ def _run_live(args):
     events, entries, labels = load_combined(args.base, run_dir / 'normalized', args.season)
     config = json.loads(args.config.read_text())
     for path in forecast_due(
-        events, entries, labels, config, args.archive, args.config, args.season, now, args.overrides
+        events,
+        entries,
+        labels,
+        config,
+        args.archive,
+        args.config,
+        args.season,
+        now,
+        args.overrides,
+        sources=source_inventory(args.base, run_dir / 'normalized', args.season),
     ):
         logger.info('archived prospective forecast %s', path)
     races = score_archives(args.archive, labels)
@@ -276,6 +286,28 @@ def _run_live(args):
     (run_dir / 'health.json').write_text(json.dumps(health, indent=2) + '\n')
     logger.info('scored races=%d readme_changed=%s', len(races), changed)
     return 0
+
+
+def record_live_failure(args):
+    """Workflow fallback when a stage failed before the live wrapper was entered."""
+    now = datetime.now(UTC)
+    failures = [{'stage': args.stage, 'error': 'Workflow stage failed; inspect its run logs.'}]
+    if args.report and args.report.exists():
+        try:
+            failures = json.loads(args.report.read_text()).get('failures') or failures
+        except (ValueError, OSError):
+            logger.warning('Unable to read failure report %s', args.report)
+    health = {
+        'checked_at': now.isoformat(),
+        'status': 'pipeline_failed',
+        'failed_stage': args.stage,
+        'failures': failures,
+    }
+    write_health(args.scorecard, health)
+    run_dir = args.live_root / now.strftime('%Y%m%dT%H%M%SZ')
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / 'health.json').write_text(json.dumps(health, indent=2) + '\n')
+    return 0  # Recording succeeded; the original failed workflow step still keeps the run red.
 
 
 def main():
@@ -338,6 +370,11 @@ def main():
     loop.add_argument('--archive', type=Path, default=Path('predictions'))
     loop.add_argument('--scorecard', type=Path, default=Path('reports/live-2026'))
     loop.add_argument('--readme', type=Path, default=Path('README.md'))
+    failure = commands.add_parser('live-failure', help='record a failed workflow stage without fetching or fitting')
+    failure.add_argument('--stage', required=True)
+    failure.add_argument('--report', type=Path)
+    failure.add_argument('--scorecard', type=Path, default=Path('reports/live-2026'))
+    failure.add_argument('--live-root', type=Path, default=Path('data/live'))
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s: %(message)s')
     if args.command == 'build-dataset':
@@ -356,6 +393,8 @@ def main():
         return run_predict(args)
     if args.command == 'live':
         return run_live(args)
+    if args.command == 'live-failure':
+        return record_live_failure(args)
     if args.command == 'select':
         spec = FEATURE_SETS[args.feature_set]
         report = run_selection(args.dataset, args.report, args.config, **spec)

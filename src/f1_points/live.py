@@ -28,7 +28,9 @@ def should_forecast(event, has_labels, has_archive, now):
     return settled and now < race_start
 
 
-def forecast_due(events, entries, labels, config, archive_dir, config_path, season, now, overrides=None, *, clock=None):
+def forecast_due(
+    events, entries, labels, config, archive_dir, config_path, season, now, overrides=None, *, clock=None, sources=None
+):
     """Archive a prospective forecast for every due event; returns written paths."""
     written = []
     labeled = set(labels['event_id'])
@@ -45,6 +47,8 @@ def forecast_due(events, entries, labels, config, archive_dir, config_path, seas
         completed_at = clock() if clock else datetime.now(UTC)
         if metadata['mode'] == 'prospective' and completed_at < datetime.fromisoformat(event['race_start_utc']):
             metadata['created_at'] = completed_at.isoformat()
+            if sources is not None:
+                metadata['source_inventory'] = sources
             written.append(archive(predictions, metadata, config_path, archive_dir))
     return written
 
