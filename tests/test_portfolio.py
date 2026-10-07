@@ -43,3 +43,22 @@ def test_verification_and_demo_work_when_resource_is_unavailable(tmp_path, monke
     monkeypatch.setitem(sys.modules, 'resource', None)
     assert verify_artifacts(ROOT)['status'] == 'verified'
     assert run_demo(ROOT, tmp_path)['process_peak_rss_mib'] is None
+
+
+def test_integrity_manifest_requires_sealed_and_source_evidence(tmp_path):
+    shutil.copytree(ROOT / 'reports', tmp_path / 'reports')
+    shutil.copytree(ROOT / 'configs', tmp_path / 'configs')
+    manifest_path = write_manifest(tmp_path)
+    manifest = json.loads(manifest_path.read_text())
+    required = {
+        'reports/experiments/test_2025.json',
+        'reports/experiments/test_2025_predictions.csv',
+        'reports/experiments/development.json',
+        'reports/coverage.json',
+        'reports/coverage-2026.json',
+    }
+    assert required <= manifest['files'].keys()
+    del manifest['files']['reports/experiments/test_2025.json']
+    manifest_path.write_text(json.dumps(manifest))
+    with pytest.raises(ValueError, match='missing required'):
+        verify_artifacts(tmp_path)

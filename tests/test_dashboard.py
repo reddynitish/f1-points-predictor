@@ -43,3 +43,17 @@ def test_archive_text_cannot_close_json_script(tmp_path):
     html = (tmp_path / 'index.html').read_text()
     assert '</script><img src=x' not in html
     assert '\\u003c/script' in html
+
+
+def test_export_fingerprints_all_auxiliary_data_inputs():
+    data = load_dashboard_data(ROOT)
+    required = {
+        'reports/event-catalog.json',
+        'reports/live-2026/scorecard.json',
+        'reports/live-2026/health.json',
+        'reports/diagnostics/errors.json',
+        'reports/coverage-2026.json',
+    }
+    assert required <= data['source_hashes'].keys()
+    assert data['source_manifests']
+    assert all(m['source_url'].startswith('https://') for m in data['source_manifests'])
