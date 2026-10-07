@@ -1,0 +1,212 @@
+{
+  "scope": "Schedule metadata only; times are scheduled, not observed session end",
+  "events": [
+    {
+      "event_id": "2026-01",
+      "season": 2026,
+      "round": 1,
+      "circuit_id": "albert_park",
+      "race_start_utc": "2026-03-08T04:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-03-07T05:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-02",
+      "season": 2026,
+      "round": 2,
+      "circuit_id": "shanghai",
+      "race_start_utc": "2026-03-15T07:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-03-14T07:00:00+00:00",
+      "sprint_weekend": true
+    },
+    {
+      "event_id": "2026-03",
+      "season": 2026,
+      "round": 3,
+      "circuit_id": "suzuka",
+      "race_start_utc": "2026-03-29T05:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-03-28T06:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-04",
+      "season": 2026,
+      "round": 4,
+      "circuit_id": "miami",
+      "race_start_utc": "2026-05-03T20:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-05-02T20:00:00+00:00",
+      "sprint_weekend": true
+    },
+    {
+      "event_id": "2026-05",
+      "season": 2026,
+      "round": 5,
+      "circuit_id": "villeneuve",
+      "race_start_utc": "2026-05-24T20:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-05-23T20:00:00+00:00",
+      "sprint_weekend": true
+    },
+    {
+      "event_id": "2026-06",
+      "season": 2026,
+      "round": 6,
+      "circuit_id": "monaco",
+      "race_start_utc": "2026-06-07T13:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-06-06T14:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-07",
+      "season": 2026,
+      "round": 7,
+      "circuit_id": "catalunya",
+      "race_start_utc": "2026-06-14T13:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-06-13T14:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-08",
+      "season": 2026,
+      "round": 8,
+      "circuit_id": "red_bull_ring",
+      "race_start_utc": "2026-06-28T13:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-06-27T14:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-09",
+      "season": 2026,
+      "round": 9,
+      "circuit_id": "silverstone",
+      "race_start_utc": "2026-07-05T14:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-07-04T15:00:00+00:00",
+      "sprint_weekend": true
+    },
+    {
+      "event_id": "2026-10",
+      "season": 2026,
+      "round": 10,
+      "circuit_id": "spa",
+      "race_start_utc": "2026-07-19T13:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-07-18T14:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-11",
+      "season": 2026,
+      "round": 11,
+      "circuit_id": "hungaroring",
+      "race_start_utc": "2026-07-26T13:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-07-25T14:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-12",
+      "season": 2026,
+      "round": 12,
+      "circuit_id": "zandvoort",
+      "race_start_utc": "2026-08-23T13:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-08-22T14:00:00+00:00",
+      "sprint_weekend": true
+    },
+    {
+      "event_id": "2026-13",
+      "season": 2026,
+      "round": 13,
+      "circuit_id": "monza",
+      "race_start_utc": "2026-09-06T13:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-09-05T14:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-14",
+      "season": 2026,
+      "round": 14,
+      "circuit_id": "madring",
+      "race_start_utc": "2026-09-13T13:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-09-12T14:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-15",
+      "season": 2026,
+      "round": 15,
+      "circuit_id": "baku",
+      "race_start_utc": "2026-09-26T11:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-09-25T12:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-16",
+      "season": 2026,
+      "round": 16,
+      "circuit_id": "sepang",
+      "race_start_utc": "2026-10-04T07:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-10-03T08:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-17",
+      "season": 2026,
+      "round": 17,
+      "circuit_id": "marina_bay",
+      "race_start_utc": "2026-10-11T12:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-10-10T13:00:00+00:00",
+      "sprint_weekend": true
+    },
+    {
+      "event_id": "2026-18",
+      "season": 2026,
+      "round": 18,
+      "circuit_id": "americas",
+      "race_start_utc": "2026-10-25T20:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-10-24T21:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-19",
+      "season": 2026,
+      "round": 19,
+      "circuit_id": "rodriguez",
+      "race_start_utc": "2026-11-01T20:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-10-31T21:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-20",
+      "season": 2026,
+      "round": 20,
+      "circuit_id": "interlagos",
+      "race_start_utc": "2026-11-08T17:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-11-07T18:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-21",
+      "season": 2026,
+      "round": 21,
+      "circuit_id": "vegas",
+      "race_start_utc": "2026-11-22T04:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-11-21T04:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-22",
+      "season": 2026,
+      "round": 22,
+      "circuit_id": "losail",
+      "race_start_utc": "2026-11-29T16:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-11-28T18:00:00+00:00",
+      "sprint_weekend": false
+    },
+    {
+      "event_id": "2026-23",
+      "season": 2026,
+      "round": 23,
+      "circuit_id": "yas_marina",
+      "race_start_utc": "2026-12-06T13:00:00+00:00",
+      "qualifying_scheduled_start_utc": "2026-12-05T14:00:00+00:00",
+      "sprint_weekend": false
+    }
+  ]
+}

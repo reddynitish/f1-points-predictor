@@ -224,6 +224,24 @@ def run_predict(args):
 
 
 def run_live(args):
+    try:
+        return _run_live(args)
+    except Exception as error:
+        logger.exception('live pipeline failed')
+        now = datetime.now(UTC)
+        health = {
+            'checked_at': now.isoformat(),
+            'status': 'pipeline_failed',
+            'failures': [{'stage': 'live_pipeline', 'error': str(error)}],
+        }
+        write_health(args.scorecard, health)
+        run_dir = args.live_root / now.strftime('%Y%m%dT%H%M%SZ')
+        run_dir.mkdir(parents=True, exist_ok=True)
+        (run_dir / 'health.json').write_text(json.dumps(health, indent=2) + '\n')
+        return 1
+
+
+def _run_live(args):
     now = datetime.now(UTC)
     started = time.perf_counter()
     run_dir = args.live_root / now.strftime('%Y%m%dT%H%M%SZ')

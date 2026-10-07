@@ -38,6 +38,8 @@ def test_forecast_once_then_score_after_results(tmp_path):
     assert races[0]['event_id'] == '2024-03' and races[0]['drivers'] == 4
     assert 0 <= races[0]['brier_B1'] <= 1
     assert '1 live race(s)' in scorecard_markdown(races)
+    assert len(races[0]['outcomes']) == 4
+    assert sum(r['scored_points'] for r in races[0]['outcomes']) == 3
 
 
 def test_readme_section_is_replaced_between_markers(tmp_path):
@@ -78,3 +80,19 @@ def test_health_exposes_missing_forecast_and_partial_results(tmp_path):
     health = operational_health(events, entries, labels, tmp_path, 2024, datetime(2024, 3, 11, tzinfo=UTC))
     assert health['events'][-1]['state'] == 'missed_forecast'
     assert health['events'][-1]['qualifying_drivers'] == 4
+
+
+def test_live_pipeline_error_is_recorded_and_returns_failure(tmp_path, monkeypatch):
+    from argparse import Namespace
+
+    from f1_points import cli
+
+    def broken(args):
+        raise RuntimeError('upstream schema changed')
+
+    monkeypatch.setattr(cli, '_run_live', broken)
+    args = Namespace(scorecard=tmp_path / 'public', live_root=tmp_path / 'runs')
+    assert cli.run_live(args) == 1
+    health = json.loads((args.scorecard / 'health.json').read_text())
+    assert health['status'] == 'pipeline_failed'
+    assert health['failures'][0]['error'] == 'upstream schema changed'

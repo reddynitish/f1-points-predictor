@@ -72,6 +72,7 @@ def score_archives(archive_dir, labels):
                 'confident_predictions': len(confident),
                 'confident_scored': int(confident['scored_points'].sum()),
                 'archive': path.name,
+                'outcomes': frame[['driver_id', 'scored_points']].to_dict('records'),
             }
         )
     return races
@@ -142,6 +143,7 @@ def write_health(directory, payload):
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / 'health.json'
     previous = json.loads(path.read_text()) if path.exists() else {}
+    payload = {'last_success_at': previous.get('last_success_at'), **payload}
     transient = {'checked_at', 'last_success_at', 'source_fetched_at', 'duration_seconds'}
 
     def stable(p):
