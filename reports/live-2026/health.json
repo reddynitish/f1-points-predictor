@@ -1,67 +1,12 @@
 {
   "last_success_at": "2026-10-07T15:02:48.331304+00:00",
-  "checked_at": "2026-10-07T15:02:37.302053+00:00",
-  "duration_seconds": 11.029,
-  "status": "ok",
-  "source_fetched_at": "2026-10-07T15:02:47.281755+00:00",
-  "failures": [],
-  "events": [
+  "checked_at": "2026-10-09T19:32:39.450518+00:00",
+  "status": "collection_failed",
+  "failures": [
     {
-      "event_id": "2026-17",
-      "state": "waiting_for_qualifying",
-      "qualifying_drivers": 0,
-      "archived_drivers": 0,
-      "result_drivers": 0,
-      "warnings": []
-    },
-    {
-      "event_id": "2026-18",
-      "state": "waiting_for_qualifying",
-      "qualifying_drivers": 0,
-      "archived_drivers": 0,
-      "result_drivers": 0,
-      "warnings": []
-    },
-    {
-      "event_id": "2026-19",
-      "state": "waiting_for_qualifying",
-      "qualifying_drivers": 0,
-      "archived_drivers": 0,
-      "result_drivers": 0,
-      "warnings": []
-    },
-    {
-      "event_id": "2026-20",
-      "state": "waiting_for_qualifying",
-      "qualifying_drivers": 0,
-      "archived_drivers": 0,
-      "result_drivers": 0,
-      "warnings": []
-    },
-    {
-      "event_id": "2026-21",
-      "state": "waiting_for_qualifying",
-      "qualifying_drivers": 0,
-      "archived_drivers": 0,
-      "result_drivers": 0,
-      "warnings": []
-    },
-    {
-      "event_id": "2026-22",
-      "state": "waiting_for_qualifying",
-      "qualifying_drivers": 0,
-      "archived_drivers": 0,
-      "result_drivers": 0,
-      "warnings": []
-    },
-    {
-      "event_id": "2026-23",
-      "state": "waiting_for_qualifying",
-      "qualifying_drivers": 0,
-      "archived_drivers": 0,
-      "result_drivers": 0,
-      "warnings": []
+      "season": 2026,
+      "stage": "schedule",
+      "error": "HTTPSConnectionPool(host='api.jolpi.ca', port=443): Read timed out. (read timeout=45)"
     }
-  ],
-  "first_round": 17
+  ]
 }
