@@ -1,12 +1,67 @@
 {
-  "last_success_at": "2026-10-07T15:02:48.331304+00:00",
-  "checked_at": "2026-10-09T19:32:39.450518+00:00",
-  "status": "collection_failed",
-  "failures": [
+  "last_success_at": "2026-10-09T22:01:13.052247+00:00",
+  "checked_at": "2026-10-09T22:01:03.306461+00:00",
+  "duration_seconds": 9.746,
+  "status": "ok",
+  "source_fetched_at": "2026-10-09T22:01:11.958315+00:00",
+  "failures": [],
+  "events": [
     {
-      "season": 2026,
-      "stage": "schedule",
-      "error": "HTTPSConnectionPool(host='api.jolpi.ca', port=443): Read timed out. (read timeout=45)"
+      "event_id": "2026-17",
+      "state": "waiting_for_qualifying",
+      "qualifying_drivers": 0,
+      "archived_drivers": 0,
+      "result_drivers": 0,
+      "warnings": []
+    },
+    {
+      "event_id": "2026-18",
+      "state": "waiting_for_qualifying",
+      "qualifying_drivers": 0,
+      "archived_drivers": 0,
+      "result_drivers": 0,
+      "warnings": []
+    },
+    {
+      "event_id": "2026-19",
+      "state": "waiting_for_qualifying",
+      "qualifying_drivers": 0,
+      "archived_drivers": 0,
+      "result_drivers": 0,
+      "warnings": []
+    },
+    {
+      "event_id": "2026-20",
+      "state": "waiting_for_qualifying",
+      "qualifying_drivers": 0,
+      "archived_drivers": 0,
+      "result_drivers": 0,
+      "warnings": []
+    },
+    {
+      "event_id": "2026-21",
+      "state": "waiting_for_qualifying",
+      "qualifying_drivers": 0,
+      "archived_drivers": 0,
+      "result_drivers": 0,
+      "warnings": []
+    },
+    {
+      "event_id": "2026-22",
+      "state": "waiting_for_qualifying",
+      "qualifying_drivers": 0,
+      "archived_drivers": 0,
+      "result_drivers": 0,
+      "warnings": []
+    },
+    {
+      "event_id": "2026-23",
+      "state": "waiting_for_qualifying",
+      "qualifying_drivers": 0,
+      "archived_drivers": 0,
+      "result_drivers": 0,
+      "warnings": []
     }
-  ]
+  ],
+  "first_round": 17
 }
