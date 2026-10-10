@@ -145,12 +145,13 @@ def test_due_enrichment_has_provenance_and_excludes_future_identities(tmp_path):
     assert len(calls) == 1
 
 
-def test_call_caches_full_response_and_uses_isolated_recipe(tmp_path):
+def test_call_caches_full_response_and_uses_isolated_recipe(tmp_path, monkeypatch):
     import json
     import subprocess
 
     from f1_points.official import call_official
 
+    monkeypatch.setattr('f1_points.official.shutil.which', lambda _: '/synthetic/api-anything')
     recipe = tmp_path / 'recipe.json'
     recipe.write_text('{"name":"f1-official"}')
     body = json.dumps(answer())
