@@ -39,6 +39,11 @@ jobs:
       - name: Record historical bootstrap failure
         if: failure() && steps.history.outcome == 'failure'
         run: uv run python -m f1_points.cli live-failure --stage history_bootstrap --report data/history-coverage.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned official qualifying adapter
+        run: npm ci --prefix tools/api-anything
       - name: Forecast and score
         run: uv run python -m f1_points.cli live
       - name: Commit new forecasts and scores

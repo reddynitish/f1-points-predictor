@@ -115,6 +115,9 @@ def predict_event(events, entries, labels, event_id, config, *, now=None, overri
     ]:
         for driver in target.loc[target[column] == 1, 'driver_id']:
             warnings.append(f'{driver}: {text}')
+    official_source = event.get('qualifying_source')
+    if isinstance(official_source, str):
+        warnings.append('Official qualifying retrieved after the session; later revisions may be present.')
     if event.get('sprint_weekend'):
         warnings.append('sprint weekend: current-weekend sprint results are excluded from inputs')
 
@@ -128,6 +131,10 @@ def predict_event(events, entries, labels, event_id, config, *, now=None, overri
         'qualifying_scheduled_start_utc': event.get('qualifying_scheduled_start_utc'),
         'race_start_utc': race_start,
         'primary': 'p_B1',
+        'qualifying_source': official_source if isinstance(official_source, str) else 'Jolpica',
+        'qualifying_retrieved_at': event.get('qualifying_retrieved_at')
+        if isinstance(event.get('qualifying_retrieved_at'), str)
+        else None,
         'primary_rule': PRIMARY_RULE,
         'model': {'B1': 'qualifying-rank logistic', 'M1': frozen_candidate(config).label()},
         'training_rows': len(train),

@@ -34,6 +34,7 @@ from .live import (
 )
 from .livetiming import BASE_URL as livetiming_base
 from .livetiming import LiveTimingClient, event_sessions, match_meeting, season_meetings
+from .official import enrich_due_events
 from .predict import QualifyingUnavailable, archive, load_combined, predict_event, source_inventory
 
 logger = logging.getLogger('f1_points')
@@ -204,6 +205,7 @@ def run_predict(args):
         if report['failures']:
             logger.error('target season collection failed: %s', report['failures'])
             return 1
+        enrich_due_events(run_dir / 'normalized', args.archive, args.official_sources, now=datetime.now(UTC))
         live = run_dir / 'normalized'
     events, entries, labels = load_combined(args.base, live, args.season)
     event_id = f'{args.season}-{args.round:02d}'
@@ -255,6 +257,7 @@ def _run_live(args):
         write_health(args.scorecard, health)
         (run_dir / 'health.json').write_text(json.dumps(health, indent=2) + '\n')
         return 1
+    report['manifests'].extend(enrich_due_events(run_dir / 'normalized', args.archive, args.official_sources, now=now))
     events, entries, labels = load_combined(args.base, run_dir / 'normalized', args.season)
     config = json.loads(args.config.read_text())
     for path in forecast_due(
@@ -346,6 +349,7 @@ def main():
     forecast.add_argument('--config', type=Path, default=Path('configs/final.json'))
     forecast.add_argument('--overrides', type=Path, default=Path('overrides/qualifying.csv'))
     forecast.add_argument('--archive', type=Path, default=Path('predictions'))
+    forecast.add_argument('--official-sources', type=Path, default=Path('configs/official_sources.json'))
     sessions = commands.add_parser('collect-sessions', help='pre-qualifying practice laps and qualifying weather')
     sessions.add_argument('--start', type=int, default=2018)
     sessions.add_argument('--end', type=int, default=PROSPECTIVE_SEASON)
@@ -368,6 +372,7 @@ def main():
     loop.add_argument('--config', type=Path, default=Path('configs/final.json'))
     loop.add_argument('--overrides', type=Path, default=Path('overrides/qualifying.csv'))
     loop.add_argument('--archive', type=Path, default=Path('predictions'))
+    loop.add_argument('--official-sources', type=Path, default=Path('configs/official_sources.json'))
     loop.add_argument('--scorecard', type=Path, default=Path('reports/live-2026'))
     loop.add_argument('--readme', type=Path, default=Path('README.md'))
     failure = commands.add_parser('live-failure', help='record a failed workflow stage without fetching or fitting')

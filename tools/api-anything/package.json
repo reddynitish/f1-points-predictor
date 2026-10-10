@@ -1,0 +1,7 @@
+{
+  "name": "f1-official-data-runtime",
+  "private": true,
+  "dependencies": {
+    "api-anything": "git+https://github.com/goodnight000/api-anything.git#fe5cca70fe145634e49a1c9ba1f3e8250b291bea"
+  }
+}

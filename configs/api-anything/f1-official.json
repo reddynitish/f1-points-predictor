@@ -1,0 +1,95 @@
+{
+  "name": "f1-official",
+  "baseUrl": "https://www.formula1.com",
+  "operations": [
+    {
+      "name": "qualifying",
+      "description": "Official Grand Prix qualifying classification; nonnumeric positions remain unknown. No lap times, grid or outcomes.",
+      "request": {
+        "method": "GET",
+        "url": "https://www.formula1.com/en/results/%7Bseason%7D/races/%7Brace%7D/%7Bslug%7D/qualifying",
+        "headers": {
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          "accept-language": "en-US,en;q=0.9",
+          "priority": "u=0, i",
+          "sec-ch-ua": "\"Chromium\";v=\"154\", \"Google Chrome\";v=\"154\", \"Not A(Brand\";v=\"99\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"macOS\"",
+          "sec-fetch-dest": "document",
+          "sec-fetch-mode": "navigate",
+          "sec-fetch-site": "none",
+          "sec-fetch-user": "?1",
+          "upgrade-insecure-requests": "1",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36"
+        }
+      },
+      "slots": [
+        {
+          "param": "season",
+          "at": [
+            "path:2"
+          ]
+        },
+        {
+          "param": "race",
+          "at": [
+            "path:4"
+          ]
+        },
+        {
+          "param": "slug",
+          "at": [
+            "path:5"
+          ]
+        }
+      ],
+      "volatile": [],
+      "trigger": {
+        "url": "https://www.formula1.com/en/results/{season}/races/{race}/{slug}/qualifying"
+      },
+      "match": {
+        "method": "GET",
+        "host": "www.formula1.com",
+        "path": "/en/results/*/races/*/*/qualifying"
+      },
+      "response": {
+        "format": "html",
+        "contentType": "text/html; charset=utf-8",
+        "html": {
+          "items": "body",
+          "fields": {
+            "title": "h1",
+            "positions": "all:table tbody tr td:nth-child(1)",
+            "numbers": "all:table tbody tr td:nth-child(2)",
+            "drivers": "all:table tbody tr td:nth-child(3)",
+            "teams": "all:table tbody tr td:nth-child(4)"
+          }
+        }
+      },
+      "params": [
+        {
+          "name": "season",
+          "type": "string",
+          "required": true,
+          "example": "2026"
+        },
+        {
+          "name": "race",
+          "type": "string",
+          "required": true,
+          "example": "1296"
+        },
+        {
+          "name": "slug",
+          "type": "string",
+          "required": true,
+          "example": "singapore"
+        }
+      ],
+      "readOnly": true,
+      "minTier": 1,
+      "learnedLoggedIn": false,
+      "learnedAt": "2026-10-10T16:32:49.714Z"
+    }
+  ]
+}
