@@ -1,0 +1,9 @@
+# Plain-language forecast dashboard
+
+Authorized request: rename the public project F1 Points-Scoring Predictor, get directly to predictions, and move explanation to a Machine Learning page. Use the user's stated ADHD-project principles: precise, short, plain-language sections; no automatic animation or dense default evidence. The ADHD repository path is not yet identified; do not claim it was inspected.
+
+Prediction page: one race selector with distinct live forecasts and past examples, latest verified saved forecast selected by default, clearly labeled mode, race timing and per-driver chance of earning at least one Sunday race point. Show results only when available and maintain missing-rank caution. Keep tables usable at 320px. Simple source/date details are optional. No B1/M1 names, error metrics, model selector, hash inventories or charts on the default prediction page.
+
+Machine Learning page: explain probability, historical learning, qualifying input, saving before the race and checking results in brief sections. Explain that qualifying rank alone is the main model and richer models did not demonstrate improvement. Label backtest results as past-race tests, never live performance. Collapsible evidence includes model comparisons, audit links and operational status. Preserve replay/live distinctions, provenance and no future-outcome inference.
+
+Both pages use the same data export, self-contained assets, keyboard navigation, visible focus and responsive system typography. Keep static identity/nav consistent and show one illustrative probability example, not exact-points or winner predictions. Preserve existing saved probabilities, experiment artifacts and models. Build both pages to docs/dashboard for existing Pages workflow. Verify actual desktop/mobile UI and empty/live/replay/scored states.

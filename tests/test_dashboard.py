@@ -12,7 +12,7 @@ def test_export_is_self_contained_and_preserves_replay_labels(tmp_path):
     path = tmp_path / 'index.html'
     build_dashboard(ROOT, path)
     html = path.read_text()
-    assert 'Retrospective replay' in html
+    assert 'Past race example' in html
     assert 'https://fonts.' not in html
     assert '<script src=' not in html
     assert '2026-16' in html
@@ -43,6 +43,9 @@ def test_archive_text_cannot_close_json_script(tmp_path):
     html = (tmp_path / 'index.html').read_text()
     assert '</script><img src=x' not in html
     assert '\\u003c/script' in html
+    explanation = (tmp_path / 'machine-learning.html').read_text()
+    assert '</script><img src=x' not in explanation
+    assert '\\u003c/script' in explanation
 
 
 def test_export_fingerprints_all_auxiliary_data_inputs():
@@ -57,3 +60,20 @@ def test_export_fingerprints_all_auxiliary_data_inputs():
     assert required <= data['source_hashes'].keys()
     assert data['source_manifests']
     assert all(m['source_url'].startswith('https://') for m in data['source_manifests'])
+
+
+def test_export_includes_linked_standalone_explanation(tmp_path):
+    path = tmp_path / 'index.html'
+    build_dashboard(ROOT, path)
+    explanation = tmp_path / 'machine-learning.html'
+    assert explanation.exists()
+    main = path.read_text()
+    ml = explanation.read_text()
+    assert 'F1 Points-Scoring Predictor' in main
+    assert 'href="machine-learning.html"' in main
+    assert 'href="index.html"' in ml
+    assert 'How the prediction works' in ml
+    assert 'id="dashboard-data"' in ml
+    assert '<script src=' not in ml
+    assert '/* DASHBOARD_JS */' not in ml
+    assert '"DASHBOARD_DATA"' not in ml
