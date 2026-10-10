@@ -1,14 +1,14 @@
 {
-  "last_success_at": "2026-10-09T22:01:13.052247+00:00",
-  "checked_at": "2026-10-09T22:01:03.306461+00:00",
-  "duration_seconds": 9.746,
+  "last_success_at": "2026-10-10T16:29:28.281055+00:00",
+  "checked_at": "2026-10-10T16:29:15.333346+00:00",
+  "duration_seconds": 12.948,
   "status": "ok",
-  "source_fetched_at": "2026-10-09T22:01:11.958315+00:00",
+  "source_fetched_at": "2026-10-10T16:29:26.803533+00:00",
   "failures": [],
   "events": [
     {
       "event_id": "2026-17",
-      "state": "waiting_for_qualifying",
+      "state": "qualifying_unavailable",
       "qualifying_drivers": 0,
       "archived_drivers": 0,
       "result_drivers": 0,
