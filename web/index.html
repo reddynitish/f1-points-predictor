@@ -2,29 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Explore honest, cutoff-aware Formula 1 points probabilities, baseline comparisons and archived forecasts.">
-<title>F1 Points Predictor · Forecast explorer</title>
+<meta name="description" content="Each F1 driver's chance of scoring at least one Grand Prix point. Saved predictions, clearly explained.">
+<title>F1 Points-Scoring Predictor</title>
 <style>/* DASHBOARD_CSS */</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to forecasts</a>
-<header><div class="shell masthead"><a class="brand" href="#"><span class="mark" aria-hidden="true">P<span>+</span></span><span>F1 POINTS<br><small>PREDICTOR</small></span></a><nav aria-label="Main"><a href="#main">Forecasts</a><a href="#evaluation">Evaluation</a><a href="#method">Method</a><a href="https://github.com/reddynitish/f1-points-predictor">GitHub ↗</a></nav></div></header>
-<div class="hero"><div class="shell hero-grid"><div><p class="eyebrow">QUALIFYING IN. PROBABILITIES OUT.</p><h1>Who has a chance<br>of scoring points?</h1><p class="intro">Explore each driver’s chance of Grand Prix points. B1 uses qualifying rank; compare it with M1’s driver and team history.</p><p class="hero-note">Qualifying position ≠ Sunday starting grid.</p></div><aside class="live-box" aria-label="Live forecast status"><span class="eyebrow">PROSPECTIVE TRACK RECORD</span><h2 id="live-title">Waiting for the first live forecast</h2><p id="live-copy">Backtests are labelled separately. Live forecasts are archived before race start.</p><a href="#operations">View operational status ↓</a></aside></div></div>
+<a class="skip" href="#main">Skip to predictions</a>
+<header class="shell masthead"><a class="brand" href="index.html">F1 Points-Scoring Predictor</a><nav aria-label="Main"><a href="index.html" aria-current="page">Predictions</a><a href="machine-learning.html">Machine Learning</a></nav></header>
 <main id="main" class="shell">
-<section class="explorer" aria-labelledby="explorer-heading"><div class="section-top"><div><p class="eyebrow muted">FORECAST EXPLORER</p><h2 id="explorer-heading">The probability ledger</h2></div><div class="controls"><label for="source">Forecast source<select id="source"><option value="replay">2026 retrospective replay</option><option value="live">Archived live forecasts</option></select></label><label for="event">Grand Prix<select id="event"></select></label></div></div>
-<div id="empty" class="empty" hidden><h3>No live forecast has been archived yet.</h3><p>Select the retrospective replay to explore the completed backtest. Future forecasts will appear after qualifying and before race start.</p></div>
-<div id="event-view"><div class="event-heading"><div><span id="mode" class="badge">Retrospective replay</span><h3 id="race-title"></h3><p id="race-meta" class="muted"></p></div><label class="model-label" for="model">Probabilities shown<select id="model"><option value="p_B1">B1 · Qualifying rank (primary)</option><option value="p_M1">M1 · Driver/team history (comparison)</option></select></label></div>
-<p id="selection-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p><div class="race-stats" id="race-stats"></div><p class="small muted">Brier score is the average squared difference between a probability and the outcome (1 for points, 0 for no points). Lower is better.</p><p id="cutoff-note" class="notice"></p>
-<p id="ledger-scroll-hint" class="small muted scroll-hint">Swipe sideways, or focus the table and use the arrow keys, to see comparison probabilities and race outcomes.</p><div class="table-scroll" role="region" aria-label="Driver probability table" aria-describedby="ledger-scroll-hint" tabindex="0"><table class="ledger"><caption class="sr-only">Driver points probabilities, qualifying ranks and published outcomes</caption><thead><tr><th scope="col">Driver / constructor</th><th scope="col">Qualifying</th><th scope="col">Chance of points</th><th scope="col" id="other-model-heading">M1 comparison</th><th scope="col">Race outcome</th></tr></thead><tbody id="drivers"></tbody></table></div><p class="small muted">Points means race points &gt; 0; sprint points are excluded. Probabilities are independent and need not sum to ten. A high probability is not a guarantee.</p>
-<details><summary>Forecast provenance and warnings</summary><div id="provenance"></div></details></div></section>
-<section id="evaluation" aria-labelledby="evaluation-heading"><div class="section-top"><div><p class="eyebrow muted">EVIDENCE OVER COMPLEXITY</p><h2 id="evaluation-heading">Did the richer models help?</h2></div><span class="badge neutral">16 races · 347 predictions</span></div><p class="section-intro">They did not demonstrate improvement over their baselines. B1 remains the primary forecast. These are retrospective 2026 rounds 1–16 results, not a live track record.</p>
-<div class="evaluation-grid"><article class="panel"><h3>Model comparison</h3><p class="small muted">Race-averaged Brier score · lower is better</p><div id="comparison"></div><p class="small muted">Pre-race models use a different cutoff. Compare each candidate against its own baseline.</p><div id="interval" class="notice"></div></article><article class="panel"><h3>Do the probabilities match outcomes?</h3><p class="small muted">B1 calibration · marker size reflects bin count</p><div id="calibration"></div><p class="small muted">Only 16–59 drivers per bin, clustered within 16 races. This descriptive chart does not establish precise calibration.</p></article></div>
-<article class="panel failures"><div><p class="eyebrow muted">LEARN FROM THE MISSES</p><h3>Confidence still leaves room for surprises.</h3><p id="failure-copy"></p></div><div><h4>Highest-error qualifying band</h4><p><strong>Positions 11–15</strong><br><span class="muted">Brier 0.223 · 80 rows across 16 races</span></p><p class="small muted">Descriptive error, not proof of correctable bias.</p><a href="https://github.com/reddynitish/f1-points-predictor/blob/main/reports/ERROR_ANALYSIS.md">Read the error analysis ↗</a></div></article>
+<div class="page-intro"><h1>Who could score points?</h1><p>Each percentage is a chance of earning <strong>at least 1 race point</strong>.</p></div>
+<p id="update-notice" class="note" hidden></p>
+<section class="forecast" aria-labelledby="race-title">
+<div class="race-controls"><label for="event">Choose a race<select id="event"></select></label><span id="mode" class="badge"></span></div>
+<h2 id="race-title">Waiting for a forecast</h2><p id="race-meta" class="muted"></p>
+<p id="selection-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+<div id="empty" class="empty" hidden><h3>No live prediction yet.</h3><p>It will appear after qualifying results are available. You can choose a past race above to see an example.</p></div>
+<div id="event-view">
+<p id="race-note" class="context"></p>
+<div class="table-scroll"><table class="predictions"><caption class="sr-only">Drivers ordered by their chance of scoring at least one race point</caption><thead><tr><th scope="col">Driver</th><th scope="col">Chance of points</th><th scope="col" id="result-heading" hidden>Scored?</th></tr></thead><tbody id="drivers"></tbody></table></div>
+<button id="more-drivers" class="more" type="button" aria-expanded="false" aria-controls="drivers" hidden>Show all drivers</button>
+<p id="rank-warning" class="small" hidden></p>
+<details class="prediction-details"><summary>About this prediction</summary><div id="prediction-details"></div></details>
+</div>
 </section>
-<section id="operations" class="panel" aria-labelledby="operations-heading"><p class="eyebrow muted">OPERATIONS</p><h2 id="operations-heading">Forecast health</h2><div id="health"></div><p class="small muted">This page is a saved snapshot. Full per-run diagnostics are available in GitHub Actions artifacts; the public health snapshot updates when meaningful state changes.</p><a href="https://github.com/reddynitish/f1-points-predictor/actions/workflows/live.yml">Inspect live workflow runs ↗</a></section>
-<section id="method" aria-labelledby="method-heading"><p class="eyebrow muted">THE ENGINEERING BEHIND THE FORECAST</p><h2 id="method-heading">A simple model. A careful process.</h2><div class="method-grid"><article><span class="step">01 / DATA</span><h3>Inputs have a cutoff.</h3><p>History comes from earlier events. Whole-team results are aggregated before shifting, so a teammate’s target-race result cannot enter the features.</p></article><article><span class="step">02 / EVALUATION</span><h3>Whole races stay together.</h3><p>Development moves forward by season. Configurations were frozen before holdouts. The spent 2025 and 2026 tests cannot be reused to prove another model.</p></article><article><span class="step">03 / DECISION</span><h3>Keep the baseline when it wins.</h3><p>Richer inputs failed to demonstrate additional value. Negative findings, coverage gaps and uncertainty are part of the result.</p></article></div><div class="method-links"><a href="https://github.com/reddynitish/f1-points-predictor/blob/main/reports/MODEL_CARD.md">Model card ↗</a><a href="https://github.com/reddynitish/f1-points-predictor/blob/main/docs/CASE_STUDY.md">Engineering case study ↗</a><a href="https://github.com/reddynitish/f1-points-predictor#try-it">Reproduce locally ↗</a></div></section>
-</main><footer class="shell"><span>Independent educational project · no Formula 1 affiliation</span><span id="built"></span></footer>
-<noscript><p class="shell">Enable JavaScript to explore the saved forecasts. All results are also available in the GitHub repository.</p></noscript>
+<p class="learn-link">How do we get these numbers? <a href="machine-learning.html">See the simple explanation →</a></p>
+</main>
+<footer class="shell"><p>Independent learning project. Not affiliated with Formula 1.</p><a href="https://github.com/reddynitish/f1-points-predictor">Project on GitHub</a></footer>
+<noscript><p class="shell">JavaScript is needed to display the saved predictions. They are also available on GitHub.</p></noscript>
 <script type="application/json" id="dashboard-data">"DASHBOARD_DATA"</script>
 <script>/* DASHBOARD_JS */</script>
-</body></html>
+</body>
+</html>

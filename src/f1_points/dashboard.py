@@ -92,13 +92,18 @@ def build_dashboard(root, output, *, template_dir=None):
     payload = json.dumps(data, separators=(',', ':'), allow_nan=False)
     for original, escaped in (('<', '\\u003c'), ('>', '\\u003e'), ('&', '\\u0026')):
         payload = payload.replace(original, escaped)
-    template = (template_dir / 'index.html').read_text()
-    template = template.replace('/* DASHBOARD_CSS */', (template_dir / 'style.css').read_text(), 1)
-    template = template.replace('/* DASHBOARD_JS */', (template_dir / 'app.js').read_text(), 1)
-    template = template.replace('"DASHBOARD_DATA"', payload, 1)
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(template)
+    css = (template_dir / 'style.css').read_text()
+    for destination, template_name, script_name in (
+        (output, 'index.html', 'app.js'),
+        (output.with_name('machine-learning.html'), 'machine-learning.html', 'machine-learning.js'),
+    ):
+        template = (template_dir / template_name).read_text()
+        template = template.replace('/* DASHBOARD_CSS */', css, 1)
+        template = template.replace('/* DASHBOARD_JS */', (template_dir / script_name).read_text(), 1)
+        template = template.replace('"DASHBOARD_DATA"', payload, 1)
+        destination.write_text(template)
     return output
 
 

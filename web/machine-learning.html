@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A simple explanation of how F1 Points-Scoring Predictor learns from past races and estimates a driver's chance of scoring points.">
+<title>Machine Learning · F1 Points-Scoring Predictor</title>
+<style>/* DASHBOARD_CSS */</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to explanation</a>
+<header class="shell masthead"><a class="brand" href="index.html">F1 Points-Scoring Predictor</a><nav aria-label="Main"><a href="index.html">Predictions</a><a href="machine-learning.html" aria-current="page">Machine Learning</a></nav></header>
+<main id="main" class="shell">
+<div class="page-intro"><h1>How the prediction works</h1><p>It learns a pattern from past races, then uses qualifying position to estimate each driver’s chance of scoring.</p></div>
+<div class="reading">
+<section aria-labelledby="meaning"><h2 id="meaning">What does the percentage mean?</h2><div class="example"><strong>90% chance of points</strong><p>The model thinks scoring at least 1 race point is likely. It can still be wrong.</p></div><p>It estimates whether a driver will score, rather than how many points they will earn. Sprint points are excluded.</p></section>
+<section aria-labelledby="learning"><h2 id="learning">How we get that number</h2><ol class="steps"><li><strong>Learn from earlier races.</strong>For each driver, look at qualifying position and whether they later scored race points.</li><li><strong>Find the pattern.</strong>The model learns how the chance of scoring changes with qualifying position.</li><li><strong>Read the new qualifying results.</strong>Use each driver’s position to calculate a percentage. Sunday’s result is still unknown.</li><li><strong>Save it, then check it.</strong>Keep the prediction before the race starts. After the race, compare it with who actually scored.</li></ol></section>
+<section aria-labelledby="choice"><h2 id="choice">Why keep the model simple?</h2><p>We also tested driver and team history, practice, weather and other information. Those models did not show a clear improvement over qualifying position alone.</p><p class="answer">So qualifying position remains the main input.</p><p>That is a useful result: more information does not automatically make a better prediction.</p></section>
+<section aria-labelledby="results"><h2 id="results">How well has it done?</h2><p id="backtest-result">See the saved results below.</p><p>Those tests recreated past races. They are not predictions published before those races.</p><p id="live-result"></p><p>Crashes, retirements and unexpected race events can change the result. A high chance is not a guarantee.</p></section>
+<section aria-labelledby="data"><h2 id="data">Where does the data come from?</h2><p>Past race data comes from Jolpica, a free F1 data service. For Singapore’s live forecast, api-anything reads qualifying positions from F1’s official website.</p><p>Qualifying position can differ from Sunday’s starting grid. We keep them separate. If a qualifying position is unknown, the dashboard flags it.</p></section>
+<details id="evidence" class="evidence"><summary>Model details and saved evidence</summary>
+<h3>The model, in one sentence</h3><p>The main model uses <strong>logistic regression</strong>: it learns a curve that turns qualifying position into a probability. Reports call this model <strong>B1</strong>. A separate model, <strong>M1</strong>, adds driver and team history for comparison.</p>
+<h3>How we kept the test fair</h3><ul><li>Train on earlier races and test on later ones.</li><li>Keep every driver from a race in the same test group.</li><li>Keep the new race’s result out of its prediction.</li><li>Choose model settings before opening the final test results.</li><li>Keep saved forecasts unchanged after results arrive.</li></ul><p>2025 and 2026 rounds 1–16 have already been used for testing. A new model needs fresh, untouched race results.</p>
+<h3>Past-race model comparison</h3><p class="small">These scores measure probability errors: lower is better. The reports call this the Brier score. It averages the squared gap between a probability and the result (1 for points, 0 for no points).</p><div class="table-scroll"><table class="evidence-table"><caption class="sr-only">Probability error on 2026 past-race tests</caption><thead><tr><th scope="col">Inputs</th><th scope="col">Main model</th><th scope="col">Extra-information model</th></tr></thead><tbody id="comparison"></tbody></table></div><p class="small">Compare within each row. The final row uses starting-grid information closer to race start, so it has a different prediction time.</p>
+<p id="interval" class="note"></p>
+<h3>Saved forecast records</h3><div id="archive-proof"></div>
+<h3>Automation status</h3><div id="health"></div><p class="small">This page is a saved snapshot, not a live data feed. Public status changes when something meaningful changes. Individual checks are recorded in GitHub Actions.</p>
+<div class="audit-links"><a href="https://github.com/reddynitish/f1-points-predictor/blob/main/reports/MODEL_CARD.md">Full model report</a><a href="https://github.com/reddynitish/f1-points-predictor/blob/main/reports/BACKTEST_2026.md">Past-race test results</a><a href="https://github.com/reddynitish/f1-points-predictor/blob/main/docs/CASE_STUDY.md">How the project was built</a><a href="https://github.com/reddynitish/f1-points-predictor/actions/workflows/live.yml">Automation checks</a></div>
+<p id="built" class="small"></p>
+</details>
+<p class="learn-link"><a href="index.html">← Back to predictions</a></p>
+</div>
+</main>
+<footer class="shell"><p>Independent learning project. Not affiliated with Formula 1.</p><a href="https://github.com/reddynitish/f1-points-predictor">Project on GitHub</a></footer>
+<script type="application/json" id="dashboard-data">"DASHBOARD_DATA"</script>
+<script>/* DASHBOARD_JS */</script>
+</body>
+</html>

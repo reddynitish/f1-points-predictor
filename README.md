@@ -1,4 +1,4 @@
-# 🏎️ F1 Points Predictor
+# 🏎️ F1 Points-Scoring Predictor
 
 [![CI](https://github.com/reddynitish/f1-points-predictor/actions/workflows/ci.yml/badge.svg)](https://github.com/reddynitish/f1-points-predictor/actions/workflows/ci.yml)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue)
@@ -8,7 +8,7 @@
 
 It's a production-style educational ML system. The data is cached and audited, a test suite checks for leakage, models are compared against baselines on races they did not train on, and automation is configured to archive future live forecasts before race start.
 
-**[Explore the dashboard](https://reddynitish.github.io/f1-points-predictor/)** · [Engineering case study](docs/CASE_STUDY.md) · [Error analysis](reports/ERROR_ANALYSIS.md) · [Council review](reports/COUNCIL_REVIEW_2026-10-07.md)
+**[See predictions](https://reddynitish.github.io/f1-points-predictor/)** · [Machine Learning: simple explanation](https://reddynitish.github.io/f1-points-predictor/machine-learning.html) · [Engineering case study](docs/CASE_STUDY.md) · [Error analysis](reports/ERROR_ANALYSIS.md) · [Council review](reports/COUNCIL_REVIEW_2026-10-07.md)
 
 ![Dashboard preview](docs/img/dashboard-desktop.jpg)
 
