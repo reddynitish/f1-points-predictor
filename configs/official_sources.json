@@ -1,0 +1,27 @@
+{
+  "recipe": "api-anything/f1-official.json",
+  "events": {
+    "2026-17": {
+      "season": 2026,
+      "round": 17,
+      "circuit_id": "marina_bay",
+      "race": "1296",
+      "slug": "singapore",
+      "title_contains": "SINGAPORE",
+      "expected_rows": 22,
+      "teams": {
+        "Red Bull Racing": "red_bull",
+        "Ferrari": "ferrari",
+        "Mercedes": "mercedes",
+        "McLaren": "mclaren",
+        "Alpine": "alpine",
+        "Racing Bulls": "rb",
+        "Audi": "audi",
+        "Haas F1 Team": "haas",
+        "Williams": "williams",
+        "Aston Martin": "aston_martin",
+        "Cadillac": "cadillac"
+      }
+    }
+  }
+}

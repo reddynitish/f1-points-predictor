@@ -33,3 +33,15 @@ New archives include canonical fingerprints of actual training features/labels a
 If the historical bootstrap step fails before `live` runs, the workflow calls `live-failure --stage history_bootstrap` to replace public health with the failed stage and available coverage errors. Historical coverage reports are retained with health artifacts for 30 days. Environment setup failures or a cancelled/timed-out runner can still prevent this reporting step; inspect the workflow run itself.
 
 Health is collected before the workflow commits a new archive. `unverified_archive_commit` can therefore remain until the next successful run observes that commit; it is not itself proof of a late forecast. Never edit a forecast to repair its provenance.
+
+## Official qualifying with api-anything (October 10)
+
+The live workflow now prefers the official F1 qualifying page for events explicitly mapped in `configs/official_sources.json`. Initial coverage is Singapore 2026 round 17. Other races continue to use Jolpica until their official IDs, circuit mapping and displayed table coverage are verified and added. Jolpica remains the schedule, historical training and race-outcome source; this is not a full replacement or a model change.
+
+`npm ci --prefix tools/api-anything` installs api-anything from a pinned MIT-licensed upstream Git commit with a transitive lockfile. A globally installed CLI is also supported locally. The exported read-only recipe in `configs/api-anything/f1-official.json` uses direct public HTML; calls run with an isolated `API_ANYTHING_HOME` and no imported credentials. No paid API or AI subscription is required. Browser fallback is not guaranteed on CI. Schema drift, auth/rate errors and partial tables halt the pipeline and appear in health diagnostics rather than silently accepting scraped guesses.
+
+Only due prospective events without labels or an existing archive are enriched. Driver codes and car numbers must map to earlier same-season entries; teams use explicit aliases. Unknown identities require a sourced mapping update. A nonnumeric RT/NC/DSQ/DNS position stays missing and is disclosed in the forecast. The expected row count checks the published table, not an independent entered roster. The recipe deliberately excludes lap times because missing cells are omitted by the tool's list extractor; rank-only inputs and frozen M1 inputs need no qualifying lap times.
+
+Raw tool responses are retained under the per-run ignored `official-snapshots` directory. Archive source inventory contains response SHA-256, retrieval time, recipe/mapping hashes and transport tier. This hashes the extracted tool response, not the original HTML. Official tables can contain revisions after qualifying; retrieval time does not establish exact qualifying-end publication state. Existing overrides and archive immutability remain enforced.
+
+Fresh `predict` and `live` collection use this configuration by default. `predict --live <dir>` replays supplied normalized files without enriching or mutating that existing snapshot. Automation still checks after qualifying and scores after Sunday's race; sprint results are excluded.

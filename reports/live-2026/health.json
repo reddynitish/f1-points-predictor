@@ -1,18 +1,22 @@
 {
-  "last_success_at": "2026-10-10T16:29:28.281055+00:00",
-  "checked_at": "2026-10-10T16:29:15.333346+00:00",
-  "duration_seconds": 12.948,
+  "last_success_at": "2026-10-10T16:38:38.461696+00:00",
+  "checked_at": "2026-10-10T16:38:28.590579+00:00",
+  "duration_seconds": 9.871,
   "status": "ok",
-  "source_fetched_at": "2026-10-10T16:29:26.803533+00:00",
+  "source_fetched_at": "2026-10-10T16:38:37.316995+00:00",
   "failures": [],
   "events": [
     {
       "event_id": "2026-17",
-      "state": "qualifying_unavailable",
+      "state": "forecast_saved",
       "qualifying_drivers": 0,
-      "archived_drivers": 0,
+      "archived_drivers": 22,
       "result_drivers": 0,
-      "warnings": []
+      "warnings": [
+        "hadjar: qualifying rank missing",
+        "Official qualifying retrieved after the session; later revisions may be present.",
+        "sprint weekend: current-weekend sprint results are excluded from inputs"
+      ]
     },
     {
       "event_id": "2026-18",

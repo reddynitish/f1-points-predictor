@@ -21,6 +21,13 @@ jobs:
           enable-cache: true
       - name: Install locked environment
         run: make install
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify pinned api-anything runtime installation
+        run: |
+          npm ci --prefix tools/api-anything
+          tools/api-anything/node_modules/.bin/api-anything --help
       # Tests use synthetic fixtures only; no upstream data is downloaded in CI.
       - name: Lint, type-check and test
         run: make check

@@ -65,3 +65,11 @@ https://github.com/manasscodes/f1-race-intelligence had only README and gitignor
 - [GitHub Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages): official configure/upload/deploy action contracts; only the standalone export is published.
 - [scikit-learn ColumnTransformer](https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html): explicit feature-group selection for post-hoc development ablations.
 - Reddit portfolio discussions informed presentation priorities, not model methodology or hiring guarantees: [usable deliverables](https://www.reddit.com/r/datascience/comments/1ck3qwp/actual_product_vs_portfolio_of_demos/), [showcase narrative](https://www.reddit.com/r/datascience/comments/15j4r69/how_to_best_showcase_personal_data_project/) and [engineering/failure analysis](https://www.reddit.com/r/learnmachinelearning/comments/1vd19nz/what_ml_projects_actually_get_you_hired_in_2026/).
+
+## api-anything — official qualifying adapter (October 10, 2026)
+
+https://github.com/goodnight000/api-anything — MIT license, copyright 2026 Tianjun Zheng, checked in the installed LICENSE and package metadata. Used as a pinned external CLI dependency, not copied application code. Upstream commit `fe5cca70fe145634e49a1c9ba1f3e8250b291bea`; Node dependencies locked under `tools/api-anything`.
+
+A credential-free recipe learned locally from F1's official server-rendered qualifying table is exported in `configs/api-anything/f1-official.json`. Verified direct HTTP calls for Singapore (1296) and Azerbaijan (1295), season 2026, returned 22 displayed rows each. An intentionally mismatched slug showed why explicit title/event validation is necessary: a URL alone cannot prove event identity. Synthetic tests check rejection of foreign event/session/year, partial/unequal columns, duplicate ranks/identities, unknown codes/numbers/teams, failed and truncated responses. No speed or reliability superiority claim is established from these few calls.
+
+F1 website data and upstream usage rights are separate from the CLI's MIT software license. Raw captures and personal sessions are not committed. This integration changes qualifying acquisition for configured prospective events, not features/model selection, and does not rerun spent test periods.

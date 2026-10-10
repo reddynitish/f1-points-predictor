@@ -125,3 +125,7 @@ This is an independent educational project, not affiliated with Formula 1, the F
 ## Development and attribution
 
 Developed with AI coding assistance, including Codex. The [case study](docs/CASE_STUDY.md#authorship-and-assistance) documents assistance and reviewable decisions; [related work](docs/RELATED_WORK.md) records sources. No external project’s metrics are claimed as ours.
+
+### Faster qualifying acquisition
+
+For configured live events, the pipeline reads the official F1 qualifying table through the free, locally runnable **api-anything** CLI instead of waiting for Jolpica's qualifying update. Singapore 2026 is the first configured event. Install its pinned runtime with `npm ci --prefix tools/api-anything` (Node 22+); GitHub Actions installs it automatically. Source identities, table coverage and missing ranks are checked before forecasting. Historical training data, schedules and outcome scoring still use Jolpica. See [live operation](docs/LIVE_RUNBOOK.md#official-qualifying-with-api-anything-october-10) for coverage and revision limitations.
