@@ -42,7 +42,11 @@ It's a production-style educational ML system. The data is cached and audited, a
 Forecasts saved after qualifying and committed **before** each race, then scored automatically once results are published ([how it works](#live-forecasts)).
 
 <!-- live-scorecard:start -->
-_No live forecast has been scored yet. Forecasts are saved after qualifying and committed before each race; the first is the 2026 Singapore Grand Prix._
+**1 live race(s): 8.0 / 10 correct top-10 picks on average; 5 of 5 drivers given 80%+ scored.**
+
+| Race | Circuit | Top-10 picks correct | Brier | 80%+ picks that scored | Forecast saved |
+|---|---|---:|---:|---:|---|
+| 2026-17 | marina_bay | 8 / 10 | 0.118 | 5 / 5 | [2026-10-10T16:38 UTC](predictions/2026-17-prospective.json) |
 <!-- live-scorecard:end -->
 
 ## How it works
