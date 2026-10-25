@@ -1,9 +1,9 @@
 {
-  "last_success_at": "2026-10-11T18:54:25.461189+00:00",
-  "checked_at": "2026-10-11T18:54:11.622664+00:00",
-  "duration_seconds": 13.839,
+  "last_success_at": "2026-10-25T00:20:28.345200+00:00",
+  "checked_at": "2026-10-25T00:20:16.843175+00:00",
+  "duration_seconds": 11.502,
   "status": "ok",
-  "source_fetched_at": "2026-10-11T18:54:24.400853+00:00",
+  "source_fetched_at": "2026-10-25T00:20:26.888401+00:00",
   "failures": [],
   "events": [
     {
@@ -16,7 +16,7 @@
     },
     {
       "event_id": "2026-18",
-      "state": "waiting_for_qualifying",
+      "state": "qualifying_unavailable",
       "qualifying_drivers": 0,
       "archived_drivers": 0,
       "result_drivers": 0,
