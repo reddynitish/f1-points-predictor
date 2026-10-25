@@ -1,0 +1,1200 @@
+{
+  "event_id": "2026-18",
+  "circuit_id": "americas",
+  "mode": "prospective",
+  "created_at": "2026-10-25T17:39:06.645269+00:00",
+  "cutoff": "qualifying end (interval: scheduled qualifying start to race start)",
+  "qualifying_scheduled_start_utc": "2026-10-24T21:00:00+00:00",
+  "race_start_utc": "2026-10-25T20:00:00+00:00",
+  "primary": "p_B1",
+  "qualifying_source": "Jolpica",
+  "qualifying_retrieved_at": null,
+  "primary_rule": "Sealed 2025 evaluation did not show M1 beating the rank-only baseline (B1); per the pre-registered rule B1 is the primary forecast and M1 is shown for comparison.",
+  "model": {
+    "B1": "qualifying-rank logistic",
+    "M1": "M1 C=0.1"
+  },
+  "training_rows": 3823,
+  "training_last_event": "2026-17",
+  "feature_columns": [
+    "qualifying_rank",
+    "qualifying_rank_missing",
+    "field_size",
+    "qualifying_percentile",
+    "driver_points_rate_last5",
+    "driver_finish_mean_last5",
+    "driver_dnf_rate_last5",
+    "driver_history_count",
+    "rookie",
+    "constructor_points_rate_last5_events",
+    "constructor_history_events",
+    "constructor_new",
+    "circuit_id",
+    "constructor_id"
+  ],
+  "input_fingerprints": {
+    "training_sha256": "f294aa0e45009cfc97d224bd8e73003856ad3887efe193516d51199ec5470a5a",
+    "target_sha256": "9db7c669fe9a1f53ff82491eec420b0666824fce3ac358b09d8d30aded7115bf",
+    "overrides_sha256": "660cd7bcd605c2adc6c20956617da26d6dce57ffaac7021dba5f5096d760a634",
+    "scope": "Actual training features/labels and target features; target outcomes excluded. Canonical sorted JSON with float precision 15; identity evidence, not independent replication."
+  },
+  "coverage": {
+    "input_roster_rows": 22,
+    "predicted_drivers": 22,
+    "excluded_without_qualifying_row": 0,
+    "rank_missing_drivers": 0,
+    "policy": "Qualifying-row roster only; no independent full entered-roster completeness claim."
+  },
+  "warnings": [],
+  "note": "Qualifying rank is not the final starting grid. Probabilities are independent per driver and need not sum to ten.",
+  "source_inventory": {
+    "manifests": [
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2018.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:32:27.801417+00:00",
+        "sha256": "f10b3e4652d3b682269c5ed6f931f390b34f9529ef4042dc3e215577a009505e",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2018/qualifying.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:32:29.715600+00:00",
+        "sha256": "6344be8f934bfae6b2613cf6ec0912c2f680d2392a93c1ea42a58a8db9c16396",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2018/qualifying.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:32:31.636169+00:00",
+        "sha256": "2f7c05a9de8ae18b574e117fed45e6f3f5ef3ad1b47b59da9c494fd056b04eba",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2018/qualifying.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:32:33.920894+00:00",
+        "sha256": "bc8c3de704dd7c1d117a2def15a5054dbdfd58c91968a7ef496e61eb7223199a",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2018/qualifying.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:32:35.886251+00:00",
+        "sha256": "9ad646d5db6d47f3fdb62f8e8f616de42742fefd7192df360c82be3d9bf165a0",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2018/qualifying.json?limit=100&offset=400",
+        "fetched_at": "2026-10-06T14:32:37.640668+00:00",
+        "sha256": "5d02958904d1fdb79dccfe04747dd6d8192b937344d8fb4a80534005eebe2ea3",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2018/results.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:32:39.370048+00:00",
+        "sha256": "6c7494c9b3ce65efa3a421c15c395ec7166d818806b43c1ad4a7e0401b96936f",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2018/results.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:32:41.189190+00:00",
+        "sha256": "1b4ef252336b0c8422224481b023db47c9fd041537df944be5caa2a3b8f6e0bd",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2018/results.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:32:43.143947+00:00",
+        "sha256": "350c1fa11c71c373a27aef4acfb944cbc5e87b8d4554d2e865364164cc33b67a",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2018/results.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:32:45.053375+00:00",
+        "sha256": "ca0670da915f38a61e7872fe1b1879b930b278570f820e386768bc473ea4f93a",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2018/results.json?limit=100&offset=400",
+        "fetched_at": "2026-10-06T14:32:46.934968+00:00",
+        "sha256": "de1de0b2803784aa48cae25e3c0f4055db2ead3a947db08d2191805b4414bc6a",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2019.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:32:48.510506+00:00",
+        "sha256": "0238ee2f51849e1b591607a1227e5277c8264802cdc99cb9b8a14d629dc97743",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2019/qualifying.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:32:50.600830+00:00",
+        "sha256": "62e514df091fe778fd7751bba822144fc53723bd9dc6764d15631ad4bf6fe875",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2019/qualifying.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:32:52.518767+00:00",
+        "sha256": "2e0571b244130254d0f79e2ae0ffbf9497f4ee9ea060cbee7098c67139c3cab3",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2019/qualifying.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:32:54.416376+00:00",
+        "sha256": "f7c7630e963ee996388c4a881d99eb026dd686843a8a8dfc5ff5164bb7670265",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2019/qualifying.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:32:56.288132+00:00",
+        "sha256": "7cd35d13b649952681701f1701bcf1d714f3c6ee18387d65caec6c4206cd8007",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2019/qualifying.json?limit=100&offset=400",
+        "fetched_at": "2026-10-06T14:32:58.982664+00:00",
+        "sha256": "7c4e76451893a7aa88959fab5cbf87a7f55a5406736ef2490a2fa7a6b1c9e40e",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2019/results.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:33:00.794894+00:00",
+        "sha256": "135764aeaea236ef525b211b31d6b07979ba08058eb049c5267fb2367e50e3a3",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2019/results.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:33:02.682655+00:00",
+        "sha256": "a11c0e7dff58a3edf75dcfbf0d6a80b74543a556badb0c9fe870e849b3cb301d",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2019/results.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:33:04.737522+00:00",
+        "sha256": "c82b66eae47b958257b1a431f2d9e0cd29bdd03cd0e6feee47735764a05a0c8c",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2019/results.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:33:06.586926+00:00",
+        "sha256": "566ee93c47ab59e5fb86bad8247669138cb66eeb580d5a87967897ea15435195",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2019/results.json?limit=100&offset=400",
+        "fetched_at": "2026-10-06T14:33:08.285621+00:00",
+        "sha256": "407fcf22fef9550cf407f51856e1764d3f0e148fc1da67f15dedd483c42d8159",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2020.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:33:09.909622+00:00",
+        "sha256": "38c2395bbfc10277c7007fd038d6af7a4da87c87b00372dc6741d00eaa3d1bd4",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2020/qualifying.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:33:12.114151+00:00",
+        "sha256": "2ee3b497bd4a7f39d6d6b190aec252fc0e62fe2accc6ac6df86750d045b5cbf1",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2020/qualifying.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:33:13.702012+00:00",
+        "sha256": "b49eb161cff795fe3e37c7d95368904ecb704f8ae24bdf54f93fe0e2e969c2d7",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2020/qualifying.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:33:15.608912+00:00",
+        "sha256": "2635d4683bae2d4170e0e07f9e2954997ce2c9853dc81e681a0fae70c3344c71",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2020/qualifying.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:33:17.378431+00:00",
+        "sha256": "8a3e3733d0c246ddc0eb4bccab191857530e5469460e1cbafed6747c7f42f90a",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2020/results.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:33:19.315626+00:00",
+        "sha256": "be212999e9585c6fe455d362f19ecab7d9a8910f6a8dff49bd85f0c5ea653086",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2020/results.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:33:21.285674+00:00",
+        "sha256": "9efd8396627a892e04ee91af8df7d03b54aa4ff3a6911c2758002dc5887c7566",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2020/results.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:33:23.109589+00:00",
+        "sha256": "7d61fb47857d583c06e900bdafc6901c8d81d21208ec86087dbeadb938c377c6",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2020/results.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:33:24.851020+00:00",
+        "sha256": "386f7c331e4752fe65cbededf70f1460d81af9c833a5b49b0f7a60d04f3858d1",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2021.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:33:26.504588+00:00",
+        "sha256": "064a07a473e36e6c55cc0ff6a301e8febc6b92d06e0bd58a219e60dbbec98149",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2021/qualifying.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:33:28.589556+00:00",
+        "sha256": "5fb5434bfd230a4cd4728cd652dfa214d1ac4985bdd1f900294c29a8e66a52da",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2021/qualifying.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:33:30.675533+00:00",
+        "sha256": "c34716d41138d138394483c3177020586d3b4672d4389aa7d3a974aeb44d013b",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2021/qualifying.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:33:32.866805+00:00",
+        "sha256": "9a53e382fdd80910e92c6543b477940a7841009497114e020cd60ad165c73d20",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2021/qualifying.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:33:34.476338+00:00",
+        "sha256": "8389405cc018ccc22021d588d0e7fd2ba3611acc481ae88df9e7aa2480b9e073",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2021/qualifying.json?limit=100&offset=400",
+        "fetched_at": "2026-10-06T14:33:36.344542+00:00",
+        "sha256": "5b948a707dbcbf3d0bea7d99c2b96078726e14db8b2f04d49431e2ffca466a08",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2021/results.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:33:38.404124+00:00",
+        "sha256": "0aa47f2bb623f21f8472aa460fb3e2e7c933734e5bbe0bb45f70229570916b65",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2021/results.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:33:40.394098+00:00",
+        "sha256": "ad015058b7c058bd531f2f6367e62a61627e6b924d71f0101ce00626120ff5a4",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2021/results.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:33:42.628112+00:00",
+        "sha256": "c7fe4c18f5c591c19755ab256ef6a20ab83a1ee6b9b784269510293d33d581bb",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2021/results.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:33:44.632345+00:00",
+        "sha256": "94145b6d00a540ed22189b02fa1710709636f234435cebb85e11ab706293ae4b",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2021/results.json?limit=100&offset=400",
+        "fetched_at": "2026-10-06T14:33:46.545314+00:00",
+        "sha256": "23aec5e324d758171a33f4b350a60e6704defa9be50e9299bceb3a1adc0b5772",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2022.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:33:48.179767+00:00",
+        "sha256": "80344f4c631a7b6b9bd5a93fc313bf40aa5246bae259d0c4cfd277fd412ba93b",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2022/qualifying.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:33:50.157236+00:00",
+        "sha256": "6abeb0a47bc607b17a47389bfafaa6f2b6fad871b316d67705bb6aa9140c0c9e",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2022/qualifying.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:33:52.166263+00:00",
+        "sha256": "ab2cd1e757c17665a9c564607498738f43104cca2f3913a1dbf58d70e00b9c3e",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2022/qualifying.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:33:54.181923+00:00",
+        "sha256": "60fe88c873f67b3643275d9d05e75a1db88bf4b3e89926e8ab436328edbf918c",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2022/qualifying.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:33:56.103977+00:00",
+        "sha256": "9f659df38c68f53f0f55d3a63dfe166ff5db1377dfec7293b0171735ac2c06b7",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2022/qualifying.json?limit=100&offset=400",
+        "fetched_at": "2026-10-06T14:33:57.894777+00:00",
+        "sha256": "28420a6816cdb152e66778d5a739c13302f3fbcd49f09055f5def9f7fd804292",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2022/results.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:33:59.933791+00:00",
+        "sha256": "ed4d1c069b7ca52b85f4427008580d122c66e717f40c1bbfa7546c39ba799702",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2022/results.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:34:01.516000+00:00",
+        "sha256": "580b27b746e58fcddb29190ae38cf37afac80d874da30bd973a9d9251984f19c",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2022/results.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:34:03.353823+00:00",
+        "sha256": "d80eef9f59b7cf4c48d3ae6017fa24ed4443c3897030eced5ff3be789bc34af5",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2022/results.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:34:05.396876+00:00",
+        "sha256": "aa74c7476fa29b96bdeb436f614fed2775c01e5613a5cdafc65e59c225b72710",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2022/results.json?limit=100&offset=400",
+        "fetched_at": "2026-10-06T14:34:07.224327+00:00",
+        "sha256": "bf393e1e9609815e32982faacc6d6852db7db8918a9c3c91fa9f98f85b9ce0c7",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2023.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:34:08.906789+00:00",
+        "sha256": "b297d4a56fbf7f89d3627ddbcb6ceb2e4b421f251bb0fe4d38d64bb5b5fd9987",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2023/qualifying.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:34:10.818377+00:00",
+        "sha256": "4c44c30e5bfd86726ca31bf8ca9e2ce61f4a08055a6132830d5e9a18401a18cc",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2023/qualifying.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:34:12.890052+00:00",
+        "sha256": "87729e03342de360c73b0bb4f591d95e8270e68d83bc09bab24f61fd0c13a208",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2023/qualifying.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:34:15.154506+00:00",
+        "sha256": "8050f3a5a9aa4fcd643e9334de035b02686617da7937a319ddbde8aa401c99b6",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2023/qualifying.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:34:17.065198+00:00",
+        "sha256": "a859400558e32099d266bd523a7686b1fba07b6a554e66b2d3d2a9d8b25c2a59",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2023/qualifying.json?limit=100&offset=400",
+        "fetched_at": "2026-10-06T14:34:19.839657+00:00",
+        "sha256": "d5417dc2a94e02dd9cb019cc1c413690e3131281c2282a88a2e20609fd697d6f",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2023/results.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:34:21.636335+00:00",
+        "sha256": "9770366c70f97f7b670669a2f20d42500f8772f883aad62c9adb58e224817db1",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2023/results.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:34:23.460319+00:00",
+        "sha256": "0753a4fac5ce54116553fe64dc7502bcd4a586c8e53705b626e7673ea500f471",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2023/results.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:34:25.344655+00:00",
+        "sha256": "52f3324010ead5a5299f68e87a8dfc0302a23df30b312b6dc2b4664e86434b17",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2023/results.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:34:27.140270+00:00",
+        "sha256": "adc0a426ad5b8e331799b3e11982f3400d2f0202bca70a3b5fce2c06df6865f8",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2023/results.json?limit=100&offset=400",
+        "fetched_at": "2026-10-06T14:34:29.086746+00:00",
+        "sha256": "dc7df4fa61c087b067c7641d95e9464ed10368fd3b21ddafaa383a0fdf389cf7",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2024.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:34:30.465941+00:00",
+        "sha256": "690e1b73e6f639967e94878b0ddf747396eebd2bd840bd2a72f8a8a2740bd4d7",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2024/qualifying.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:34:32.481977+00:00",
+        "sha256": "81b8016418761e01a1249444a02f0e9bab24cc65a790a33d48ce3117b635e959",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2024/qualifying.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:34:34.616407+00:00",
+        "sha256": "61ef1040b43750be187a784858e6a72bf3fc6a12cdf73d8b6086b421fdddc23e",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2024/qualifying.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:34:36.551215+00:00",
+        "sha256": "0f1d4a55af8bb3dc049937c89488bd605cde478dba3e9d08acf45885c55c4872",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2024/qualifying.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:34:38.446152+00:00",
+        "sha256": "2b9903be9809bdb2f176a375813e405920032cf4dfd9d0a56f8d8f7d8427ffdf",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2024/qualifying.json?limit=100&offset=400",
+        "fetched_at": "2026-10-06T14:34:40.426687+00:00",
+        "sha256": "922a3566d252c5d0c004bc0a3aeaba2fa17972546f25eca4687d3f8f3abfce45",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2024/results.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:34:42.240592+00:00",
+        "sha256": "f0135d5558a4df808a76368b4b4ac00518898c431bc17736203352ac4ef111e2",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2024/results.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:34:44.052277+00:00",
+        "sha256": "aa881ef66c695389799424b0448d7c3e7de4ecfaa8bec51a8b81151fc7fbd008",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2024/results.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:34:46.159395+00:00",
+        "sha256": "56b8fd3249093027d90b24c477175a09f7f240ed6fbbf5b17049366e5c7028a0",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2024/results.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:34:47.990851+00:00",
+        "sha256": "7aa3720d9621324a9dc4db99bcf2f85da73c7bbd2495a226dfe58ed7487df552",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2024/results.json?limit=100&offset=400",
+        "fetched_at": "2026-10-06T14:34:49.761655+00:00",
+        "sha256": "fc8799d8bce062b1136a4b08b2c05ad376ee372218674cf0576d389c5013ad07",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2025.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:34:51.376072+00:00",
+        "sha256": "a4979f3a271f10dc85378f2732fe030fa56f37670ddfe6d80b157ffa57f52b83",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2025/qualifying.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:34:53.163373+00:00",
+        "sha256": "5ab3fa7c153e8b52d8f89d8b5ec0e469324c51d24f56db7553d8d272a766b53a",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2025/qualifying.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:34:55.178316+00:00",
+        "sha256": "dba2e412dcdb95aae3589f86bf26a477074379fa7813a0116e7194cda897727e",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2025/qualifying.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:34:57.095374+00:00",
+        "sha256": "be4432770905fae706037aeb454c9c45d703adb41f7e1906d7f5a33f9137f51d",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2025/qualifying.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:34:59.063499+00:00",
+        "sha256": "425fbc78ad4d8f217c72f7f8c71cec216cba32e68a0711538c794eedce6c1ee3",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2025/qualifying.json?limit=100&offset=400",
+        "fetched_at": "2026-10-06T14:35:00.958889+00:00",
+        "sha256": "32bed7a1e0d9e445d5b5e9fd6b08eb6c2cab7d84466c8eebcd9b575fcfd17686",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2025/results.json?limit=100&offset=0",
+        "fetched_at": "2026-10-06T14:35:02.806407+00:00",
+        "sha256": "8537c8d06ef21cb7d18875600c0541d54942ac2028f1b968e689396bb38efc3d",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2025/results.json?limit=100&offset=100",
+        "fetched_at": "2026-10-06T14:35:04.724080+00:00",
+        "sha256": "7974425c887d26e57bfaea73bba1680632b41d9d9c8475294bb2b7f1a130f67b",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2025/results.json?limit=100&offset=200",
+        "fetched_at": "2026-10-06T14:35:06.688065+00:00",
+        "sha256": "7fd99c338d834eef59e2b9bc39d134729ff9111bcb4fee9aa86c8cb6dfbf96c6",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2025/results.json?limit=100&offset=300",
+        "fetched_at": "2026-10-06T14:35:08.525840+00:00",
+        "sha256": "6568df28863aaa3b478c7e7ee401c2604e9347576f1f9e8eaeb8be13c9b3ca08",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2025/results.json?limit=100&offset=400",
+        "fetched_at": "2026-10-06T14:35:10.778283+00:00",
+        "sha256": "74e5b8e8791d40d9a5be10171f129e32542f108a0177e5b94781947c965e4192",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2026.json?limit=100&offset=0",
+        "fetched_at": "2026-10-25T17:38:54.021545+00:00",
+        "sha256": "07c030c15a97f883f2a27881dd7b146556a7314f50d025c34c7f7c2a962a1d9b",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2026/qualifying.json?limit=100&offset=0",
+        "fetched_at": "2026-10-25T17:38:55.440869+00:00",
+        "sha256": "e9c6c37131e4666ac82ce568e0e72e5038996342d4ef20e2aaef4dda4ebb4f12",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2026/qualifying.json?limit=100&offset=100",
+        "fetched_at": "2026-10-25T17:38:56.860133+00:00",
+        "sha256": "b6fad2c57899056b41d8d568d70a1c9aff803e4baec73f34f4fe0119adee5754",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2026/qualifying.json?limit=100&offset=200",
+        "fetched_at": "2026-10-25T17:38:58.275904+00:00",
+        "sha256": "a729ee03eb058dea52ea638f40db9c73c57c35efb027d3f8521938f6b865d44f",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2026/qualifying.json?limit=100&offset=300",
+        "fetched_at": "2026-10-25T17:38:59.670222+00:00",
+        "sha256": "891a72dc1c56cecea0de2e24fb09ff07e26c68ca2589844173ae40b31c1e1c51",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2026/results.json?limit=100&offset=0",
+        "fetched_at": "2026-10-25T17:39:01.087569+00:00",
+        "sha256": "43ac8dd6f00010ca4346c537c5b7afad07c2626d2e989e1fc2cf3bc5f8639bc5",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2026/results.json?limit=100&offset=100",
+        "fetched_at": "2026-10-25T17:39:02.516151+00:00",
+        "sha256": "de974e69f560011577d8613aeda7e1c83e8382dd3713f9b076559e7022e14bab",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2026/results.json?limit=100&offset=200",
+        "fetched_at": "2026-10-25T17:39:03.906545+00:00",
+        "sha256": "e169e0c1d2b4165a9f3b67131178f113f0e1385ab194bcadd7d121de27a68ddf",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      },
+      {
+        "source_url": "https://api.jolpi.ca/ergast/f1/2026/results.json?limit=100&offset=300",
+        "fetched_at": "2026-10-25T17:39:05.322974+00:00",
+        "sha256": "b2dbd7db4fb32cbca581d95973ff5210cf5cde558caa657be2a242f8c1778a95",
+        "schema_version": 1,
+        "adapter_version": "0.1.0",
+        "requests_version": "2.34.2"
+      }
+    ],
+    "normalized_sha256": {
+      "history/2018-01.json": "2923d52292cc43a361e6cc96a66115660906979006da77acf572e03fab785185",
+      "history/2018-02.json": "f5642f17e77b843bbf0390b2164d434eb85ca10840f3efa8cfcc5125c7c367ec",
+      "history/2018-03.json": "8e2ecc1c6d1b8e4305655b06cf664ff1cdda08627c0353a66e6ad070b1c3691e",
+      "history/2018-04.json": "87bb0bf0af09eea03e03a611644328426d506d906773202c2ff94505073c714b",
+      "history/2018-05.json": "7f4da687474470848082c4f79a9d42495b863ffd077cb9a87366e34444df9796",
+      "history/2018-06.json": "93771fa7121e63b1eb7ad195b3a977fba0e454a6b2d0e7998750819b3ddf0021",
+      "history/2018-07.json": "399b1b939ab5f56e991d66c1cf10b5508335de4bf42cc93a169aab1da10c5b98",
+      "history/2018-08.json": "7959c0bcff8baa50db221b513bedc3e97870b072c93b043fb57e1c77eb14f334",
+      "history/2018-09.json": "98e93ba3ad65249c52188884d62825f01176a607c7e14f05dcb6a51b1b1b4378",
+      "history/2018-10.json": "14bd0764af696e730f6039f9a012698c6f13e2aa0d4bff505c722c4b75dccd90",
+      "history/2018-11.json": "bac3791cd619ed24c470b31e4b00d042f0d4f5ebee715ed8038d33cceb2f5625",
+      "history/2018-12.json": "058e377c059ee03d5eb6e2cccaa36b9b560758d5e537e19fff0fb0ab2a38a702",
+      "history/2018-13.json": "513ce5441e03eb6439e36eaa27d033f740af96528ac0cab37d3b3e7b5ae7f325",
+      "history/2018-14.json": "096bf3d8ff21b2cff65f8c44d433d9b2a4c38a32bd884eea996531f1530be506",
+      "history/2018-15.json": "0d2d641e65778cc47395f8653d13295fbc00cd40b48d3f10f28263121148db56",
+      "history/2018-16.json": "e075181622d2c82ef901d8afee5d2a609cc6a125380d7688ae9c6556b4270fbd",
+      "history/2018-17.json": "943b567d2bad50f44f2838d1bc9cb2f82c6aa6d683d799247986d6fb2e3d684e",
+      "history/2018-18.json": "536ff43ff8d0fdc29864f5aa2c75cae743f5eeca6b972085f4871390655685f8",
+      "history/2018-19.json": "caf6792c365598f810673cff4b2bd21c35606f3d4399c7808932b7f89c321d62",
+      "history/2018-20.json": "148d97bd5527614381e80896ca410235ba9d0953e83e3cfb2fa2c67db32630be",
+      "history/2018-21.json": "d04b789bd1ba42507e0f0d19e87bab69c66abc3d596135361a53017c4569b254",
+      "history/2019-01.json": "024b7ad8efbc0498b8b30a46d74ecbb46fe256cdcdf6e2946e5db889bb0c677c",
+      "history/2019-02.json": "6d586fdc93f6096d71268b0d57f0a8df59c76683342e32eb1e8cd2e7828f3bd1",
+      "history/2019-03.json": "90d9c03366e556caf27d8e399bf79880f3be061c7e4a0bc66d0ffcc19bc38cb1",
+      "history/2019-04.json": "ff42deaef018504bce7d8449777108bae4c473baf7a70a0dc3b49f9c1a3f1995",
+      "history/2019-05.json": "6c532149d06a097598a992b42d3d316076a43b2aba47eee30ba22ae423d275de",
+      "history/2019-06.json": "8fbfb7bf61e42d68d728310f8173cd8ae243c532cf4573e87a21848d7a965e9a",
+      "history/2019-07.json": "975c7a3c79de180d25897e9aa0e40944148cc88c42e2a72969dd301a86f3fb19",
+      "history/2019-08.json": "3c61f4c28b4d0d9271206192bb927bee77d1bf70ece5c393995343bb10510f25",
+      "history/2019-09.json": "31d3b289f45c168961d26e7c6a7ed42927439a9c0d7b169b9a98f4f62e5aaeca",
+      "history/2019-10.json": "474ac26d70ff56e0506de0e1cdf26f9ffb2192644814849ce2b9a018ca2fe435",
+      "history/2019-11.json": "b47fd55608f2c1d0c39fc03ada1917baaaa4edb4b991981224870feaeae0295f",
+      "history/2019-12.json": "78e5a1ad1a48f6aafd4c3ee70eb39c8749a1fbf0a4cde676091d96b5248bbf8b",
+      "history/2019-13.json": "4ba3ef49a578faa9349c857166f5e1b28f820c1e096189e68b64ac1528526d98",
+      "history/2019-14.json": "15828ee8156f9c6cdf758635edd281f2a956d49914b024437b18d697090271b1",
+      "history/2019-15.json": "c9913462fc262b66630f0a10325be8dd04bea823fe9ecb6c5222781e523dc850",
+      "history/2019-16.json": "ce3c420df9c9d2487644e4e1bf7c6073e56c10ca6951d2027f3b5187db8bc8ed",
+      "history/2019-17.json": "d8c22ab36b798188c2fc1b3f5e3e0484c2843740f6fae059a901035ff5a13ee8",
+      "history/2019-18.json": "81f12bc2e78bfc53d6721da0bdc8923b834a67a49cd60e9e6b41dc8ee061fca5",
+      "history/2019-19.json": "ccbfc714f48201975f792266541057120ef385454816a5f61fa8f6d55d4b2062",
+      "history/2019-20.json": "e3881710a0fcaad38c3922cf1e9d1dae75a3bda163312d2ad2bbdf95edb87ec9",
+      "history/2019-21.json": "43014e6b3b64c5e827522bf1b378595c41a4a799e7a9fb79a94ad6ad642f3599",
+      "history/2020-01.json": "3474c56749022dd02748a6b95ef663d8261099a346e9c921839cfd950484d42d",
+      "history/2020-02.json": "136f04357a5309b9f8921fa5c555a8695b424f87b6c1156bba8309eb140ac824",
+      "history/2020-03.json": "62f45067710cb6a5b1ee74008dc1d8c451973a61859c1bf1e4fdaa6b0bc1bd51",
+      "history/2020-04.json": "28c2976c77964b1c108fb7566da6e597f63c35a93b52ed20009706caf3cbda26",
+      "history/2020-05.json": "28747f761a917bf8b99351cbb8c70890a0c18350b23bcef0484c2df0be93d413",
+      "history/2020-06.json": "fd05660a3cdc7e6c8f47bb395f62053c7f1a02de93145e736f5a6e94ef7cb0ef",
+      "history/2020-07.json": "8eb419b954d68cea09a511ce7f8055ca1c464eb34e5b4588ae8b2ed5408f7886",
+      "history/2020-08.json": "17faff62dbe5798a623029b49e7016be655dd07a3c644093a58762632898be72",
+      "history/2020-09.json": "ba3d5c15fa104ea531aa6f252f8369bb32437595d72b224c50a7750d70c548e1",
+      "history/2020-10.json": "5753915dda95bd6766d75bb1765e0fd30b1d5a6efa2a2d0a83f31bcb7d82e6c5",
+      "history/2020-11.json": "8317a616afce5318a6f38fc2e123586f448fbcbfed5d5d1939f3c4f48a0f3c36",
+      "history/2020-12.json": "ddb61390a67d1f806a807b4f4f95fc812bf8d5016f42e95be146dc93918e9c11",
+      "history/2020-13.json": "d0d45782030cb5b952a77d6dc616bc6379251fd0bde37809e223521a73ee1481",
+      "history/2020-14.json": "b644b91ec2edf5af91541289ebcab6b4155a227e3025bb4447615b4d72c8e46d",
+      "history/2020-15.json": "d16b24d05c312c592151da4659e49b836199b32b802f4d6465497122d8d4bb80",
+      "history/2020-16.json": "92ec28be33cfe1fa7428eccc8baf05ec0b38ae1de4bc05a8660cd4568632db6f",
+      "history/2020-17.json": "c957f630be1eb88bcda6623f2590dc2f93089eeddfdcd1c3dcbbab6eacebcddb",
+      "history/2021-01.json": "a092e5aaa8c46e7c5dd8c2b6b7622f543f7b87204d997cf985e489a5a137072c",
+      "history/2021-02.json": "ca8c9b903f539d0227a7c8ec5b9cf80c6d3acdbf757222272d5a8b52f01ebde0",
+      "history/2021-03.json": "bf3b8a0b2d186072482563007ad42254418964fc74317a2cf4e0ae2bd8d0ded5",
+      "history/2021-04.json": "6ab13bc6b44f3d7a269186296187b2a27915d0f57baf6a0049cf262446965237",
+      "history/2021-05.json": "e17863bfeef433715e8596ace494829fecdc711e124de822fb1b81a03cab5f6c",
+      "history/2021-06.json": "5af65a4b6f4832ff8fdcf44d5e69c6c67de5acde8670bf788f1245557c2a4f6a",
+      "history/2021-07.json": "93b7cd9d2f8c4f690fbced9e50da684da6f48cbec3a29996821df6a94397b625",
+      "history/2021-08.json": "1e0af2f8fe3ae9af4a452ae4eab36131562becfb490c0830ebf66e799262a6be",
+      "history/2021-09.json": "1cecb9223a244ecee2bb1d500239dcf93228578e366e43c9b2a08283d3a4f276",
+      "history/2021-10.json": "4728f5f8862ee60450bd0f47d21595396d826c4c96c12c27be78d25d6e0514e6",
+      "history/2021-11.json": "ec9b5f3776b9f6c1afef98691b55143d4c0776910db7f836b8b3dc2c166e9eca",
+      "history/2021-12.json": "d81fc821a03edf41ac6fc36afbad8fb12e4d13ba703ccd8cad2171a18c506f91",
+      "history/2021-13.json": "8dfe65c1073228622d081b338a0ff5913aa318376b69aea81d408e622b93e20f",
+      "history/2021-14.json": "ba514131a56b661bfce3e82557e0d57f596a1516436c8ad74be4ff13fb72cd46",
+      "history/2021-15.json": "f11188e49480219a81c784fe2bbc413425b77f66c67c2f75c84ad59b632ffc26",
+      "history/2021-16.json": "0bc313e8aef08efe3439dc446d9a9872ced3848fe901804372794855061184ce",
+      "history/2021-17.json": "470496cc6556cd3459837bda75c3104cb048d9b7222db8c2d73c9cb905561a7e",
+      "history/2021-18.json": "1406ca4b7c269697cd599e729f741d5d1bbaa13eed35b314004994cbc3a25cd1",
+      "history/2021-19.json": "b2efd2a6b8c5fca565eb81c23975836c4b081595806773576cc1c45fea21354e",
+      "history/2021-20.json": "283823d70de0996dcc2a00ff14ae59dd5222937ffa6e741be2b1d2530573cdea",
+      "history/2021-21.json": "1ed392b3473ee45ee1d1c94feeb30a681973782bd03da1d23c5139e84e2d62ba",
+      "history/2021-22.json": "613938e55d133493085ed9492728ff8d61c5a5c1af381962f92ab9b3a01a04cc",
+      "history/2022-01.json": "c2ca49dc438cb329d893c3197f96c3a2dd17b76205e9b9271e557e6e3027c164",
+      "history/2022-02.json": "703a16656128f8356bc079ca7e4fd77fa5be495aed49c4bf77f35e242f12da31",
+      "history/2022-03.json": "b5bbcda45d3c464ffa3dce68947622c5c03f75f24037f5c2e3022969bb240fcf",
+      "history/2022-04.json": "d7cb6b075ccf9dc9716f5b5ea8cc720f7bc48b71c35f71526ce0708cc57dfd89",
+      "history/2022-05.json": "05b4ee09fa320752cff19b2da940202141f7d21e6984bee94420938bfaa6c493",
+      "history/2022-06.json": "34164ed7ba9adf026734a7bb66cad5e3b69fa4a5192f8aa633751b8d6adf5785",
+      "history/2022-07.json": "cd352971d3097bdb8b0fe1cab49bdbd4a57176663ac21f3c62c69a592a571e65",
+      "history/2022-08.json": "0fbe9fe80cda2847a0623ad54219b4f02d1ee56e6ea3368b7cffd75efc288bd1",
+      "history/2022-09.json": "e7c22704a01453383e7f202235b3f15d849d321be9a75274b511374779a07456",
+      "history/2022-10.json": "c79e7f32a4a050cd82bc444b3b48a2f3d71fa5aabcc415db66dff37514dac15d",
+      "history/2022-11.json": "7719c5f270750617595f6b5a9ed073fab2efc7a58e3f5b7222a3fe211a15ef45",
+      "history/2022-12.json": "657087d7578d73762e3553639a47d722e0566ae7c82d14cb47f3bd2363f220bd",
+      "history/2022-13.json": "2ae9ce9f653ae1adc39ed312ddbf2f57d087a41faa4de37f8e53554018774650",
+      "history/2022-14.json": "8ab83d3812389dd7ba0a7c719e0a00d52802a4410555d70f1d4bee3acba576bf",
+      "history/2022-15.json": "468cadb390255c92cafca0365cfc4b1a33db27e6eabaf6a930f425f059dc2e09",
+      "history/2022-16.json": "1f18aefbb5da9bbec26854d60fae4d4d81f37626a4202a1f57623699fc386efa",
+      "history/2022-17.json": "b52a2e2a8bffc1e9e41f4035fb83f4d397faab6dd54b5959057f3a7bf8ce8358",
+      "history/2022-18.json": "afd501b5dcb5e0ada783b829389dc59f7fcc4efc739678a1ea9bc75eecb43b11",
+      "history/2022-19.json": "512afee8f73ddba326518787bd2321762f24fb5014968ee0243e0e4612f7d960",
+      "history/2022-20.json": "9fa0fc97a5d2c9e08bd71ebb4decb5edf4823085e81f06a496178fc181fcdbe6",
+      "history/2022-21.json": "888768ef01409f5cbc5a850853f9b1cbd6cf62642d53ae425838f9087d7b9469",
+      "history/2022-22.json": "aee022e73cdba0366056a3681e2f06cdade5414e149ce62042ec0f8e1cd2577b",
+      "history/2023-01.json": "aa469504c6de086f85ee00d057c09aecbf6251cc750b75b200dba2bc906bbd14",
+      "history/2023-02.json": "728e43ffb3afed20dd87286aa0755f74585f54a9961be8d6c05dd2d5d3f52ac9",
+      "history/2023-03.json": "a758629b8266049f88a9a97ad47b7fb47329ce3049fb11bc115935a3806825bb",
+      "history/2023-04.json": "933458d7ed7a2749e1b2507014252fbcfab774d7222cdf898ca8ed7f3fa974a3",
+      "history/2023-05.json": "7ec86a3e3375f66782ee6c8721ea9bb21d76ecf6d0c0012ad6d7290b2f6e9edb",
+      "history/2023-06.json": "96f31b5319ec2111284646c3ac517f8095cda32fcf7445c18bd679984619f69a",
+      "history/2023-07.json": "034e9e14a38f6c0b294546d62b00bfc39cfaebbccb3d31368779034af91d331a",
+      "history/2023-08.json": "2daabe355a960a9cd617415e0fdf017395eef42d053f9650b598e040b0ad6116",
+      "history/2023-09.json": "b174ae28352df032f6ab3eac433d13d8b2fb77cfe908a80bf804de606af74cf6",
+      "history/2023-10.json": "cef6a4128afd166632e3859d504180d31cdba1c4567a430c06344040e1a8288a",
+      "history/2023-11.json": "80a3299e106570664276c675bea5233e6563480afa8034e4f922576f4db54381",
+      "history/2023-12.json": "3d76f58df23ab3a8e62a0259cf092a77fee6657613a3d31e62b8f89e0aea3233",
+      "history/2023-13.json": "affe2ca299665c8bb675e8f4db6f24a001ae34e748cbd3b34036b41be2990ebd",
+      "history/2023-14.json": "6a4ef4589d1bef63d33911f293184245f310729d9da2a13cfc535b1851a734a7",
+      "history/2023-15.json": "09114d2cf2067b5cd2e2d3db6c59fba14a64df7e9537807145de995196c02f76",
+      "history/2023-16.json": "f8ed5870289ccf07cd6dca3e298e793d0ab82e721f0fccc3c4f8243d41a6c153",
+      "history/2023-17.json": "e300774f81755e36c3f0417c8d035cace6d5425739292b69f9f32212c8b73ba1",
+      "history/2023-18.json": "ee23eebe3bae82380b9d14aa21a232efd1b165a03d9d5e1a3d2b4526a0ae5264",
+      "history/2023-19.json": "5d7315dd1a5d11ed7d4f7e0993662b91d49fd3ae3db42201b6b5441778d3a821",
+      "history/2023-20.json": "ef25d8fdfbaa31ec7324570d4607fee7e04176a9095bf00ab794d6b288c2c14e",
+      "history/2023-21.json": "3c7f91a34ee15ca325155260104501cbd4fe3f8dc6ec507fa6869c2bbb90bbfb",
+      "history/2023-22.json": "0f2d7998cc02dd2b510574bd5d0cd56425441ebb892db5e5a5eea7b925ede957",
+      "history/2024-01.json": "c20abd495f1fe4c382a38eedf2e73ac5f0e5fb2e1d2853105168e86438a32555",
+      "history/2024-02.json": "f6e8b6ccf90acd833c39d3c71f65881a3472a365c1fef1ea88d3a3a698b040c8",
+      "history/2024-03.json": "51910a10bf864abfb3dc9e25633151f6b9d3c5879306f15e41402ea8da3d9af0",
+      "history/2024-04.json": "068cdff0766c08ba1617a156672555501373e19b5618409397b123c14b968a35",
+      "history/2024-05.json": "705226ef960037e39e2b5d340596f96851332f8ac218ea2e512aed67d715a9fa",
+      "history/2024-06.json": "0449a0a9f0b5ced1db72bee0aec7bf9e1bfc73f46d4dc5d8752746359b053b4d",
+      "history/2024-07.json": "f03382bf54f60d8862f8f4992c66599254ca5a278bc41e6058471307f445c73f",
+      "history/2024-08.json": "ff935f3d5e35761599c6b086412835268c63580c795838de78fe2954a03ce1b0",
+      "history/2024-09.json": "18d060f0f9646afbf5da1db9841a23237e274216f318373213aa5ddcec2dd40a",
+      "history/2024-10.json": "e6304fd01d52313c21a09156ef0fc015e72e869d4b12eeffaab4b4882569b9b5",
+      "history/2024-11.json": "bd4e8c886fc5d5fc088b98586a849eff00378c742cdb1015d4837bc2e582521b",
+      "history/2024-12.json": "ac9e4447fe14dcff1490f6bf86bcf723cb38884ef4bb24b2e3d2ee798268a649",
+      "history/2024-13.json": "22f40c4159d08237d8ba78cc46e0b2a182b0568a484375173ea859d9f36b8aa1",
+      "history/2024-14.json": "be7942561f03e856827f8799ffa27bb061f9d497983e42d9c41335233df2af91",
+      "history/2024-15.json": "48f0632ec2417a1a4a6a42c9b8ce49fdb8f67c8900c1cb838181dde06c6a42a9",
+      "history/2024-16.json": "6ed5867c6d6bcccd64c733ee7a304f2a768f73f6387ca66cdb19f1e9be5322ab",
+      "history/2024-17.json": "c45b3699ff7859541a7e429f00ae73bf7114d5b0a5e1e88f59e706484ef2b2c4",
+      "history/2024-18.json": "86b10ee75f5d80f40b2d41f53a544918dfd0bda36377d5fa7b8c6f1421ae80f5",
+      "history/2024-19.json": "738664a56f47f618ffd8dcdcec7d2d187b28bea67da49527534c7fe7578d9693",
+      "history/2024-20.json": "94b1bde31e15a44552bd9e2c4ef76adcf15fb59d524b2eeb212b1f567a538750",
+      "history/2024-21.json": "1b7893930a6ca95b073729d059763dbebf2fec4e85c816c32a2eaaa1dddd3dfe",
+      "history/2024-22.json": "5e892a60575cd7067b76c33b4433b13960c7a92087a163c5e905f6f09a86d2d3",
+      "history/2024-23.json": "8422920ad26cd860493016de18d873b7aaa669fa473a808b7db6465d5fbd1ad2",
+      "history/2024-24.json": "8d361cf864f17844d6ec4794c42a39ed95b8bcf769335929801aa873d3afeda3",
+      "history/2025-01.json": "6e18938631b6a9cd6e74eb13a650642287804a0664dbd989b0aa8caf4197d3a3",
+      "history/2025-02.json": "ca0007c413c84ffe6a06a04bc7fd8737ff1a6e1ad813e80b1a50dbb7b44cabf9",
+      "history/2025-03.json": "c2cb36cff102fd2e298345178703c41cc2c5d7e15ba143c0e7699180ab5c2f4f",
+      "history/2025-04.json": "096b9f4cae3fb7d0155aed8d40db2882c52fa1184b77e40b0394d84aa8be5ace",
+      "history/2025-05.json": "206fca747190a27773faa41472b7d46c5377804b997595ce1dd60bfbaad04cb9",
+      "history/2025-06.json": "93144ffde61b26ebc6bba86cfa299691b3a5d660dddad96acd1a969eadc809f4",
+      "history/2025-07.json": "7b8a1de9cff53fe9f3a95db1c24962a3dd78abe3c2aaa08bb47c543dd6210354",
+      "history/2025-08.json": "32663c6b411b6037c8b6e297a490ab881bee50d8c67e152576fc4cbbd254bf4c",
+      "history/2025-09.json": "0b96f2d624f12cbd58f234eea810f72861d4f2c7f8df8a65257456a3d5e73913",
+      "history/2025-10.json": "41b9d66791a199734d13408fb77d09e8ca1003ea097f4634da1f0f39a2ac333f",
+      "history/2025-11.json": "1fd3a186634fd78fe2fb01c1b21517bcf28fd7a4e1f467a869701917b2e7440d",
+      "history/2025-12.json": "cfe9a93d340d81d808a4fc5450d6d9c3c18d1b9207765fffbd3321ed1aebb1aa",
+      "history/2025-13.json": "73928d98e1de77d1b839549ddc9aa6f39e136aa62d70edd58562126c70b5ff40",
+      "history/2025-14.json": "3ea7bc40061dca97c5bba209f9ad37064fc5cce3fd4ae688e424c1ae499a7704",
+      "history/2025-15.json": "76564bec471875990a111ba232364b1c8378e4aef54eba31c3b5529912f06721",
+      "history/2025-16.json": "fe5c82795047db0f56e22cc748b8d10a4412a36b9193f8352c6a1b89b1286609",
+      "history/2025-17.json": "b173a5c7eb364f0879924823587415877fcdd0a4e90f2cd35fc0fdb7fa6d6e8c",
+      "history/2025-18.json": "49c5335315aaed3b6c71531da33edd6281879f3b89fbc55d6dfa8ce0f3ba7493",
+      "history/2025-19.json": "7faa07158ff3d92fcae093cae741c19f3f8bf6148373405a0cb8bc08396812fa",
+      "history/2025-20.json": "aa42b2a38c71c3bacd55efa687dd0abe956771f20459e2763442653c0290cd8a",
+      "history/2025-21.json": "fb5848d921cb5e76d6a87c6c4517ce8bad1bf0a73d77be10bd1340e48bb3e5be",
+      "history/2025-22.json": "dc7306769572c122b2389795ddc4e8378c25530db1af708720db555d0ec85c78",
+      "history/2025-23.json": "cb0ecbb32d7a2c02ad6ab3cb34d69c519b74d6ddb867b63183c260ad82064233",
+      "history/2025-24.json": "3ffa9784aff337ba5be781dfbf2f3841ced0aa82efd8c7f32abeaa1e05807a01",
+      "target_season/2026-01.json": "c1ea3d7b71450c760f13a7a85e9490a6ecfb338805c664092dca50c268ff4ada",
+      "target_season/2026-02.json": "e91a6e04c8192c95b3f10ba2f2e9f290e4793c4d01beea621e221935674e81ff",
+      "target_season/2026-03.json": "46be0a6dde1f55d8c8642cb1d4dd755e1573a3d9c0d2f3604ab5cabfc964bd8e",
+      "target_season/2026-04.json": "b9a72610e79a224a0b8cfca79856ef31248454d51724e675f4376fea4e9c8648",
+      "target_season/2026-05.json": "a56cc38a0e1edc1e7d57e03c282a6dcaf849d8f804fd1bda4ec9e43304889e9a",
+      "target_season/2026-06.json": "57c90273f39b9f8c550266a3b327c877e8446ad3e8f4c56f17cbe18ed1bb6f92",
+      "target_season/2026-07.json": "84015801a9b9408366c17f1a4c3c0863d3d7a2faded1ca4e71db76ccdda5cb46",
+      "target_season/2026-08.json": "5f895ebf24e40fd2c7ef709b74a17a9e17ffaf376fe2a66614999230565352a8",
+      "target_season/2026-09.json": "a787d956ebde93e5572140f84c05f1c179697fdc930398df63f8f9f7c71d3ada",
+      "target_season/2026-10.json": "e0b06c3002bc0170dc5de8c0434c2d7706da6429bb087a45c95effc029dfe1b8",
+      "target_season/2026-11.json": "67d774c3d48958f1c379ec8cc021d2fd15a119a7d61c642a5442dc1e789049fa",
+      "target_season/2026-12.json": "d78e9b9b0b9ad3f9bd43022e26c786cefefda6161f8bd326924ac901c9e4d745",
+      "target_season/2026-13.json": "5a84724e44dde2ceda841d21da8a0bb62236a7a527f6c09c38c79394a4aaa236",
+      "target_season/2026-14.json": "742bbb07aa766c441c6ecb7ff2c534a9b5cf17bf32fbfbae2a837c98dbe387eb",
+      "target_season/2026-15.json": "8e7f2d209abe63989704c8c1437ee3e6ad255198bd2e9e8da8a63e0d51f56f2e",
+      "target_season/2026-16.json": "5271e3233fee1f719b8c4d567da2b616890a934c1e8d39924b5298ca394cff9d",
+      "target_season/2026-17.json": "28f122573a5054c2415b7c9fe4f08e7dcaff80e8a6707f9dad332da21123fbcb",
+      "target_season/2026-18.json": "d3cebb62b5a3ddc6fa0484452f4e7ce4c72210b272e99847d125da3904628308",
+      "target_season/2026-19.json": "2c2f1f30a27aa92068836d50f88f6ab1fa35ea753ee7240fcd78d5cfdfae22c8",
+      "target_season/2026-20.json": "6aca625737e5296647fecbe1f858964e218060d40f84a2b0b5ffca419d6939b3",
+      "target_season/2026-21.json": "5cfeb99cff330dad6b04c3f429f0bc09528f0971b0fe88a652ad5cc205680314",
+      "target_season/2026-22.json": "8a692acef8a7f944eb183eeb6554cda169d58cc7f535785c649eaa68868b054d",
+      "target_season/2026-23.json": "c6bac412408e1eab7ff614877ecbdebffa89cd230d4c311ba6c26a4d561bbb5f"
+    },
+    "scope": "Collected input-file identities; actual fitted rows are separately fingerprinted. Raw snapshots are not retained publicly; these hashes do not enable full reproduction alone."
+  },
+  "git_commit": "578b049acf873920a6ed2e7ec88ad8167ff336ab",
+  "config_sha256": "90bb838dfa711728858c6eb584b1e942581a3b9b0616df834bb25ce55fb6a01d",
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "scikit_learn": "1.9.1",
+    "pandas": "2.3.3",
+    "seed": 42
+  },
+  "predictions": [
+    {
+      "event_id": "2026-18",
+      "driver_id": "antonelli",
+      "constructor_id": "mercedes",
+      "qualifying_rank": 1.0,
+      "p_B1": 0.9246,
+      "p_M1": 0.9445
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "max_verstappen",
+      "constructor_id": "red_bull",
+      "qualifying_rank": 2.0,
+      "p_B1": 0.904,
+      "p_M1": 0.9339
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "hadjar",
+      "constructor_id": "red_bull",
+      "qualifying_rank": 3.0,
+      "p_B1": 0.8785,
+      "p_M1": 0.8879
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "leclerc",
+      "constructor_id": "ferrari",
+      "qualifying_rank": 4.0,
+      "p_B1": 0.8473,
+      "p_M1": 0.8676
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "hamilton",
+      "constructor_id": "ferrari",
+      "qualifying_rank": 5.0,
+      "p_B1": 0.8099,
+      "p_M1": 0.8277
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "russell",
+      "constructor_id": "mercedes",
+      "qualifying_rank": 6.0,
+      "p_B1": 0.7658,
+      "p_M1": 0.8497
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "piastri",
+      "constructor_id": "mclaren",
+      "qualifying_rank": 7.0,
+      "p_B1": 0.7151,
+      "p_M1": 0.7681
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "norris",
+      "constructor_id": "mclaren",
+      "qualifying_rank": 8.0,
+      "p_B1": 0.6584,
+      "p_M1": 0.7653
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "arvid_lindblad",
+      "constructor_id": "rb",
+      "qualifying_rank": 9.0,
+      "p_B1": 0.5966,
+      "p_M1": 0.5675
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "lawson",
+      "constructor_id": "rb",
+      "qualifying_rank": 10.0,
+      "p_B1": 0.5317,
+      "p_M1": 0.5676
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "gasly",
+      "constructor_id": "alpine",
+      "qualifying_rank": 11.0,
+      "p_B1": 0.4657,
+      "p_M1": 0.4581
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "hulkenberg",
+      "constructor_id": "audi",
+      "qualifying_rank": 12.0,
+      "p_B1": 0.4009,
+      "p_M1": 0.2892
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "bortoleto",
+      "constructor_id": "audi",
+      "qualifying_rank": 13.0,
+      "p_B1": 0.3393,
+      "p_M1": 0.2192
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "colapinto",
+      "constructor_id": "alpine",
+      "qualifying_rank": 14.0,
+      "p_B1": 0.2828,
+      "p_M1": 0.35
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "alonso",
+      "constructor_id": "aston_martin",
+      "qualifying_rank": 15.0,
+      "p_B1": 0.2323,
+      "p_M1": 0.2212
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "bearman",
+      "constructor_id": "haas",
+      "qualifying_rank": 16.0,
+      "p_B1": 0.1885,
+      "p_M1": 0.1329
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "ocon",
+      "constructor_id": "haas",
+      "qualifying_rank": 17.0,
+      "p_B1": 0.1513,
+      "p_M1": 0.1197
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "stroll",
+      "constructor_id": "aston_martin",
+      "qualifying_rank": 18.0,
+      "p_B1": 0.1204,
+      "p_M1": 0.1738
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "sainz",
+      "constructor_id": "williams",
+      "qualifying_rank": 19.0,
+      "p_B1": 0.0951,
+      "p_M1": 0.0753
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "albon",
+      "constructor_id": "williams",
+      "qualifying_rank": 20.0,
+      "p_B1": 0.0746,
+      "p_M1": 0.0711
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "perez",
+      "constructor_id": "cadillac",
+      "qualifying_rank": 21.0,
+      "p_B1": 0.0583,
+      "p_M1": 0.0473
+    },
+    {
+      "event_id": "2026-18",
+      "driver_id": "bottas",
+      "constructor_id": "cadillac",
+      "qualifying_rank": 22.0,
+      "p_B1": 0.0454,
+      "p_M1": 0.0433
+    }
+  ]
+}
