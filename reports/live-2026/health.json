@@ -1,9 +1,9 @@
 {
-  "last_success_at": "2026-10-31T23:23:32.202070+00:00",
-  "checked_at": "2026-10-31T23:23:17.028774+00:00",
-  "duration_seconds": 15.173,
+  "last_success_at": "2026-11-01T06:01:40.579503+00:00",
+  "checked_at": "2026-11-01T06:01:29.876717+00:00",
+  "duration_seconds": 10.703,
   "status": "ok",
-  "source_fetched_at": "2026-10-31T23:23:30.841002+00:00",
+  "source_fetched_at": "2026-11-01T06:01:39.500515+00:00",
   "failures": [],
   "events": [
     {
@@ -24,11 +24,13 @@
     },
     {
       "event_id": "2026-19",
-      "state": "unverified_archive_commit",
+      "state": "forecast_saved",
       "qualifying_drivers": 22,
       "archived_drivers": 22,
       "result_drivers": 0,
-      "warnings": []
+      "warnings": [
+        "ryo_hirakawa: no prior race history"
+      ]
     },
     {
       "event_id": "2026-20",
