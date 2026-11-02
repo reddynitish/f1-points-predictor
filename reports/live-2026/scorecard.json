@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T00:23:00.534009+00:00",
+  "generated_at": "2026-11-02T05:59:38.800811+00:00",
   "races": [
     {
       "event_id": "2026-17",
@@ -197,6 +197,110 @@
         },
         {
           "driver_id": "albon",
+          "scored_points": 0
+        },
+        {
+          "driver_id": "perez",
+          "scored_points": 0
+        },
+        {
+          "driver_id": "bottas",
+          "scored_points": 0
+        }
+      ]
+    },
+    {
+      "event_id": "2026-19",
+      "circuit_id": "rodriguez",
+      "forecast_created_at": "2026-10-31T23:23:32.161678+00:00",
+      "archive_committed_at": "2026-10-31T23:23:32+00:00",
+      "git_commit": "67b1f3ff9ad8d7cfe1cf757a7eb955d00c321407",
+      "drivers": 22,
+      "brier_B1": 0.11750685909090906,
+      "brier_M1": 0.10281312590909092,
+      "top10_hits_B1": 8,
+      "confident_predictions": 5,
+      "confident_scored": 5,
+      "archive": "2026-19-prospective.json",
+      "outcomes": [
+        {
+          "driver_id": "hamilton",
+          "scored_points": 1
+        },
+        {
+          "driver_id": "russell",
+          "scored_points": 1
+        },
+        {
+          "driver_id": "leclerc",
+          "scored_points": 1
+        },
+        {
+          "driver_id": "max_verstappen",
+          "scored_points": 1
+        },
+        {
+          "driver_id": "antonelli",
+          "scored_points": 1
+        },
+        {
+          "driver_id": "norris",
+          "scored_points": 1
+        },
+        {
+          "driver_id": "hadjar",
+          "scored_points": 0
+        },
+        {
+          "driver_id": "lawson",
+          "scored_points": 1
+        },
+        {
+          "driver_id": "arvid_lindblad",
+          "scored_points": 0
+        },
+        {
+          "driver_id": "gasly",
+          "scored_points": 1
+        },
+        {
+          "driver_id": "hulkenberg",
+          "scored_points": 0
+        },
+        {
+          "driver_id": "colapinto",
+          "scored_points": 1
+        },
+        {
+          "driver_id": "piastri",
+          "scored_points": 1
+        },
+        {
+          "driver_id": "bortoleto",
+          "scored_points": 0
+        },
+        {
+          "driver_id": "bearman",
+          "scored_points": 0
+        },
+        {
+          "driver_id": "sainz",
+          "scored_points": 0
+        },
+        {
+          "driver_id": "albon",
+          "scored_points": 0
+        },
+        {
+          "driver_id": "alonso",
+          "scored_points": 0
+        },
+        {
+          "driver_id": "ryo_hirakawa",
+          "scored_points": 0
+        },
+        {
+          "driver_id": "stroll",
           "scored_points": 0
         },
         {

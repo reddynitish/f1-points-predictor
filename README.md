@@ -42,12 +42,13 @@ It's a production-style educational ML system. The data is cached and audited, a
 Forecasts saved after qualifying and committed **before** each race, then scored automatically once results are published ([how it works](#live-forecasts)).
 
 <!-- live-scorecard:start -->
-**2 live race(s): 8.5 / 10 correct top-10 picks on average; 10 of 10 drivers given 80%+ scored.**
+**3 live race(s): 8.3 / 10 correct top-10 picks on average; 15 of 15 drivers given 80%+ scored.**
 
 | Race | Circuit | Top-10 picks correct | Brier | 80%+ picks that scored | Forecast saved |
 |---|---|---:|---:|---:|---|
 | 2026-17 | marina_bay | 8 / 10 | 0.118 | 5 / 5 | [2026-10-10T16:38 UTC](predictions/2026-17-prospective.json) |
 | 2026-18 | americas | 9 / 10 | 0.078 | 5 / 5 | [2026-10-25T17:39 UTC](predictions/2026-18-prospective.json) |
+| 2026-19 | rodriguez | 8 / 10 | 0.118 | 5 / 5 | [2026-10-31T23:23 UTC](predictions/2026-19-prospective.json) |
 <!-- live-scorecard:end -->
 
 ## How it works
