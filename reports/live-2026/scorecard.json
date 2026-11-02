@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T05:59:38.800811+00:00",
+  "generated_at": "2026-11-02T23:29:31.171744+00:00",
   "races": [
     {
       "event_id": "2026-17",
@@ -216,8 +216,8 @@
       "archive_committed_at": "2026-10-31T23:23:32+00:00",
       "git_commit": "67b1f3ff9ad8d7cfe1cf757a7eb955d00c321407",
       "drivers": 22,
-      "brier_B1": 0.11750685909090906,
-      "brier_M1": 0.10281312590909092,
+      "brier_B1": 0.13376140454545454,
+      "brier_M1": 0.12634039863636362,
       "top10_hits_B1": 8,
       "confident_predictions": 5,
       "confident_scored": 5,
@@ -249,7 +249,7 @@
         },
         {
           "driver_id": "hadjar",
-          "scored_points": 0
+          "scored_points": 1
         },
         {
           "driver_id": "lawson",
@@ -261,7 +261,7 @@
         },
         {
           "driver_id": "gasly",
-          "scored_points": 1
+          "scored_points": 0
         },
         {
           "driver_id": "hulkenberg",
@@ -269,15 +269,15 @@
         },
         {
           "driver_id": "colapinto",
-          "scored_points": 1
+          "scored_points": 0
         },
         {
           "driver_id": "piastri",
-          "scored_points": 1
+          "scored_points": 0
         },
         {
           "driver_id": "bortoleto",
-          "scored_points": 0
+          "scored_points": 1
         },
         {
           "driver_id": "bearman",
@@ -297,7 +297,7 @@
         },
         {
           "driver_id": "ryo_hirakawa",
-          "scored_points": 0
+          "scored_points": 1
         },
         {
           "driver_id": "stroll",

@@ -48,7 +48,7 @@ Forecasts saved after qualifying and committed **before** each race, then scored
 |---|---|---:|---:|---:|---|
 | 2026-17 | marina_bay | 8 / 10 | 0.118 | 5 / 5 | [2026-10-10T16:38 UTC](predictions/2026-17-prospective.json) |
 | 2026-18 | americas | 9 / 10 | 0.078 | 5 / 5 | [2026-10-25T17:39 UTC](predictions/2026-18-prospective.json) |
-| 2026-19 | rodriguez | 8 / 10 | 0.118 | 5 / 5 | [2026-10-31T23:23 UTC](predictions/2026-19-prospective.json) |
+| 2026-19 | rodriguez | 8 / 10 | 0.134 | 5 / 5 | [2026-10-31T23:23 UTC](predictions/2026-19-prospective.json) |
 <!-- live-scorecard:end -->
 
 ## How it works
