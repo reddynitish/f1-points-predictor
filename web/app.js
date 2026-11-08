@@ -13,9 +13,13 @@ const date = value => value ? new Date(value).toLocaleString(undefined,{month:'s
 let showAll = false;
 let currentRows = [];
 let outcomesKnown = false;
+function resultText(row){
+  if (Number.isFinite(row.race_points)) return `${row.race_points} ${row.race_points===1?'point':'points'}`;
+  return row.scored_points?'Scored points':'No points';
+}
 function renderDrivers(){
   const rows = showAll ? currentRows : currentRows.slice(0,10);
-  $('drivers').innerHTML=rows.map(r=>`<tr><td><span class="driver-name">${esc(pretty(r.driver_id))}</span>${r.qualifying_rank==null?'<span class="rank-caution">Qualifying position unknown</span>':''}</td><td><div class="probability"><span class="lane" aria-hidden="true"><span style="width:${100*r.p_B1}%"></span></span><strong>${percent(r.p_B1)}</strong></div></td>${outcomesKnown?`<td class="result ${r.scored_points?'yes':'no'}">${r.scored_points?'Yes':'No'}</td>`:''}</tr>`).join('');
+  $('drivers').innerHTML=rows.map(r=>`<tr><td><span class="driver-name">${esc(pretty(r.driver_id))}</span>${r.qualifying_rank==null?'<span class="rank-caution">Qualifying position unknown</span>':''}</td><td><div class="probability"><span class="lane" aria-hidden="true"><span style="width:${100*r.p_B1}%"></span></span><strong>${percent(r.p_B1)}</strong></div></td>${outcomesKnown?`<td class="result ${r.scored_points?'yes':'no'}">${resultText(r)}</td>`:''}</tr>`).join('');
   const more = $('more-drivers');
   more.hidden=currentRows.length<=10;
   more.textContent=showAll?'Show the top 10 only':`Show ${currentRows.length-10} more drivers`;
@@ -28,8 +32,8 @@ function renderEvent(){
   const archive=live?archives.find(a=>a.event_id===id):null;
   const event=archive || catalog.get(id) || {};
   const score=data.scorecard.races.find(r=>r.event_id===id);
-  const outcomes=new Map((score?.outcomes || []).map(r=>[r.driver_id,r.scored_points]));
-  currentRows=(live?(archive?.predictions || []).map(r=>({...r,scored_points:outcomes.get(r.driver_id)})):data.replays.v1.predictions.filter(r=>r.event_id===id)).sort((a,b)=>b.p_B1-a.p_B1 || String(a.driver_id).localeCompare(String(b.driver_id)));
+  const outcomes=new Map((score?.outcomes || []).map(r=>[r.driver_id,r]));
+  currentRows=(live?(archive?.predictions || []).map(r=>({...r,...outcomes.get(r.driver_id)})):data.replays.v1.predictions.filter(r=>r.event_id===id)).sort((a,b)=>b.p_B1-a.p_B1 || String(a.driver_id).localeCompare(String(b.driver_id)));
   const available=!!currentRows.length;
   $('empty').hidden=available;
   $('event-view').hidden=!available;
@@ -45,8 +49,14 @@ function renderEvent(){
   $('race-title').textContent=raceName(id,archive);
   $('race-meta').textContent=`${event.race_start_utc?`Race: ${date(event.race_start_utc)} · `:''}Round ${Number(id.split('-')[1])}`;
   outcomesKnown=currentRows.every(r=>r.scored_points===0||r.scored_points===1);
+  showAll=outcomesKnown;
+  $('forecast-heading').innerHTML=live?'Before race<br>Chance of points':'Replay<br>Chance of points';
   $('result-heading').hidden=!outcomesKnown;
-  $('race-note').textContent=live?(outcomesKnown?'Results are in. “Scored?” shows who earned race points.':'Highest chances first. We’ll check these against the race results.'):'These predictions were recreated after the race. They are examples, not live forecasts.';
+  $('race-note').textContent=live
+    ? outcomesKnown
+      ? `${score.top10_hits_B1} of the ${Math.min(10,currentRows.length)} drivers with the highest forecast chances scored points.`
+      : 'Awaiting race results. The comparison will appear here after the full results are published and checked.'
+    : 'This replay pairs a historical model estimate with the actual result. The estimate was calculated after the race.';
   const missing=currentRows.filter(r=>r.qualifying_rank==null);
   $('rank-warning').hidden=!missing.length;
   $('rank-warning').textContent=`${missing.map(r=>pretty(r.driver_id)).join(', ')}: the qualifying position is unknown. Treat the estimate with extra caution.`;

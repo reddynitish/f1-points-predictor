@@ -79,7 +79,9 @@ def archive_commit_time(path):
 
 def score_archives(archive_dir, labels, *, publication_lookup=archive_commit_time):
     """Grade every prospective forecast whose race result is published. Recomputed from scratch each run."""
-    outcome = labels.assign(scored_points=(labels['race_points'] > 0).astype(int))[[*KEY, 'scored_points']]
+    outcome = labels.assign(scored_points=(labels['race_points'] > 0).astype(int))[
+        [*KEY, 'race_points', 'scored_points']
+    ]
     races = []
     for path in sorted(Path(archive_dir).glob('*-prospective.json')):
         record = json.loads(path.read_text())
@@ -107,7 +109,7 @@ def score_archives(archive_dir, labels, *, publication_lookup=archive_commit_tim
                 'confident_predictions': len(confident),
                 'confident_scored': int(confident['scored_points'].sum()),
                 'archive': path.name,
-                'outcomes': frame[['driver_id', 'scored_points']].to_dict('records'),
+                'outcomes': frame[['driver_id', 'scored_points', 'race_points']].to_dict('records'),
             }
         )
     return races

@@ -48,11 +48,15 @@ def test_forecast_once_then_score_after_results(tmp_path):
     assert [p.name for p in written] == ['2024-03-prospective.json']
     assert forecast_due(events, entries, pending, CONFIG, tmp_path, CONFIG_PATH, 2024, now) == []
     assert score_archives(tmp_path, pending) == []  # race not run yet
+    archived = written[0].read_bytes()
     races = score_archives(tmp_path, labels)
+    assert written[0].read_bytes() == archived
     assert races[0]['event_id'] == '2024-03' and races[0]['drivers'] == 4
     assert 0 <= races[0]['brier_B1'] <= 1
     assert '1 live race(s)' in scorecard_markdown(races)
-    assert len(races[0]['outcomes']) == 4
+    assert {r['driver_id']: r['race_points'] for r in races[0]['outcomes']} == (
+        labels[labels['event_id'] == '2024-03'].set_index('driver_id')['race_points'].to_dict()
+    )
     assert sum(r['scored_points'] for r in races[0]['outcomes']) == 3
 
 
