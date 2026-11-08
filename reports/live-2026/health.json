@@ -1,9 +1,9 @@
 {
-  "last_success_at": "2026-11-08T08:59:10.418987+00:00",
-  "checked_at": "2026-11-08T08:58:54.506318+00:00",
-  "duration_seconds": 15.913,
+  "last_success_at": "2026-11-08T22:03:41.743005+00:00",
+  "checked_at": "2026-11-08T22:03:27.058232+00:00",
+  "duration_seconds": 14.685,
   "status": "ok",
-  "source_fetched_at": "2026-11-08T08:59:09.180385+00:00",
+  "source_fetched_at": "2026-11-08T22:03:40.588516+00:00",
   "failures": [],
   "events": [
     {
@@ -32,13 +32,11 @@
     },
     {
       "event_id": "2026-20",
-      "state": "forecast_saved",
+      "state": "scored",
       "qualifying_drivers": 22,
       "archived_drivers": 22,
-      "result_drivers": 0,
-      "warnings": [
-        "rafael_camara: no prior race history"
-      ]
+      "result_drivers": 22,
+      "warnings": []
     },
     {
       "event_id": "2026-21",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T16:23:42.400553+00:00",
+  "generated_at": "2026-11-08T22:03:27.058232+00:00",
   "races": [
     {
       "event_id": "2026-17",
@@ -374,6 +374,132 @@
         },
         {
           "driver_id": "bottas",
+          "scored_points": 0,
+          "race_points": 0.0
+        }
+      ]
+    },
+    {
+      "event_id": "2026-20",
+      "circuit_id": "interlagos",
+      "forecast_created_at": "2026-11-08T01:26:59.008002+00:00",
+      "archive_committed_at": "2026-11-08T01:26:59+00:00",
+      "git_commit": "d878c4be25e0bfedf68c6bf04008c02a5d8083a7",
+      "drivers": 22,
+      "brier_B1": 0.13208635681818182,
+      "brier_M1": 0.0787682140909091,
+      "top10_hits_B1": 7,
+      "confident_predictions": 5,
+      "confident_scored": 5,
+      "archive": "2026-20-prospective.json",
+      "outcomes": [
+        {
+          "driver_id": "norris",
+          "scored_points": 1,
+          "race_points": 25.0
+        },
+        {
+          "driver_id": "russell",
+          "scored_points": 1,
+          "race_points": 12.0
+        },
+        {
+          "driver_id": "antonelli",
+          "scored_points": 1,
+          "race_points": 10.0
+        },
+        {
+          "driver_id": "leclerc",
+          "scored_points": 1,
+          "race_points": 6.0
+        },
+        {
+          "driver_id": "lawson",
+          "scored_points": 1,
+          "race_points": 4.0
+        },
+        {
+          "driver_id": "hulkenberg",
+          "scored_points": 1,
+          "race_points": 1.0
+        },
+        {
+          "driver_id": "hadjar",
+          "scored_points": 1,
+          "race_points": 15.0
+        },
+        {
+          "driver_id": "bearman",
+          "scored_points": 0,
+          "race_points": 0.0
+        },
+        {
+          "driver_id": "alonso",
+          "scored_points": 0,
+          "race_points": 0.0
+        },
+        {
+          "driver_id": "albon",
+          "scored_points": 0,
+          "race_points": 0.0
+        },
+        {
+          "driver_id": "hamilton",
+          "scored_points": 1,
+          "race_points": 2.0
+        },
+        {
+          "driver_id": "piastri",
+          "scored_points": 1,
+          "race_points": 8.0
+        },
+        {
+          "driver_id": "rafael_camara",
+          "scored_points": 0,
+          "race_points": 0.0
+        },
+        {
+          "driver_id": "arvid_lindblad",
+          "scored_points": 0,
+          "race_points": 0.0
+        },
+        {
+          "driver_id": "sainz",
+          "scored_points": 0,
+          "race_points": 0.0
+        },
+        {
+          "driver_id": "max_verstappen",
+          "scored_points": 1,
+          "race_points": 18.0
+        },
+        {
+          "driver_id": "colapinto",
+          "scored_points": 0,
+          "race_points": 0.0
+        },
+        {
+          "driver_id": "gasly",
+          "scored_points": 0,
+          "race_points": 0.0
+        },
+        {
+          "driver_id": "stroll",
+          "scored_points": 0,
+          "race_points": 0.0
+        },
+        {
+          "driver_id": "bottas",
+          "scored_points": 0,
+          "race_points": 0.0
+        },
+        {
+          "driver_id": "perez",
+          "scored_points": 0,
+          "race_points": 0.0
+        },
+        {
+          "driver_id": "bortoleto",
           "scored_points": 0,
           "race_points": 0.0
         }
