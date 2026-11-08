@@ -1,9 +1,9 @@
 {
-  "last_success_at": "2026-11-08T01:26:59.076682+00:00",
-  "checked_at": "2026-11-08T01:26:41.917989+00:00",
-  "duration_seconds": 17.159,
+  "last_success_at": "2026-11-08T08:59:10.418987+00:00",
+  "checked_at": "2026-11-08T08:58:54.506318+00:00",
+  "duration_seconds": 15.913,
   "status": "ok",
-  "source_fetched_at": "2026-11-08T01:26:57.377193+00:00",
+  "source_fetched_at": "2026-11-08T08:59:09.180385+00:00",
   "failures": [],
   "events": [
     {
@@ -32,11 +32,13 @@
     },
     {
       "event_id": "2026-20",
-      "state": "unverified_archive_commit",
+      "state": "forecast_saved",
       "qualifying_drivers": 22,
       "archived_drivers": 22,
       "result_drivers": 0,
-      "warnings": []
+      "warnings": [
+        "rafael_camara: no prior race history"
+      ]
     },
     {
       "event_id": "2026-21",
