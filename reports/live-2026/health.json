@@ -1,9 +1,9 @@
 {
-  "last_success_at": "2026-11-07T21:49:18.415518+00:00",
-  "checked_at": "2026-11-07T21:49:02.502352+00:00",
-  "duration_seconds": 15.913,
+  "last_success_at": "2026-11-08T01:26:59.076682+00:00",
+  "checked_at": "2026-11-08T01:26:41.917989+00:00",
+  "duration_seconds": 17.159,
   "status": "ok",
-  "source_fetched_at": "2026-11-07T21:49:17.163751+00:00",
+  "source_fetched_at": "2026-11-08T01:26:57.377193+00:00",
   "failures": [],
   "events": [
     {
@@ -32,9 +32,9 @@
     },
     {
       "event_id": "2026-20",
-      "state": "qualifying_unavailable",
-      "qualifying_drivers": 0,
-      "archived_drivers": 0,
+      "state": "unverified_archive_commit",
+      "qualifying_drivers": 22,
+      "archived_drivers": 22,
       "result_drivers": 0,
       "warnings": []
     },
