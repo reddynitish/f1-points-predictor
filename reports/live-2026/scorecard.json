@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T22:03:27.058232+00:00",
+  "generated_at": "2026-11-09T01:44:01.421963+00:00",
   "races": [
     {
       "event_id": "2026-17",
@@ -411,12 +411,12 @@
         {
           "driver_id": "leclerc",
           "scored_points": 1,
-          "race_points": 6.0
+          "race_points": 4.0
         },
         {
           "driver_id": "lawson",
           "scored_points": 1,
-          "race_points": 4.0
+          "race_points": 6.0
         },
         {
           "driver_id": "hulkenberg",
